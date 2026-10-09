@@ -1,0 +1,447 @@
+\doxysection{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+
+
+A single simulated vehicle: physics, Li\+DAR, and wall-\/collision detection.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a08449770a692aa883a43346987eb9cad}{\+\_\+\+\_\+init\+\_\+\_}} (self, params, seed, is\+\_\+ego=False, time\+\_\+step=0.\+01, num\+\_\+beams=1080, fov=4.\+7, integrator=\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}{Integrator.\+Euler}}, lidar\+\_\+dist=0.\+0)
+\begin{DoxyCompactList}\small\item\em Construct a vehicle and, if this is the first vehicle, build the shared Li\+DAR model. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a4d5acd420ecd82fe645b689555ebeabc}{update\+\_\+params}} (self, params)
+\begin{DoxyCompactList}\small\item\em Replace the vehicle\textquotesingle{}s physical parameters. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_abec518cd552dc6f05756ffaa85f5e9ed}{set\+\_\+map}} (self, map\+\_\+path, map\+\_\+ext)
+\begin{DoxyCompactList}\small\item\em Load the occupancy-\/grid map that the Li\+DAR ray-\/casts against. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}{reset}} (self, pose)
+\begin{DoxyCompactList}\small\item\em Put the vehicle at rest at a given pose and clear all transient state. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7c4df859497de94fa56d2fce114f3883}{ray\+\_\+cast\+\_\+agents}} (self, scan)
+\begin{DoxyCompactList}\small\item\em Add the other vehicles to a Li\+DAR scan. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_acfad31ede2fab6a052009cb585667a7d}{check\+\_\+ttc}} (self, current\+\_\+scan)
+\begin{DoxyCompactList}\small\item\em Detect a collision with the environment using instantaneous time-\/to-\/collision (i\+TTC). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose}} (self, raw\+\_\+steer, vel)
+\begin{DoxyCompactList}\small\item\em Advance the vehicle\textquotesingle{}s physics one time step and take a Li\+DAR scan. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_adf289c821bb1a67683dd8df693446606}{update\+\_\+opp\+\_\+poses}} (self, opp\+\_\+poses)
+\begin{DoxyCompactList}\small\item\em Tell this vehicle where every other vehicle is. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad6c4539dfae27037296311db875230b0}{update\+\_\+scan}} (self, agent\+\_\+scans, agent\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Finish this vehicle\textquotesingle{}s scan: check for a wall collision, then add the opponents. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_af3ba3709a5dfd62c730a8896126a2539}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_af3ba3709a5dfd62c730a8896126a2539} 
+{\bfseries params} = params
+\begin{DoxyCompactList}\small\item\em Vehicle parameter dictionary (see the constructor for its keys). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a9b3284cba21c28500c06bf89c74784f5}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a9b3284cba21c28500c06bf89c74784f5} 
+{\bfseries seed} = seed
+\begin{DoxyCompactList}\small\item\em Seed for this car\textquotesingle{}s Li\+DAR noise generator; reused on every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}{reset()}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a5408c25f5507645e351b33c7b93d09e9}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a5408c25f5507645e351b33c7b93d09e9} 
+{\bfseries is\+\_\+ego} = is\+\_\+ego
+\begin{DoxyCompactList}\small\item\em True if this is the ego vehicle. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a507e48bfae2cd153ce988acfa915f4e3}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a507e48bfae2cd153ce988acfa915f4e3} 
+{\bfseries time\+\_\+step} = time\+\_\+step
+\begin{DoxyCompactList}\small\item\em Physics time step in seconds. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a32283ca467927cb92fd4cebaf4572788}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a32283ca467927cb92fd4cebaf4572788} 
+{\bfseries num\+\_\+beams} = num\+\_\+beams
+\begin{DoxyCompactList}\small\item\em Number of Li\+DAR beams per scan. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ab17edc5d7143043b17160ce593da0e05}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ab17edc5d7143043b17160ce593da0e05} 
+{\bfseries fov} = fov
+\begin{DoxyCompactList}\small\item\em Li\+DAR field of view in radians. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad9490ec65b485c6319228cd439f828fa}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad9490ec65b485c6319228cd439f828fa} 
+{\bfseries integrator} = integrator
+\begin{DoxyCompactList}\small\item\em Integration scheme used in \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose()}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a95f0f352caa6f533474839046ebde8c0}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a95f0f352caa6f533474839046ebde8c0} 
+{\bfseries lidar\+\_\+dist} = lidar\+\_\+dist
+\begin{DoxyCompactList}\small\item\em Forward offset of the Li\+DAR from the vehicle reference point (state x, y), in metres. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_aea2c21a52410444a2502ee4e7d370bad}{state}} = np.\+zeros((7, ))
+\begin{DoxyCompactList}\small\item\em Full dynamic state: \+[x, y, steer\+\_\+angle, vel, yaw\+\_\+angle, yaw\+\_\+rate, slip\+\_\+angle]. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a3dc163d182be2760a4f8322417fd2332}{opp\+\_\+poses}} = None
+\begin{DoxyCompactList}\small\item\em Poses \+[x, y, yaw] of every other car, shape (num\+\_\+agents -\/ 1, 3). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a5ca981390572bd3cb751f6612dde0b07}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a5ca981390572bd3cb751f6612dde0b07} 
+float {\bfseries accel} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Longitudinal acceleration command (m/\+s\texorpdfstring{$^\wedge$}{\string^}2). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7f14f0d65e86091e9400584911f09dc4}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7f14f0d65e86091e9400584911f09dc4} 
+float {\bfseries steer\+\_\+angle\+\_\+vel} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Steering angle velocity command (rad/\+s). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a462d1ce0e070187aba97a24d75961884}{steer\+\_\+buffer}} = np.\+empty((0, ))
+\begin{DoxyCompactList}\small\item\em FIFO buffer that delays steering commands to model servo lag. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_af231001221ce1c00f1de139953cd8910}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_af231001221ce1c00f1de139953cd8910} 
+int {\bfseries steer\+\_\+buffer\+\_\+size} = 2
+\begin{DoxyCompactList}\small\item\em Number of steps of steering delay. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7fd3b2f463d3bdd927193231b6b03530}\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7fd3b2f463d3bdd927193231b6b03530} 
+bool {\bfseries in\+\_\+collision} = False
+\begin{DoxyCompactList}\small\item\em True if the most recent i\+TTC check found a collision with the environment. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a34582c2e022315d26bf94aa92b5c8eb3}{ttc\+\_\+thresh}} = 0.\+005
+\begin{DoxyCompactList}\small\item\em Instantaneous time-\/to-\/collision threshold in seconds. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a38886a18b974e71d95ac9571b8ed4ec2}{scan\+\_\+rng}} = np.\+random.\+default\+\_\+rng(\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a9b3284cba21c28500c06bf89c74784f5}{seed}}=self.\+seed)
+\begin{DoxyCompactList}\small\item\em Random generator for Li\+DAR noise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a35674ca4c4a0eda359249216bee094b3}{scan\+\_\+simulator}} = None
+\begin{DoxyCompactList}\small\item\em Shared \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{Scan\+Simulator2D} instance that ray-\/casts Li\+DAR beams against the map. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a47e2229884b30c3640f75cc46a4b1fe9}{cosines}} = None
+\begin{DoxyCompactList}\small\item\em Precomputed cos(angle) for every Li\+DAR beam, shape (num\+\_\+beams,). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a416feebdc5bf3289495877a722ac5e}{scan\+\_\+angles}} = None
+\begin{DoxyCompactList}\small\item\em Angle of every Li\+DAR beam relative to the car\textquotesingle{}s heading, shape (num\+\_\+beams,). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a45934ce2c731e21cee3b3890d5713a1e}{side\+\_\+distances}} = None
+\begin{DoxyCompactList}\small\item\em Distance from the Li\+DAR origin to the edge of the car\textquotesingle{}s own body along each beam, shape (num\+\_\+beams,). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A single simulated vehicle: physics, Li\+DAR, and wall-\/collision detection. 
+
+A \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} owns its own state vector and control inputs, but shares a single Li\+DAR scan simulator (and the per-\/beam lookup tables derived from it) with every other \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} instance. Those shared objects are stored as class attributes and built only once, by whichever car is constructed first.
+
+A \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} only knows about collisions with the static map (walls). Car-\/to-\/car collisions are detected by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}{Simulator.\+check\+\_\+collision()}.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator} for how multiple Race\+Cars are stepped together. 
+\end{DoxySeeAlso}
+
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-constructors}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a08449770a692aa883a43346987eb9cad}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a08449770a692aa883a43346987eb9cad} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{params}{, }\item[{}]{seed}{, }\item[{}]{is\+\_\+ego}{ = {\ttfamily False}, }\item[{}]{time\+\_\+step}{ = {\ttfamily 0.01}, }\item[{}]{num\+\_\+beams}{ = {\ttfamily 1080}, }\item[{}]{fov}{ = {\ttfamily 4.7}, }\item[{}]{integrator}{ = {\ttfamily \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}{Integrator.\+Euler}}}, }\item[{}]{lidar\+\_\+dist}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+
+
+Construct a vehicle and, if this is the first vehicle, build the shared Li\+DAR model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Vehicle parameter dictionary. Required keys:
+\begin{DoxyItemize}
+\item {\ttfamily mu} tyre-\/road friction coefficient
+\item {\ttfamily C\+\_\+\+Sf}, {\ttfamily C\+\_\+\+Sr} front / rear cornering stiffness
+\item {\ttfamily lf}, {\ttfamily lr} distance from centre of gravity to front / rear axle (m)
+\item {\ttfamily h} height of centre of gravity (m)
+\item {\ttfamily m} mass (kg)
+\item {\ttfamily I} yaw moment of inertia (kg m\texorpdfstring{$^\wedge$}{\string^}2)
+\item {\ttfamily s\+\_\+min}, {\ttfamily s\+\_\+max} steering angle limits (rad)
+\item {\ttfamily sv\+\_\+min}, {\ttfamily sv\+\_\+max} steering velocity limits (rad/\+s)
+\item {\ttfamily v\+\_\+switch} speed above which acceleration is power-\/limited (m/\+s)
+\item {\ttfamily a\+\_\+max} maximum longitudinal acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2)
+\item {\ttfamily v\+\_\+min}, {\ttfamily v\+\_\+max} speed limits (m/\+s)
+\item {\ttfamily length}, {\ttfamily width} body footprint used for collisions (m) 
+\end{DoxyItemize}\\
+\hline
+{\em seed} & Seed for the Li\+DAR noise random generator. \\
+\hline
+{\em is\+\_\+ego} & True if this is the ego (controlled / observed) vehicle. \\
+\hline
+{\em time\+\_\+step} & Physics time step in seconds. \\
+\hline
+{\em num\+\_\+beams} & Number of Li\+DAR beams per scan. \\
+\hline
+{\em fov} & Li\+DAR field of view in radians (4.\+7 rad is about 270 degrees). \\
+\hline
+{\em integrator} & \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}{Integrator} used to advance the dynamics (\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}{Integrator.\+Euler} or \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4}). \\
+\hline
+{\em lidar\+\_\+dist} & Forward distance from the vehicle reference point (state x, y) to the Li\+DAR, along the car\textquotesingle{}s heading (m).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The Li\+DAR settings ({\ttfamily num\+\_\+beams}, {\ttfamily fov}) and the body geometry used for \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a45934ce2c731e21cee3b3890d5713a1e}{side\+\_\+distances} are taken from whichever car is built first, because those objects are shared by every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car}. 
+
+{\ttfamily scan\+\_\+rng} is only created here for the first car built. \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}{reset()} creates it for every car, so call \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}{reset()} before \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose()}. \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{F110\+Env} already does this. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_acfad31ede2fab6a052009cb585667a7d}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!check\_ttc@{check\_ttc}}
+\index{check\_ttc@{check\_ttc}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{check\_ttc()}{check\_ttc()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_acfad31ede2fab6a052009cb585667a7d} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+check\+\_\+ttc (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{current\+\_\+scan}{}\end{DoxyParamCaption})}
+
+
+
+Detect a collision with the environment using instantaneous time-\/to-\/collision (i\+TTC). 
+
+For every beam i: \begin{DoxyVerb}iTTC_i = (range_i - side_distance_i) / (v * cos(angle_i))
+\end{DoxyVerb}
+
+
+i.\+e. the gap between the car body and the obstacle, divided by how fast the car is closing on it along that beam. If any beam has 0 \texorpdfstring{$<$}{<}= i\+TTC \texorpdfstring{$<$}{<} \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a34582c2e022315d26bf94aa92b5c8eb3}{ttc\+\_\+thresh}, the car counts as crashed into a wall. When the car is stationary (v == 0), no collision is reported.
+
+On a collision the car is stopped: control inputs are zeroed and so is state\+[3:].
+
+\begin{DoxyWarning}{Warning}
+state\+[3:] also includes the yaw angle (index 4), so a crash snaps the car\textquotesingle{}s heading to 0 as well as stopping it. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+This does NOT detect collisions with other vehicles; see \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}{Simulator.\+check\+\_\+collision()}.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+scan} & np.\+ndarray of shape (num\+\_\+beams,): Li\+DAR ranges to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the car is in collision with the environment. 
+\end{DoxyReturn}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7c4df859497de94fa56d2fce114f3883}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!ray\_cast\_agents@{ray\_cast\_agents}}
+\index{ray\_cast\_agents@{ray\_cast\_agents}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{ray\_cast\_agents()}{ray\_cast\_agents()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7c4df859497de94fa56d2fce114f3883} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+ray\+\_\+cast\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{scan}{}\end{DoxyParamCaption})}
+
+
+
+Add the other vehicles to a Li\+DAR scan. 
+
+The scan simulator only knows about the static map. This method treats each opponent as a rectangle (using this car\textquotesingle{}s length and width) and, for every beam that hits it, shortens the beam\textquotesingle{}s range to the hit distance.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scan} & np.\+ndarray of shape (num\+\_\+beams,): ranges measured against the map. It is modified in place. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): the scan with opponents included.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Rays are cast from the car\textquotesingle{}s reference point (state\+[0:2]), not the Li\+DAR position offset by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a95f0f352caa6f533474839046ebde8c0}{lidar\+\_\+dist} that \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose()} uses for the map scan. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!reset@{reset}}
+\index{reset@{reset}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+reset (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{pose}{}\end{DoxyParamCaption})}
+
+
+
+Put the vehicle at rest at a given pose and clear all transient state. 
+
+Zeroes the whole state vector (speed, steering, yaw rate, slip), then sets position and heading from {\ttfamily pose}. It also clears the control inputs, collision flag and steering delay buffer, and re-\/seeds the Li\+DAR noise generator so each episode is reproducible.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] in world coordinates. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_abec518cd552dc6f05756ffaa85f5e9ed}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!set\_map@{set\_map}}
+\index{set\_map@{set\_map}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{set\_map()}{set\_map()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_abec518cd552dc6f05756ffaa85f5e9ed} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+set\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{map\+\_\+path}{, }\item[{}]{map\+\_\+ext}{}\end{DoxyParamCaption})}
+
+
+
+Load the occupancy-\/grid map that the Li\+DAR ray-\/casts against. 
+
+The scan simulator is shared, so this sets the map for every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+path} & Absolute path to the map\textquotesingle{}s YAML metadata file. \\
+\hline
+{\em map\+\_\+ext} & File extension of the map image (e.\+g. "{}.\+png"{}, "{}.\+pgm"{}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_adf289c821bb1a67683dd8df693446606}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!update\_opp\_poses@{update\_opp\_poses}}
+\index{update\_opp\_poses@{update\_opp\_poses}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{update\_opp\_poses()}{update\_opp\_poses()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_adf289c821bb1a67683dd8df693446606} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+update\+\_\+opp\+\_\+poses (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{opp\+\_\+poses}{}\end{DoxyParamCaption})}
+
+
+
+Tell this vehicle where every other vehicle is. 
+
+Called by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{Simulator.\+step()} after all cars have moved, so \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7c4df859497de94fa56d2fce114f3883}{ray\+\_\+cast\+\_\+agents()} uses this step\textquotesingle{}s poses.
+
+
+\begin{DoxyParams}{Parameters}
+{\em opp\+\_\+poses} & np.\+ndarray of shape (num\+\_\+agents -\/ 1, 3): \+[x, y, yaw] of every other vehicle (this car is excluded). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a4d5acd420ecd82fe645b689555ebeabc}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!update\_params@{update\_params}}
+\index{update\_params@{update\_params}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{update\_params()}{update\_params()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a4d5acd420ecd82fe645b689555ebeabc} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+update\+\_\+params (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{params}{}\end{DoxyParamCaption})}
+
+
+
+Replace the vehicle\textquotesingle{}s physical parameters. 
+
+The new values take effect on the next call to \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose()}. It is not needed at construction time, because the constructor already stores {\ttfamily params}.
+
+\begin{DoxyNote}{Note}
+This does not rebuild \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a45934ce2c731e21cee3b3890d5713a1e}{side\+\_\+distances}, which were computed from the first car\textquotesingle{}s width and wheelbase at construction.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em params} & New vehicle parameter dictionary (same keys as the constructor). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!update\_pose@{update\_pose}}
+\index{update\_pose@{update\_pose}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{update\_pose()}{update\_pose()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+update\+\_\+pose (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{raw\+\_\+steer}{, }\item[{}]{vel}{}\end{DoxyParamCaption})}
+
+
+
+Advance the vehicle\textquotesingle{}s physics one time step and take a Li\+DAR scan. 
+
+The steps are:
+\begin{DoxyEnumerate}
+\item {\bfseries{Steering delay:}} {\ttfamily raw\+\_\+steer} goes into a FIFO buffer, and the command from \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_af231001221ce1c00f1de139953cd8910}{steer\+\_\+buffer\+\_\+size} steps ago comes out. Until the buffer is full, the applied steering is 0.
+\item {\bfseries{Low-\/level control:}} \doxylink{dynamic__models_8py_a0be97eae93fd6dc5a242b6e0e4572794}{pid()} converts the desired steering angle and speed into a steering velocity and an acceleration. Steering is bang-\/bang at +/\+-\/ sv\+\_\+max until the target angle is reached. Acceleration is proportional to the speed error and capped at a\+\_\+max.
+\item {\bfseries{Integration:}} the single-\/track (bicycle) model with tyre slip, \doxylink{dynamic__models_8py_a8e88ec80a03380998d6056e2207ea7ac}{vehicle\+\_\+dynamics\+\_\+st()}, gives the state derivative, which is integrated over one \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a507e48bfae2cd153ce988acfa915f4e3}{time\+\_\+step} with Euler or RK4.
+\item {\bfseries{Yaw wrap:}} heading is wrapped into \+[0, 2\texorpdfstring{$\ast$}{*}pi].
+\item {\bfseries{Li\+DAR scan:}} a noisy scan is ray-\/cast against the static map from the Li\+DAR position (\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a95f0f352caa6f533474839046ebde8c0}{lidar\+\_\+dist} ahead of the reference point).
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+steer} & Desired front-\/wheel steering angle (rad). \\
+\hline
+{\em vel} & Desired longitudinal speed (m/\+s). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): Li\+DAR scan against the static map only. Other vehicles are added later by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad6c4539dfae27037296311db875230b0}{update\+\_\+scan()}.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Syntax\+Error} & If \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad9490ec65b485c6319228cd439f828fa}{integrator} is not a supported \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}{Integrator} value. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad6c4539dfae27037296311db875230b0}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!update\_scan@{update\_scan}}
+\index{update\_scan@{update\_scan}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{update\_scan()}{update\_scan()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad6c4539dfae27037296311db875230b0} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+update\+\_\+scan (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{agent\+\_\+scans}{, }\item[{}]{agent\+\_\+index}{}\end{DoxyParamCaption})}
+
+
+
+Finish this vehicle\textquotesingle{}s scan: check for a wall collision, then add the opponents. 
+
+This is separate from \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{update\+\_\+pose()} because ray-\/casting opponents needs the new poses of every car, so all cars must move before any scan is finished.
+
+The i\+TTC check runs on the map-\/only scan, before opponents are added. That way another car close by is not mistaken for a wall collision; car-\/to-\/car contact is handled separately by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}{Simulator.\+check\+\_\+collision()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\+\_\+scans} & List of every car\textquotesingle{}s scan. Entry {\ttfamily agent\+\_\+index} is replaced with the finished scan. \\
+\hline
+{\em agent\+\_\+index} & Index of this car in {\ttfamily agent\+\_\+scans}. \\
+\hline
+\end{DoxyParams}
+
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a47e2229884b30c3640f75cc46a4b1fe9}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!cosines@{cosines}}
+\index{cosines@{cosines}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{cosines}{cosines}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a47e2229884b30c3640f75cc46a4b1fe9} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+cosines = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Precomputed cos(angle) for every Li\+DAR beam, shape (num\+\_\+beams,). 
+
+Used by the i\+TTC check to project the car\textquotesingle{}s velocity onto each beam. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a3dc163d182be2760a4f8322417fd2332}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!opp\_poses@{opp\_poses}}
+\index{opp\_poses@{opp\_poses}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{opp\_poses}{opp\_poses}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a3dc163d182be2760a4f8322417fd2332} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+opp\+\_\+poses = None}
+
+
+
+Poses \+[x, y, yaw] of every other car, shape (num\+\_\+agents -\/ 1, 3). 
+
+Set each step by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_adf289c821bb1a67683dd8df693446606}{update\+\_\+opp\+\_\+poses()} and used to ray-\/cast opponents into the scan. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a416feebdc5bf3289495877a722ac5e}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!scan\_angles@{scan\_angles}}
+\index{scan\_angles@{scan\_angles}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{scan\_angles}{scan\_angles}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a416feebdc5bf3289495877a722ac5e} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+scan\+\_\+angles = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Angle of every Li\+DAR beam relative to the car\textquotesingle{}s heading, shape (num\+\_\+beams,). 
+
+Runs from -\/fov/\+2 (rightmost beam) to +fov/\+2 (leftmost beam). \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a38886a18b974e71d95ac9571b8ed4ec2}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!scan\_rng@{scan\_rng}}
+\index{scan\_rng@{scan\_rng}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{scan\_rng}{scan\_rng}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a38886a18b974e71d95ac9571b8ed4ec2} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+scan\+\_\+rng = np.\+random.\+default\+\_\+rng(\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a9b3284cba21c28500c06bf89c74784f5}{seed}}=self.\+seed)}
+
+
+
+Random generator for Li\+DAR noise. 
+
+Re-\/seeded on every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a434f864ee1e440508eb7ca2acca44ec3}{reset()} so each episode\textquotesingle{}s noise sequence is reproducible. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a35674ca4c4a0eda359249216bee094b3}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!scan\_simulator@{scan\_simulator}}
+\index{scan\_simulator@{scan\_simulator}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{scan\_simulator}{scan\_simulator}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a35674ca4c4a0eda359249216bee094b3} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+scan\+\_\+simulator = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Shared \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{Scan\+Simulator2D} instance that ray-\/casts Li\+DAR beams against the map. 
+
+Created by the first \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} constructed; None until then. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a45934ce2c731e21cee3b3890d5713a1e}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!side\_distances@{side\_distances}}
+\index{side\_distances@{side\_distances}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{side\_distances}{side\_distances}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a45934ce2c731e21cee3b3890d5713a1e} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+side\+\_\+distances = None\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Distance from the Li\+DAR origin to the edge of the car\textquotesingle{}s own body along each beam, shape (num\+\_\+beams,). 
+
+Subtracted from the measured range in the i\+TTC check so the result is "{}distance from bumper to wall"{}, not "{}distance from sensor to wall"{}. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_aea2c21a52410444a2502ee4e7d370bad}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!state@{state}}
+\index{state@{state}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_aea2c21a52410444a2502ee4e7d370bad} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+state = np.\+zeros((7, ))}
+
+
+
+Full dynamic state: \+[x, y, steer\+\_\+angle, vel, yaw\+\_\+angle, yaw\+\_\+rate, slip\+\_\+angle]. 
+
+See the "{}\+Vehicle state vector"{} table in the file documentation. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a462d1ce0e070187aba97a24d75961884}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!steer\_buffer@{steer\_buffer}}
+\index{steer\_buffer@{steer\_buffer}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{steer\_buffer}{steer\_buffer}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a462d1ce0e070187aba97a24d75961884} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+steer\+\_\+buffer = np.\+empty((0, ))}
+
+
+
+FIFO buffer that delays steering commands to model servo lag. 
+
+The newest command is at index 0 and the oldest at index -\/1. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a34582c2e022315d26bf94aa92b5c8eb3}\index{f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}!ttc\_thresh@{ttc\_thresh}}
+\index{ttc\_thresh@{ttc\_thresh}!f110\_gym.envs.base\_classes.RaceCar@{f110\_gym.envs.base\_classes.RaceCar}}
+\doxysubsubsection{\texorpdfstring{ttc\_thresh}{ttc\_thresh}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a34582c2e022315d26bf94aa92b5c8eb3} 
+float f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car.\+ttc\+\_\+thresh = 0.\+005}
+
+
+
+Instantaneous time-\/to-\/collision threshold in seconds. 
+
+Any beam with an i\+TTC in \+[0, ttc\+\_\+thresh) counts as a wall collision. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{base__classes_8py}{base\+\_\+classes.\+py}}\end{DoxyCompactItemize}

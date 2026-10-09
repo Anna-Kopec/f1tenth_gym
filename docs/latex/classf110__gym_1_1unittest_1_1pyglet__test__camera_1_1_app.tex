@@ -1,0 +1,171 @@
+\doxysection{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App Class Reference}
+\hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app}{}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+
+
+Test window with a draggable, zoomable orthographic camera over one coloured square.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a4fbc29565f07c3e76d9338774b3733d2}{\+\_\+\+\_\+init\+\_\+\_}} (self, width, height, \texorpdfstring{$\ast$}{*}args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs)
+\begin{DoxyCompactList}\small\item\em Open the window with 4x anti-\/aliasing and a camera that shows (0, 0) to (width, height). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a1c7d267618e0c523879a001b7605ed56}{init\+\_\+gl}} (self, width, height)
+\begin{DoxyCompactList}\small\item\em Set the clear colour, line/\+polygon smoothing, alpha blending and viewport. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9926b4b365620d677184e7c483ebeb61}{on\+\_\+resize}} (self, width, height)
+\begin{DoxyCompactList}\small\item\em pyglet callback on resize: reset the camera to show (0, 0) to the new window size. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9f6407073c63670b0fb1b6be1aeb5fd8}{on\+\_\+mouse\+\_\+drag}} (self, x, y, dx, dy, buttons, modifiers)
+\begin{DoxyCompactList}\small\item\em pyglet callback on mouse drag: pan the camera so the scene follows the cursor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_afdd5fe21bc5899df4b72944ba14a91d1}{on\+\_\+mouse\+\_\+scroll}} (self, x, y, dx, dy)
+\begin{DoxyCompactList}\small\item\em pyglet callback on scroll: zoom about the cursor, keeping zoom\+\_\+level between 0.\+2 and 5. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a7a530ea9779daafd27e47644af569067}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a7a530ea9779daafd27e47644af569067} 
+{\bfseries on\+\_\+draw} (self)
+\begin{DoxyCompactList}\small\item\em Draw one frame: set the orthographic camera, then draw a 100x100 square with a colour per corner. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a5fe983d3fa7fe43e8128c92d51b7abf6}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a5fe983d3fa7fe43e8128c92d51b7abf6} 
+{\bfseries run} (self)
+\begin{DoxyCompactList}\small\item\em Start the pyglet event loop (blocks until the window is closed). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_aaca4f571369fc95e45355634d41fc24e}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_aaca4f571369fc95e45355634d41fc24e} 
+int {\bfseries left} = 0
+\begin{DoxyCompactList}\small\item\em Left edge of the visible area (scene units). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9c3fdc6ea9bbe0407668091c4b6effb5}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9c3fdc6ea9bbe0407668091c4b6effb5} 
+{\bfseries right} = width
+\begin{DoxyCompactList}\small\item\em Right edge of the visible area. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a155af5e767867bdf910d8b0936219b5a}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a155af5e767867bdf910d8b0936219b5a} 
+int {\bfseries bottom} = 0
+\begin{DoxyCompactList}\small\item\em Bottom edge of the visible area. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2145d5c781e3f33fefd7b46af2fadd69}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2145d5c781e3f33fefd7b46af2fadd69} 
+{\bfseries top} = height
+\begin{DoxyCompactList}\small\item\em Top edge of the visible area. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a65db1ec89b0b4e1554de85780243e4bf}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a65db1ec89b0b4e1554de85780243e4bf} 
+int {\bfseries zoom\+\_\+level} = 1
+\begin{DoxyCompactList}\small\item\em Scene units per screen pixel. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_af92e414bc48f782207e5891ea82e3ad1}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_af92e414bc48f782207e5891ea82e3ad1} 
+{\bfseries zoomed\+\_\+width} = width
+\begin{DoxyCompactList}\small\item\em Visible width in scene units. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2f88138801a909d8826f61792745409f}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2f88138801a909d8826f61792745409f} 
+{\bfseries zoomed\+\_\+height} = height
+\begin{DoxyCompactList}\small\item\em Visible height in scene units. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2dbab709834cb41b04a84ba40b24bae4}\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a2dbab709834cb41b04a84ba40b24bae4} 
+{\bfseries resizable}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Test window with a draggable, zoomable orthographic camera over one coloured square. 
+
+\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_doc-constructors}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a4fbc29565f07c3e76d9338774b3733d2}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a4fbc29565f07c3e76d9338774b3733d2} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{width}{, }\item[{}]{height}{, }\item[{\texorpdfstring{$\ast$}{*}}]{args}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{kwargs}{}\end{DoxyParamCaption})}
+
+
+
+Open the window with 4x anti-\/aliasing and a camera that shows (0, 0) to (width, height). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width,height} & Window size in pixels. \\
+\hline
+{\em args,kwargs} & Passed on to pyglet.\+window.\+Window (e.\+g. resizable=True). \\
+\hline
+\end{DoxyParams}
+
+
+\label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_doc-func-members}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a1c7d267618e0c523879a001b7605ed56}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}!init\_gl@{init\_gl}}
+\index{init\_gl@{init\_gl}!f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+\doxysubsubsection{\texorpdfstring{init\_gl()}{init\_gl()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a1c7d267618e0c523879a001b7605ed56} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App.\+init\+\_\+gl (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{width}{, }\item[{}]{height}{}\end{DoxyParamCaption})}
+
+
+
+Set the clear colour, line/\+polygon smoothing, alpha blending and viewport. 
+
+\begin{DoxyNote}{Note}
+Never called; the matching call in \doxylink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9926b4b365620d677184e7c483ebeb61}{on\+\_\+resize()} is commented out.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em width,height} & Viewport size in pixels. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9f6407073c63670b0fb1b6be1aeb5fd8}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}!on\_mouse\_drag@{on\_mouse\_drag}}
+\index{on\_mouse\_drag@{on\_mouse\_drag}!f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+\doxysubsubsection{\texorpdfstring{on\_mouse\_drag()}{on\_mouse\_drag()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9f6407073c63670b0fb1b6be1aeb5fd8} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App.\+on\+\_\+mouse\+\_\+drag (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{dx}{, }\item[{}]{dy}{, }\item[{}]{buttons}{, }\item[{}]{modifiers}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback on mouse drag: pan the camera so the scene follows the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & Cursor position in pixels. \\
+\hline
+{\em dx,dy} & Movement since the last event in pixels. \\
+\hline
+{\em buttons} & Mouse buttons held. \\
+\hline
+{\em modifiers} & Keyboard modifiers held. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_afdd5fe21bc5899df4b72944ba14a91d1}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}!on\_mouse\_scroll@{on\_mouse\_scroll}}
+\index{on\_mouse\_scroll@{on\_mouse\_scroll}!f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+\doxysubsubsection{\texorpdfstring{on\_mouse\_scroll()}{on\_mouse\_scroll()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_afdd5fe21bc5899df4b72944ba14a91d1} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App.\+on\+\_\+mouse\+\_\+scroll (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{dx}{, }\item[{}]{dy}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback on scroll: zoom about the cursor, keeping zoom\+\_\+level between 0.\+2 and 5. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & Cursor position in pixels. \\
+\hline
+{\em dx,dy} & Scroll amounts (dy \texorpdfstring{$>$}{>} 0 = scroll up = zoom out). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9926b4b365620d677184e7c483ebeb61}\index{f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}!on\_resize@{on\_resize}}
+\index{on\_resize@{on\_resize}!f110\_gym.unittest.pyglet\_test\_camera.App@{f110\_gym.unittest.pyglet\_test\_camera.App}}
+\doxysubsubsection{\texorpdfstring{on\_resize()}{on\_resize()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app_a9926b4b365620d677184e7c483ebeb61} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App.\+on\+\_\+resize (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{width}{, }\item[{}]{height}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback on resize: reset the camera to show (0, 0) to the new window size. 
+
+\begin{DoxyNote}{Note}
+This also resets the zoomed width and height to 1:1 without resetting zoom\+\_\+level, so panning and zooming after a resize are off by the old zoom factor.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em width,height} & New window size in pixels. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+unittest/\doxymbox{\hyperlink{pyglet__test__camera_8py}{pyglet\+\_\+test\+\_\+camera.\+py}}\end{DoxyCompactItemize}

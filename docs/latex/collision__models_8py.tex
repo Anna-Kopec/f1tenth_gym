@@ -1,0 +1,278 @@
+\doxysection{f110\+\_\+gym/\+envs/\+collision\+\_\+models.py File Reference}
+\hypertarget{collision__models_8py}{}\label{collision__models_8py}\index{f110\_gym/envs/collision\_models.py@{f110\_gym/envs/collision\_models.py}}
+
+
+Car-\/to-\/car collision detection (2D GJK) and helpers for vehicle body geometry.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+Collision\+Tests}}
+\begin{DoxyCompactList}\small\item\em Unit tests for \doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()}, \doxylink{collision__models_8py_af3bd441b36109b97657a02b03b499b55}{collision()} and \doxylink{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}{collision\+\_\+multiple()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{collision__models_8py_a2b2e410078df63145bd89175338e2f25}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+perpendicular}} (pt)
+\begin{DoxyCompactList}\small\item\em Rotate a 2D vector by -\/90 degrees: (x, y) -\/\texorpdfstring{$>$}{>} (y, -\/x). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_a7eb2209320a8441ecdb18361d6222702}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+triple\+Product}} (a, b, c)
+\begin{DoxyCompactList}\small\item\em 2D vector triple product (a x b) x c, expanded as b(a.\+c) -\/ a(b.\+c). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_ad6dd657facee4125bde58e26a23e3159}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+avg\+Point}} (vertices)
+\begin{DoxyCompactList}\small\item\em Mean of a set of vertices (the centroid of the corner points). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+index\+Of\+Furthest\+Point}} (vertices, d)
+\begin{DoxyCompactList}\small\item\em Index of the vertex that lies furthest along direction {\ttfamily d}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_a7a5f77766edf577c0d831b4b46147afd}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+support}} (vertices1, vertices2, d)
+\begin{DoxyCompactList}\small\item\em Support function of the Minkowski difference (body1 -\/ body2) in direction {\ttfamily d}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_af3bd441b36109b97657a02b03b499b55}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+collision}} (vertices1, vertices2)
+\begin{DoxyCompactList}\small\item\em GJK test: do two convex polygons overlap? \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+collision\+\_\+multiple}} (vertices)
+\begin{DoxyCompactList}\small\item\em Run the GJK test on every pair of bodies. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_aef3edf79f0ffa6c97789cd8f47d7c533}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+get\+\_\+trmtx}} (pose)
+\begin{DoxyCompactList}\small\item\em Homogeneous transform from the vehicle frame to the world frame. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+get\+\_\+vertices}} (pose, length, width)
+\begin{DoxyCompactList}\small\item\em World-\/frame corners of a rectangular car body. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Car-\/to-\/car collision detection (2D GJK) and helpers for vehicle body geometry. 
+
+\hypertarget{collision__models_8py_collision_models_gjk_overview}{}\doxysubsection{\texorpdfstring{How the GJK collision test works}{How the GJK collision test works}}\label{collision__models_8py_collision_models_gjk_overview}
+GJK (Gilbert-\/\+Johnson-\/\+Keerthi) decides whether two convex shapes overlap without testing their edges against each other directly. It relies on one fact:
+
+\begin{quote}
+Two convex shapes A and B overlap if and only if their Minkowski difference A -\/ B = \{ a -\/ b : a in A, b in B \} contains the origin. \end{quote}
+
+
+The Minkowski difference is never built explicitly. Instead, a {\itshape support function} returns its furthest point in any requested direction. The algorithm grows a simplex (a point, then a line segment, then a triangle in 2D) from support points, each time searching in the direction of the origin:
+\begin{DoxyItemize}
+\item If a new support point fails to get past the origin in the search direction, the origin cannot be inside A -\/ B, so the shapes are separated.
+\item If the triangle ever encloses the origin, the shapes overlap.
+\end{DoxyItemize}
+
+The implementation is a port of \href{https://github.com/kroitor/gjk.c}{\texttt{https:\+/\+/\+github.\+com/\+kroitor/\+gjk.\+c}}. Every function is compiled with numba ({\ttfamily njit}) for speed.\hypertarget{collision__models_8py_collision_models_vertex_helpers}{}\doxysubsection{\texorpdfstring{Vehicle geometry helpers}{Vehicle geometry helpers}}\label{collision__models_8py_collision_models_vertex_helpers}
+get\+\_\+trmtx() and get\+\_\+vertices() turn a pose \+[x, y, yaw] plus a body length and width into the four world-\/frame corners of the car\textquotesingle{}s rectangle. Both the Simulator (for collisions) and the renderer (for drawing) use them.
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{collision__models_8py_doc-func-members}
+\Hypertarget{collision__models_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{collision__models_8py_ad6dd657facee4125bde58e26a23e3159}\index{collision\_models.py@{collision\_models.py}!avgPoint@{avgPoint}}
+\index{avgPoint@{avgPoint}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{avgPoint()}{avgPoint()}}
+{\footnotesize\ttfamily \label{collision__models_8py_ad6dd657facee4125bde58e26a23e3159} 
+avg\+Point (\begin{DoxyParamCaption}\item[{}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+Mean of a set of vertices (the centroid of the corner points). 
+
+GJK uses it to pick a sensible first search direction (from one body\textquotesingle{}s centre toward the other\textquotesingle{}s).
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & np.\+ndarray of shape (n, 2). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,): mean of the rows of {\ttfamily vertices}. 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_af3bd441b36109b97657a02b03b499b55}\index{collision\_models.py@{collision\_models.py}!collision@{collision}}
+\index{collision@{collision}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily \label{collision__models_8py_af3bd441b36109b97657a02b03b499b55} 
+collision (\begin{DoxyParamCaption}\item[{}]{vertices1}{, }\item[{}]{vertices2}{}\end{DoxyParamCaption})}
+
+
+
+GJK test: do two convex polygons overlap? 
+
+See the file overview for the idea behind the algorithm. Here, {\ttfamily a} is always the newest simplex point and {\ttfamily ao} = -\/a points from it to the origin.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices1} & np.\+ndarray of shape (n, 2): vertices of the first convex body. \\
+\hline
+{\em vertices2} & np.\+ndarray of shape (m, 2): vertices of the second convex body. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the bodies overlap (touching counts as overlapping), False otherwise.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The loop gives up after 1000 iterations and returns False (no collision). Polygons this small normally finish in a few iterations. 
+\end{DoxyNote}
+\Hypertarget{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}\index{collision\_models.py@{collision\_models.py}!collision\_multiple@{collision\_multiple}}
+\index{collision\_multiple@{collision\_multiple}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{collision\_multiple()}{collision\_multiple()}}
+{\footnotesize\ttfamily \label{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2} 
+collision\+\_\+multiple (\begin{DoxyParamCaption}\item[{}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+Run the GJK test on every pair of bodies. 
+
+Every unordered pair (i, j) with i \texorpdfstring{$<$}{<} j is tested once, which is O(n\texorpdfstring{$^\wedge$}{\string^}2) in the number of bodies.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & np.\+ndarray of shape (num\+\_\+bodies, 4, 2): the four corners of each body. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (collisions, collision\+\_\+idx):
+\begin{DoxyItemize}
+\item {\ttfamily collisions} np.\+ndarray of shape (num\+\_\+bodies,): 1.\+0 if that body overlaps any other body, else 0.\+0.
+\item {\ttfamily collision\+\_\+idx} np.\+ndarray of shape (num\+\_\+bodies,): index of the body it overlaps, or -\/1 if none.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If a body overlaps several others, {\ttfamily collision\+\_\+idx} keeps only the partner from the last colliding pair tested. That is the highest-\/numbered partner above it if there is one, otherwise the highest-\/numbered one below it. 
+\end{DoxyNote}
+\Hypertarget{collision__models_8py_aef3edf79f0ffa6c97789cd8f47d7c533}\index{collision\_models.py@{collision\_models.py}!get\_trmtx@{get\_trmtx}}
+\index{get\_trmtx@{get\_trmtx}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_trmtx()}{get\_trmtx()}}
+{\footnotesize\ttfamily \label{collision__models_8py_aef3edf79f0ffa6c97789cd8f47d7c533} 
+get\+\_\+trmtx (\begin{DoxyParamCaption}\item[{}]{pose}{}\end{DoxyParamCaption})}
+
+
+
+Homogeneous transform from the vehicle frame to the world frame. 
+
+The result is a 4x4 matrix: a rotation by the yaw about z, plus a translation by (x, y). Multiplying a vehicle-\/frame point \+[px, py, 0, 1] by H gives that point in world coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the vehicle in the world frame. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (4, 4): homogeneous transform H. 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}\index{collision\_models.py@{collision\_models.py}!get\_vertices@{get\_vertices}}
+\index{get\_vertices@{get\_vertices}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_vertices()}{get\_vertices()}}
+{\footnotesize\ttfamily \label{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607} 
+get\+\_\+vertices (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{length}{, }\item[{}]{width}{}\end{DoxyParamCaption})}
+
+
+
+World-\/frame corners of a rectangular car body. 
+
+The rectangle is centred on (x, y) with its long side along the heading. Each corner is defined in the vehicle frame (+/\+-\/ length/\+2 forward, +/\+-\/ width/\+2 to the left) and then transformed to the world frame with get\+\_\+trmtx().
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the body centre in the world frame. \\
+\hline
+{\em length} & Body length along the heading (m). \\
+\hline
+{\em width} & Body width (m). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (4, 2): corners in the order rear-\/left, rear-\/right, front-\/right, front-\/left. Consecutive rows (wrapping from the last back to the first) form the edges. 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64}\index{collision\_models.py@{collision\_models.py}!indexOfFurthestPoint@{indexOfFurthestPoint}}
+\index{indexOfFurthestPoint@{indexOfFurthestPoint}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{indexOfFurthestPoint()}{indexOfFurthestPoint()}}
+{\footnotesize\ttfamily \label{collision__models_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64} 
+index\+Of\+Furthest\+Point (\begin{DoxyParamCaption}\item[{}]{vertices}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Index of the vertex that lies furthest along direction {\ttfamily d}. 
+
+"{}\+Furthest along d"{} means the vertex with the largest dot product with d. For a convex polygon this is its support point in direction d.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & np.\+ndarray of shape (n, 2): polygon vertices. \\
+\hline
+{\em d} & np.\+ndarray of shape (2,): search direction (need not be unit length). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int: row index into {\ttfamily vertices}. 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_a2b2e410078df63145bd89175338e2f25}\index{collision\_models.py@{collision\_models.py}!perpendicular@{perpendicular}}
+\index{perpendicular@{perpendicular}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{perpendicular()}{perpendicular()}}
+{\footnotesize\ttfamily \label{collision__models_8py_a2b2e410078df63145bd89175338e2f25} 
+perpendicular (\begin{DoxyParamCaption}\item[{}]{pt}{}\end{DoxyParamCaption})}
+
+
+
+Rotate a 2D vector by -\/90 degrees: (x, y) -\/\texorpdfstring{$>$}{>} (y, -\/x). 
+
+GJK uses this as a fallback search direction when the origin lies exactly on the current simplex edge, where the triple product is zero.
+
+\begin{DoxyWarning}{Warning}
+{\ttfamily pt} is modified in place, and the same array is returned.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & np.\+ndarray of shape (2,): input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,): the perpendicular vector (the same object as {\ttfamily pt}). 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_a7a5f77766edf577c0d831b4b46147afd}\index{collision\_models.py@{collision\_models.py}!support@{support}}
+\index{support@{support}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}}
+{\footnotesize\ttfamily \label{collision__models_8py_a7a5f77766edf577c0d831b4b46147afd} 
+support (\begin{DoxyParamCaption}\item[{}]{vertices1}{, }\item[{}]{vertices2}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Support function of the Minkowski difference (body1 -\/ body2) in direction {\ttfamily d}. 
+
+The furthest point of A -\/ B along d is the furthest point of A along d minus the furthest point of B along -\/d.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices1} & np.\+ndarray of shape (n, 2): vertices of the first body. \\
+\hline
+{\em vertices2} & np.\+ndarray of shape (m, 2): vertices of the second body. \\
+\hline
+{\em d} & np.\+ndarray of shape (2,): search direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,): a single point on the boundary of the Minkowski difference. 
+\end{DoxyReturn}
+\Hypertarget{collision__models_8py_a7eb2209320a8441ecdb18361d6222702}\index{collision\_models.py@{collision\_models.py}!tripleProduct@{tripleProduct}}
+\index{tripleProduct@{tripleProduct}!collision\_models.py@{collision\_models.py}}
+\doxysubsubsection{\texorpdfstring{tripleProduct()}{tripleProduct()}}
+{\footnotesize\ttfamily \label{collision__models_8py_a7eb2209320a8441ecdb18361d6222702} 
+triple\+Product (\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{, }\item[{}]{c}{}\end{DoxyParamCaption})}
+
+
+
+2D vector triple product (a x b) x c, expanded as b(a.\+c) -\/ a(b.\+c). 
+
+GJK uses this to find a direction perpendicular to a simplex edge that points toward the origin. For example, triple\+Product(ab, ao, ab) is perpendicular to edge ab and on the same side as the origin.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & np.\+ndarray of shape (2,). \\
+\hline
+{\em b} & np.\+ndarray of shape (2,). \\
+\hline
+{\em c} & np.\+ndarray of shape (2,). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,): b \texorpdfstring{$\ast$}{*} (a.\+c) -\/ a \texorpdfstring{$\ast$}{*} (b.\+c). 
+\end{DoxyReturn}

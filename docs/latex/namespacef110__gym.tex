@@ -1,0 +1,38 @@
+\doxysection{f110\+\_\+gym Namespace Reference}
+\hypertarget{namespacef110__gym}{}\label{namespacef110__gym}\index{f110\_gym@{f110\_gym}}
+
+
+F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface.  
+
+
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacef110__gym_a053265813f14380af323db53967da5f4}\label{namespacef110__gym_a053265813f14380af323db53967da5f4} 
+{\bfseries id}
+\item 
+\Hypertarget{namespacef110__gym_a5a9b8348f0cb72c71b742a16e2bd2c4e}\label{namespacef110__gym_a5a9b8348f0cb72c71b742a16e2bd2c4e} 
+{\bfseries entry\+\_\+point}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. 
+
+Importing this package registers the environment with gym under the id {\ttfamily \textquotesingle{}f110-\/v0\textquotesingle{}}, so it can be created with: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{env\ =\ gym.make(\textcolor{stringliteral}{'f110\_gym:f110-\/v0'},\ map=\textcolor{stringliteral}{'vegas'},\ num\_agents=1)}
+
+\end{DoxyCode}
+ The {\ttfamily \textquotesingle{}\doxylink{namespacef110__gym}{f110\+\_\+gym}:\textquotesingle{}} prefix makes gym import this package (and so run the registration below) before looking up the id.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{f110__env_8py}{f110\+\_\+env.\+py}: F110\+Env for the keyword arguments and the step / reset interface. 
+\end{DoxySeeAlso}

@@ -1,0 +1,91 @@
+\doxysection{waypoint\+\_\+follow.\+Flippy\+Planner Class Reference}
+\hypertarget{classwaypoint__follow_1_1_flippy_planner}{}\label{classwaypoint__follow_1_1_flippy_planner}\index{waypoint\_follow.FlippyPlanner@{waypoint\_follow.FlippyPlanner}}
+
+
+Test planner that flips its steering left and right to stress the integrator and dynamics.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_flippy_planner_a14833a26bbd3011bd40edc93580f4354}{\+\_\+\+\_\+init\+\_\+\_}} (self, speed=1, flip\+\_\+every=1, steer=2)
+\begin{DoxyCompactList}\small\item\em Set the constant speed and steering magnitude. \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_a25b85c45263bc5c5382bcc1d53a239ed}\label{classwaypoint__follow_1_1_flippy_planner_a25b85c45263bc5c5382bcc1d53a239ed} 
+{\bfseries render\+\_\+waypoints} (self, \texorpdfstring{$\ast$}{*}args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs)
+\begin{DoxyCompactList}\small\item\em No-\/op, so this planner can be swapped in for \doxylink{classwaypoint__follow_1_1_pure_pursuit_planner}{Pure\+Pursuit\+Planner}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_flippy_planner_abc7893f0896463b6a208c7002e8ddb16}{plan}} (self, \texorpdfstring{$\ast$}{*}args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs)
+\begin{DoxyCompactList}\small\item\em Flip the steering sign and return (speed, steer). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_aaedf3ee67668a939395dda120a449105}\label{classwaypoint__follow_1_1_flippy_planner_aaedf3ee67668a939395dda120a449105} 
+{\bfseries speed} = speed
+\begin{DoxyCompactList}\small\item\em Constant speed command (m/\+s). \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_a6dec68d69954cee2da0ee180318fe1e5}\label{classwaypoint__follow_1_1_flippy_planner_a6dec68d69954cee2da0ee180318fe1e5} 
+int {\bfseries flip\+\_\+every} = flip\+\_\+every
+\begin{DoxyCompactList}\small\item\em Intended number of calls between flips. \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_ab2451db0bfa321471291e6d989bd4be1}\label{classwaypoint__follow_1_1_flippy_planner_ab2451db0bfa321471291e6d989bd4be1} 
+int {\bfseries counter} = 0
+\begin{DoxyCompactList}\small\item\em Call counter (never incremented). \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_abd4057e013668fd3e6afeda3d5b1912e}\label{classwaypoint__follow_1_1_flippy_planner_abd4057e013668fd3e6afeda3d5b1912e} 
+{\bfseries steer} = steer
+\begin{DoxyCompactList}\small\item\em Current steering command (rad); its sign flips. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Test planner that flips its steering left and right to stress the integrator and dynamics. 
+
+For testing only. It was used to expose numerical errors when the dynamic (slip) model is active at low speed.
+
+\begin{DoxyNote}{Note}
+{\ttfamily counter} is never incremented, so the steering flips on {\itshape every} call regardless of {\ttfamily flip\+\_\+every}. The default steer of 2 rad is far beyond the car\textquotesingle{}s steering limit, so the steering simply swings between its limits. 
+\end{DoxyNote}
+
+
+\label{classwaypoint__follow_1_1_flippy_planner_doc-constructors}
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_a14833a26bbd3011bd40edc93580f4354}\index{waypoint\_follow.FlippyPlanner@{waypoint\_follow.FlippyPlanner}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!waypoint\_follow.FlippyPlanner@{waypoint\_follow.FlippyPlanner}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_flippy_planner_a14833a26bbd3011bd40edc93580f4354} 
+waypoint\+\_\+follow.\+Flippy\+Planner.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{speed}{ = {\ttfamily 1}, }\item[{}]{flip\+\_\+every}{ = {\ttfamily 1}, }\item[{}]{steer}{ = {\ttfamily 2}}\end{DoxyParamCaption})}
+
+
+
+Set the constant speed and steering magnitude. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & Speed command (m/\+s). \\
+\hline
+{\em flip\+\_\+every} & Intended number of calls between flips (see the class note). \\
+\hline
+{\em steer} & Steering magnitude (rad). \\
+\hline
+\end{DoxyParams}
+
+
+\label{classwaypoint__follow_1_1_flippy_planner_doc-func-members}
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classwaypoint__follow_1_1_flippy_planner_abc7893f0896463b6a208c7002e8ddb16}\index{waypoint\_follow.FlippyPlanner@{waypoint\_follow.FlippyPlanner}!plan@{plan}}
+\index{plan@{plan}!waypoint\_follow.FlippyPlanner@{waypoint\_follow.FlippyPlanner}}
+\doxysubsubsection{\texorpdfstring{plan()}{plan()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_flippy_planner_abc7893f0896463b6a208c7002e8ddb16} 
+waypoint\+\_\+follow.\+Flippy\+Planner.\+plan (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\texorpdfstring{$\ast$}{*}}]{args}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{kwargs}{}\end{DoxyParamCaption})}
+
+
+
+Flip the steering sign and return (speed, steer). 
+
+All arguments are ignored.
+
+\begin{DoxyReturn}{Returns}
+Tuple (speed, steer). 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+annac/\+\+Documents/\+\+FSAE/\+\+F1\+Tenth/\+f1tenth\+\_\+gym/\+examples/\doxymbox{\hyperlink{waypoint__follow_8py}{waypoint\+\_\+follow.\+py}}\end{DoxyCompactItemize}

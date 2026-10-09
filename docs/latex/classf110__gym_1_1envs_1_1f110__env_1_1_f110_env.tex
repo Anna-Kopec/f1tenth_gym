@@ -1,0 +1,439 @@
+\doxysection{f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+
+
+Open\+AI gym environment for F1\+TENTH.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a390d2e02a6a3f7a5ac12173f95fa992e}{\+\_\+\+\_\+init\+\_\+\_}} (self, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs)
+\begin{DoxyCompactList}\small\item\em Read the kwargs (see the class documentation), create the \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator} and load the map. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad2b43efa78a625999989afea1e0a1a18}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad2b43efa78a625999989afea1e0a1a18} 
+{\bfseries \+\_\+\+\_\+del\+\_\+\_} (self)
+\begin{DoxyCompactList}\small\item\em Finalizer; does nothing. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step}} (self, action)
+\begin{DoxyCompactList}\small\item\em Advance the environment by one physics time step. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69}{reset}} (self, poses)
+\begin{DoxyCompactList}\small\item\em Start a new episode with every car at the given pose. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad9418a7f82b74506bcdd41d4b23c0255}{update\+\_\+map}} (self, map\+\_\+path, map\+\_\+ext)
+\begin{DoxyCompactList}\small\item\em Load a different map into the simulator. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab9a52feda7ad414ee644a53d77574ab5}{update\+\_\+params}} (self, params, index=-\/1)
+\begin{DoxyCompactList}\small\item\em Change vehicle parameters for every car, or for one car. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a29ec7736dacc3105fc388ec72f1eb931}{add\+\_\+render\+\_\+callback}} (self, callback\+\_\+func)
+\begin{DoxyCompactList}\small\item\em Register a function that draws extra things on every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{render()} call. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{render}} (self, mode=\textquotesingle{}human\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Draw the environment in a pyglet window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a7a28f02fbcbfec3a40a94ba17176034b}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a7a28f02fbcbfec3a40a94ba17176034b} 
+int {\bfseries seed} = kwargs\+[\textquotesingle{}seed\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Seed for the Li\+DAR noise generators. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6fbb8c9dad98bbad696936dec9633939}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6fbb8c9dad98bbad696936dec9633939} 
+str {\bfseries map\+\_\+name} = kwargs\+[\textquotesingle{}map\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Map name or path as passed in (only set when the \textquotesingle{}map\textquotesingle{} kwarg is given). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a584bf97317bbe8d38d8e0136753ded60}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a584bf97317bbe8d38d8e0136753ded60} 
+str {\bfseries map\+\_\+path} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\_)) + \textquotesingle{}/maps/berlin.\+yaml\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Full path to the map YAML file. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a147cde741845fcded400365a9d495ce3}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a147cde741845fcded400365a9d495ce3} 
+str {\bfseries map\+\_\+ext} = kwargs\+[\textquotesingle{}map\+\_\+ext\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Map image extension, including the dot. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a35ac6df37bccea7256aebf6c8f42ae6d}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a35ac6df37bccea7256aebf6c8f42ae6d} 
+dict {\bfseries params} = kwargs\+[\textquotesingle{}params\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Vehicle parameter dict shared by every car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a4eefdcfd9a5f09eedfad9b27bf6ce45e}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a4eefdcfd9a5f09eedfad9b27bf6ce45e} 
+int {\bfseries num\+\_\+agents} = kwargs\+[\textquotesingle{}num\+\_\+agents\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Number of cars. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab95efdf90629b8e13c9aec1eb127f388}{timestep}} = kwargs\+[\textquotesingle{}timestep\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Physics time step (s). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ac114ff6062d053a8a33e0b0573af1177}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ac114ff6062d053a8a33e0b0573af1177} 
+int {\bfseries ego\+\_\+idx} = kwargs\+[\textquotesingle{}ego\+\_\+idx\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Index of the ego car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a8e0e4f45f7e3426b250a2f21875fcc58}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a8e0e4f45f7e3426b250a2f21875fcc58} 
+{\bfseries integrator} = kwargs\+[\textquotesingle{}integrator\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Integration scheme passed to the \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a849a66c8048b2183bef58d1922230e07}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a849a66c8048b2183bef58d1922230e07} 
+float {\bfseries lidar\+\_\+dist} = kwargs\+[\textquotesingle{}lidar\+\_\+dist\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Forward offset of the Li\+DAR from the vehicle reference point (m). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ac0ca56bf31ac8ab6425350ad0ae011d4}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ac0ca56bf31ac8ab6425350ad0ae011d4} 
+float {\bfseries start\+\_\+thresh} = 0.\+5
+\begin{DoxyCompactList}\small\item\em Unused leftover; the finish-\/zone size is hard-\/coded in \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a3bfdff2fb27ad796ec23a0a6878555b9}{\+\_\+check\+\_\+done()}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a7cffd6bee7cefeab257d3974e801fbba}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a7cffd6bee7cefeab257d3974e801fbba} 
+list {\bfseries poses\+\_\+x} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Latest x position of every car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a871b519a2740b88d7ba7029b853e34cf}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a871b519a2740b88d7ba7029b853e34cf} 
+list {\bfseries poses\+\_\+y} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Latest y position of every car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab1721a67c0eda71d53ff6cf11bf04c33}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab1721a67c0eda71d53ff6cf11bf04c33} 
+list {\bfseries poses\+\_\+theta} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Latest yaw of every car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ada1a8cc0681447645b811448f516885a}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ada1a8cc0681447645b811448f516885a} 
+{\bfseries collisions} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Latest collision flag of every car (1.\+0 = collided). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aef8296f6bf386870709e9b9e73e4cf81}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aef8296f6bf386870709e9b9e73e4cf81} 
+bool {\bfseries near\+\_\+start} = True
+\begin{DoxyCompactList}\small\item\em Unused leftover (replaced by near\+\_\+starts). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_acafb918825ad681a263199cd0374244f}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_acafb918825ad681a263199cd0374244f} 
+int {\bfseries num\+\_\+toggles} = 0
+\begin{DoxyCompactList}\small\item\em Unused leftover (replaced by toggle\+\_\+list). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a83f64f867c24f12d9ad3e14745e23aa1}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a83f64f867c24f12d9ad3e14745e23aa1} 
+{\bfseries lap\+\_\+times} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Lap time of each car (s): elapsed sim time, frozen once the car completes 2 laps. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a0b2cc3bd151748987c6e23f34f16d1a2}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a0b2cc3bd151748987c6e23f34f16d1a2} 
+{\bfseries lap\+\_\+counts} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Number of completed laps for each car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_acf9af3f7142e94d2ae0ecb2567521c3d}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_acf9af3f7142e94d2ae0ecb2567521c3d} 
+float {\bfseries current\+\_\+time} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Simulated time since the last reset (s). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a24602450e500c08f3190672922de25de}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a24602450e500c08f3190672922de25de} 
+{\bfseries near\+\_\+starts} = np.\+array(\+[True]\+\texorpdfstring{$\ast$}{*}self.\+num\+\_\+agents)
+\begin{DoxyCompactList}\small\item\em Whether each car is currently inside the finish zone. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a45f4f52ca91b4efa14118d3718213eb6}{toggle\+\_\+list}} = np.\+zeros((self.\+num\+\_\+agents,))
+\begin{DoxyCompactList}\small\item\em Number of times each car has entered or left the finish zone. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ae867a64de7fea1f98cb6db6e9ff9d4ed}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ae867a64de7fea1f98cb6db6e9ff9d4ed} 
+{\bfseries start\+\_\+xs} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Starting x of each car (from \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69}{reset()}). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a814ae4233f0c96728a9a5f47f5add06e}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a814ae4233f0c96728a9a5f47f5add06e} 
+{\bfseries start\+\_\+ys} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Starting y of each car. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a064dc8d975b3da3e0ac29f73b626b6aa}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a064dc8d975b3da3e0ac29f73b626b6aa} 
+{\bfseries start\+\_\+thetas} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Starting yaw of each car. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a613e153a969b6e3df72893eed2da061f}{start\+\_\+rot}} = np.\+eye(2)
+\begin{DoxyCompactList}\small\item\em 2x2 rotation from the world frame into the ego car\textquotesingle{}s starting frame (x along the start heading). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aa8a35ba4818fe79c1e2c6f9058a31dde}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aa8a35ba4818fe79c1e2c6f9058a31dde} 
+{\bfseries sim} = \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator}}(self.\+params, self.\+num\+\_\+agents, self.\+seed, time\+\_\+step=self.\+timestep, \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a8e0e4f45f7e3426b250a2f21875fcc58}{integrator}}=self.\+integrator, \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a849a66c8048b2183bef58d1922230e07}{lidar\+\_\+dist}}=self.\+lidar\+\_\+dist)
+\begin{DoxyCompactList}\small\item\em The underlying multi-\/car \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad72637a095c5eaa10747062ffe62180e}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad72637a095c5eaa10747062ffe62180e} 
+dict {\bfseries render\+\_\+obs} = None
+\begin{DoxyCompactList}\small\item\em Subset of the latest observation passed to the renderer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a64e9c2c50a4dd36dd493543c0d76d55f}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a64e9c2c50a4dd36dd493543c0d76d55f} 
+dict {\bfseries metadata} = \{\textquotesingle{}render.\+modes\textquotesingle{}:\+ \+[\textquotesingle{}human\textquotesingle{}, \textquotesingle{}human\+\_\+fast\textquotesingle{}]\+\}
+\begin{DoxyCompactList}\small\item\em Supported render modes. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aaa2e9426a3f641b295203f9166c33fac}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aaa2e9426a3f641b295203f9166c33fac} 
+{\bfseries renderer} = None
+\begin{DoxyCompactList}\small\item\em Shared Env\+Renderer window, created on the first \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{render()} call. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad293c8b43306e47c4430b16b9f7b8d8c}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad293c8b43306e47c4430b16b9f7b8d8c} 
+{\bfseries current\+\_\+obs} = None
+\begin{DoxyCompactList}\small\item\em Most recent observation dict from \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step()}, shared across instances. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aaa10dfc72f17aab3f492c266a6c4cb93}\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_aaa10dfc72f17aab3f492c266a6c4cb93} 
+list {\bfseries render\+\_\+callbacks} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Functions called with the renderer on every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{render()}; add with \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a29ec7736dacc3105fc388ec72f1eb931}{add\+\_\+render\+\_\+callback()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a3bfdff2fb27ad796ec23a0a6878555b9}{\+\_\+check\+\_\+done}} (self)
+\begin{DoxyCompactList}\small\item\em Update lap counts and times, and decide whether the episode is over. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a789f057dfebbe57001e1318c1e9115b0}{\+\_\+update\+\_\+state}} (self, obs\+\_\+dict)
+\begin{DoxyCompactList}\small\item\em Copy poses and collision flags from an observation into the env\textquotesingle{}s own state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Open\+AI gym environment for F1\+TENTH. 
+
+Create it with {\ttfamily gym.\+make}(\textquotesingle{}\doxylink{namespacef110__gym}{f110\+\_\+gym}:f110-\/v0\textquotesingle{}, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs). All keyword arguments are optional:
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}kwarg  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Default  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Meaning  \\
+seed  &12345  &Seed for the Li\+DAR noise generators.  \\
+map  &(vegas)  &\textquotesingle{}berlin\textquotesingle{}, \textquotesingle{}skirk\textquotesingle{} or \textquotesingle{}levine\textquotesingle{} for a bundled map, or a path to a custom map\textquotesingle{}s YAML file {\itshape without} the .yaml extension. If omitted, the bundled vegas map is used.  \\
+map\+\_\+ext  &\textquotesingle{}.png\textquotesingle{}  &Map image extension, including the dot (\textquotesingle{}.png\textquotesingle{}, \textquotesingle{}.pgm\textquotesingle{}).  \\
+params  &F1\+TENTH defaults  &Vehicle parameter dict (see below).  \\
+num\+\_\+agents  &2  &Number of cars.  \\
+timestep  &0.\+01  &Physics time step (s).  \\
+ego\+\_\+idx  &0  &Index of the ego car.  \\
+integrator  &\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4}  &\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4} or \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}{Integrator.\+Euler}.  \\
+lidar\+\_\+dist  &0.\+0  &Forward offset of the Li\+DAR from the vehicle reference point (m).  \\
+\end{DoxyTable}
+
+
+Vehicle parameters ({\ttfamily params} dict):
+\begin{DoxyItemize}
+\item {\ttfamily mu:} surface friction coefficient
+\item {\ttfamily C\+\_\+\+Sf}, {\ttfamily C\+\_\+\+Sr:} front / rear cornering stiffness coefficients
+\item {\ttfamily lf}, {\ttfamily lr:} distance from the centre of gravity to the front / rear axle (m)
+\item {\ttfamily h:} height of the centre of gravity (m)
+\item {\ttfamily m:} total mass (kg)
+\item {\ttfamily I:} yaw moment of inertia (kg m\texorpdfstring{$^\wedge$}{\string^}2)
+\item {\ttfamily s\+\_\+min}, {\ttfamily s\+\_\+max:} steering angle limits (rad)
+\item {\ttfamily sv\+\_\+min}, {\ttfamily sv\+\_\+max:} steering velocity limits (rad/\+s)
+\item {\ttfamily v\+\_\+switch:} speed above which acceleration is power-\/limited (m/\+s)
+\item {\ttfamily a\+\_\+max:} maximum longitudinal acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2)
+\item {\ttfamily v\+\_\+min}, {\ttfamily v\+\_\+max:} speed limits (m/\+s)
+\item {\ttfamily width}, {\ttfamily length:} body size (m), used for collisions and opponent ray casting
+\end{DoxyItemize}
+
+{\bfseries{Action:}} np.\+ndarray of shape (num\+\_\+agents, 2). Row i is \+[desired steering angle (rad), desired speed (m/\+s)] for car i.
+
+{\bfseries{Observation:}} the dict from \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{Simulator.\+step()}, plus {\ttfamily lap\+\_\+times} and {\ttfamily lap\+\_\+counts}.
+
+\begin{DoxyNote}{Note}
+The renderer, latest observation and render callbacks are {\itshape class} attributes, so they are shared by every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{F110\+Env} instance in the process. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-constructors}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a390d2e02a6a3f7a5ac12173f95fa992e}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a390d2e02a6a3f7a5ac12173f95fa992e} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{kwargs}{}\end{DoxyParamCaption})}
+
+
+
+Read the kwargs (see the class documentation), create the \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator} and load the map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em kwargs} & Optional settings; see the table in the class documentation.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Each setting is read inside a bare {\ttfamily try/\+except}, so a misspelt kwarg is silently ignored and the default is used instead. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a3bfdff2fb27ad796ec23a0a6878555b9}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!\_check\_done@{\_check\_done}}
+\index{\_check\_done@{\_check\_done}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{\_check\_done()}{\_check\_done()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a3bfdff2fb27ad796ec23a0a6878555b9} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+\_\+check\+\_\+done (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Update lap counts and times, and decide whether the episode is over. 
+
+{\bfseries{Finish zone:}} each car\textquotesingle{}s position is expressed relative to its own start position, in a frame aligned with the {\itshape ego} car\textquotesingle{}s starting heading:
+\begin{DoxyItemize}
+\item forward (along the start heading): dx
+\item sideways: dy, but anything within +/\+-\/2 m counts as 0, and beyond that only the excess over 2 m counts.
+\end{DoxyItemize}
+
+A car is "{}in the zone"{} when dx\texorpdfstring{$^\wedge$}{\string^}2 + (excess dy)\texorpdfstring{$^\wedge$}{\string^}2 \texorpdfstring{$<$}{<}= 0.\+1. That is roughly a box about 0.\+63 m long (+/\+-\/0.32 m) and 4 m wide, centred on the start pose.
+
+{\bfseries{Lap counting:}} every time a car enters or leaves the zone, its toggle count goes up by 1. Cars start inside the zone, so leaving and coming back is 2 toggles, i.\+e. one lap. A car\textquotesingle{}s lap time keeps updating until it reaches 4 toggles (2 laps), then freezes.
+
+{\bfseries{Done}} when the ego car has collided, or every car has completed 2 laps.
+
+\begin{DoxyReturn}{Returns}
+Tuple (done, checkpoint\+\_\+done):
+\begin{DoxyItemize}
+\item {\ttfamily done} (bool): whether the episode is over.
+\item {\ttfamily checkpoint\+\_\+done} (np.\+ndarray of bool, shape (num\+\_\+agents,)): whether each car has finished 2 laps. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a789f057dfebbe57001e1318c1e9115b0}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!\_update\_state@{\_update\_state}}
+\index{\_update\_state@{\_update\_state}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{\_update\_state()}{\_update\_state()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a789f057dfebbe57001e1318c1e9115b0} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+\_\+update\+\_\+state (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{obs\+\_\+dict}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Copy poses and collision flags from an observation into the env\textquotesingle{}s own state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obs\+\_\+dict} & Observation dict from \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{Simulator.\+step()}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a29ec7736dacc3105fc388ec72f1eb931}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!add\_render\_callback@{add\_render\_callback}}
+\index{add\_render\_callback@{add\_render\_callback}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{add\_render\_callback()}{add\_render\_callback()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a29ec7736dacc3105fc388ec72f1eb931} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+add\+\_\+render\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{callback\+\_\+func}{}\end{DoxyParamCaption})}
+
+
+
+Register a function that draws extra things on every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{render()} call. 
+
+The function receives the Env\+Renderer, so it can add shapes to {\ttfamily renderer.\+batch}, for example to draw a planned path or waypoints.
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+\_\+func} & Function taking one argument (the Env\+Renderer) and returning None.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Callbacks are stored on the class, so they apply to every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{F110\+Env} instance. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!render@{render}}
+\index{render@{render}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+render (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{mode}{ = {\ttfamily \textquotesingle{}human\textquotesingle{}}}\end{DoxyParamCaption})}
+
+
+
+Draw the environment in a pyglet window. 
+
+Scroll to zoom and click-\/drag to pan. The window shows the map, the cars, the frame rate (bottom-\/left) and lap information. The window is created on the first call.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Rendering mode:
+\begin{DoxyItemize}
+\item \textquotesingle{}human\textquotesingle{}: sleep 5 ms after each frame to slow things down for viewing.
+\item \textquotesingle{}human\+\_\+fast\textquotesingle{}: render as fast as possible.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion\+Error} & If {\ttfamily mode} is not one of the supported modes.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+The first call passes {\ttfamily self.\+map\+\_\+name} to the renderer, which expects a path without an extension. That only works for a custom map given as a path. For the bundled names (\textquotesingle{}berlin\textquotesingle{}, \textquotesingle{}skirk\textquotesingle{}, \textquotesingle{}levine\textquotesingle{}) it looks for e.\+g. \textquotesingle{}berlin.\+yaml\textquotesingle{} in the current working directory, and if the \textquotesingle{}map\textquotesingle{} kwarg was omitted, {\ttfamily map\+\_\+name} does not exist at all. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!reset@{reset}}
+\index{reset@{reset}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+reset (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{poses}{}\end{DoxyParamCaption})}
+
+
+
+Start a new episode with every car at the given pose. 
+
+Clears the timer and lap-\/counting state, records the start poses (the finish zone is built around them), resets the \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator}, and then takes one step with zero input to produce the first observation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em poses} & np.\+ndarray of shape (num\+\_\+agents, 3). Row i is \+[x, y, yaw] for car i. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (obs, reward, done, info), the same as \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step()}.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Because \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69}{reset()} calls \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step()} once, the physics has already advanced by one time step and current\+\_\+time equals timestep. 
+
+lap\+\_\+times and lap\+\_\+counts are not cleared directly; they are recalculated by the \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step()} inside \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a100524a9846eda122acb8e2a0bbfdc69}{reset()}. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!step@{step}}
+\index{step@{step}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+step (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{action}{}\end{DoxyParamCaption})}
+
+
+
+Advance the environment by one physics time step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action} & np.\+ndarray of shape (num\+\_\+agents, 2). Row i is \+[desired steering angle (rad), desired speed (m/\+s)] for car i. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (obs, reward, done, info):
+\begin{DoxyItemize}
+\item {\ttfamily obs} (dict): the observation from \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{Simulator.\+step()} (scans, poses, velocities, collisions, ego\+\_\+idx), plus {\ttfamily lap\+\_\+times} and {\ttfamily lap\+\_\+counts}.
+\item {\ttfamily reward} (float): always equal to the time step. Design your own reward for training.
+\item {\ttfamily done} (bool): ego collided, or every car has finished 2 laps.
+\item {\ttfamily info} (dict): {\ttfamily checkpoint\+\_\+done}, a per-\/car bool array of "{}finished 2 laps"{}.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+{\ttfamily lap\+\_\+times} and {\ttfamily lap\+\_\+counts} in {\ttfamily obs} are the env\textquotesingle{}s own arrays, not copies. They are updated in place, so an {\ttfamily obs} you keep from an earlier step will show later values. Copy them if you need a snapshot. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad9418a7f82b74506bcdd41d4b23c0255}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!update\_map@{update\_map}}
+\index{update\_map@{update\_map}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{update\_map()}{update\_map()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad9418a7f82b74506bcdd41d4b23c0255} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+update\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{map\+\_\+path}{, }\item[{}]{map\+\_\+ext}{}\end{DoxyParamCaption})}
+
+
+
+Load a different map into the simulator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+path} & Path to the map YAML file (with the .yaml extension). \\
+\hline
+{\em map\+\_\+ext} & Map image extension, including the dot.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The renderer is not updated, and an existing render window keeps showing the old map. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab9a52feda7ad414ee644a53d77574ab5}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!update\_params@{update\_params}}
+\index{update\_params@{update\_params}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{update\_params()}{update\_params()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab9a52feda7ad414ee644a53d77574ab5} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+update\+\_\+params (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{params}{, }\item[{}]{index}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Change vehicle parameters for every car, or for one car. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Parameter dict (see the class documentation). \\
+\hline
+{\em index} & Car index to update; -\/1 (the default) updates every car.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Index\+Error} & If {\ttfamily index} \texorpdfstring{$>$}{>}= num\+\_\+agents. \\
+\hline
+\end{DoxyExceptions}
+
+
+\label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a613e153a969b6e3df72893eed2da061f}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!start\_rot@{start\_rot}}
+\index{start\_rot@{start\_rot}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{start\_rot}{start\_rot}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a613e153a969b6e3df72893eed2da061f} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+start\+\_\+rot = np.\+eye(2)}
+
+
+
+2x2 rotation from the world frame into the ego car\textquotesingle{}s starting frame (x along the start heading). 
+
+Used to measure the finish zone. \Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab95efdf90629b8e13c9aec1eb127f388}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!timestep@{timestep}}
+\index{timestep@{timestep}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{timestep}{timestep}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ab95efdf90629b8e13c9aec1eb127f388} 
+float f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+timestep = kwargs\+[\textquotesingle{}timestep\textquotesingle{}]}
+
+
+
+Physics time step (s). 
+
+Also the reward returned by every \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a25e4d3a186b5fed4e4a3cfc299b0f653}{step()}. \Hypertarget{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a45f4f52ca91b4efa14118d3718213eb6}\index{f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}!toggle\_list@{toggle\_list}}
+\index{toggle\_list@{toggle\_list}!f110\_gym.envs.f110\_env.F110Env@{f110\_gym.envs.f110\_env.F110Env}}
+\doxysubsubsection{\texorpdfstring{toggle\_list}{toggle\_list}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a45f4f52ca91b4efa14118d3718213eb6} 
+f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env.\+toggle\+\_\+list = np.\+zeros((self.\+num\+\_\+agents,))}
+
+
+
+Number of times each car has entered or left the finish zone. 
+
+Leaving and re-\/entering is one lap, so laps = toggles /\+/ 2. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{f110__env_8py}{f110\+\_\+env.\+py}}\end{DoxyCompactItemize}

@@ -21,10 +21,35 @@
 # SOFTWARE.
 
 
-"""
-Generates random tracks.
-Adapted from https://gym.openai.com/envs/CarRacing-v0
-Author: Hongrui Zheng  
+"""!
+@file random_trackgen.py
+@brief Generate random closed race tracks as gym maps (image + YAML) plus a centreline CSV.
+
+Adapted from the track generator in OpenAI gym's CarRacing-v0.
+
+@section random_trackgen_usage Usage
+@code
+python random_trackgen.py --seed 123 --num_maps 5
+@endcode
+Output goes into folders created in the current directory:
+- @c maps/mapN.png and @c maps/mapN.pgm: the track walls as a black-on-white image.
+- @c maps/mapN.yaml: map metadata (resolution 0.0625 m/pixel, origin).
+- @c centerline/mapN.csv: centreline waypoints "x, y" in metres, starting at (0, 0).
+
+@section random_trackgen_algorithm How a track is made (create_track())
+1. Place 16 checkpoints around a circle, each at a random angle within its
+   1/16 sector and a random radius.
+2. "Drive" a point around them: at each step it turns toward the next checkpoint,
+   with a limited turn rate, then moves forward a fixed distance. Every step is
+   recorded.
+3. Cut out exactly one lap: the section between two consecutive passes through
+   the start angle. If its two ends don't meet up cleanly, give up (the caller retries).
+4. Offset the centreline by +/-WIDTH with shapely to get the two walls.
+
+convert_track() then plots the walls with matplotlib and writes the image,
+YAML and centreline files.
+
+@author Hongrui Zheng
 """
 
 import cv2
@@ -51,9 +76,27 @@ if not os.path.exists('centerline'):
     print('Creating centerline/ directory.')
     os.makedirs('centerline')
 
+## Number of track generation attempts (from --num_maps). Failed attempts are skipped, not retried.
 NUM_MAPS = args.num_maps
+## Distance from the centreline to each wall, in track units. The track is 2 * WIDTH wide.
 WIDTH = 10.0
 def create_track():
+    """!
+    @brief Generate one random closed track.
+
+    See the file overview for the algorithm. Track units are arbitrary until
+    convert_track() fixes the scale.
+
+    @return Either a tuple (track_xy, wall_a, wall_b) of np.ndarrays of (x, y) points:
+            - @c track_xy: the centreline, shape (n, 2).
+            - @c wall_a: the centreline grown outward by WIDTH (outer wall).
+            - @c wall_b: the centreline shrunk inward by WIDTH (inner wall).
+            Or False if this attempt failed to make a clean closed loop.
+
+    @note The returned walls are named @c track_xy_offset_in / @c _out in the code,
+          but buffer(+WIDTH) is actually the *outer* wall and buffer(-WIDTH) the inner one.
+    """
+    # number of checkpoints, overall scale, nominal radius, step length, and max turn per step
     CHECKPOINTS = 16
     SCALE = 6.0
     TRACK_RAD = 900/SCALE
@@ -63,6 +106,7 @@ def create_track():
     start_alpha = 0.
 
     # Create checkpoints
+    # each is (angle around the centre, x, y); the first and last are pushed out to 1.5x radius
     checkpoints = []
     for c in range(CHECKPOINTS):
         alpha = 2*math.pi*c/CHECKPOINTS + np.random.uniform(0, 2*math.pi*1/CHECKPOINTS)
@@ -78,6 +122,7 @@ def create_track():
     road = []
 
     # Go from one checkpoint to another to create track
+    # (x, y) is the moving point and beta its heading; record up to 5 laps or 2500 steps
     x, y, beta = 1.5*TRACK_RAD, 0, 0
     dest_i = 0
     laps = 0
@@ -85,6 +130,7 @@ def create_track():
     no_freeze = 2500
     visited_other_side = False
     while True:
+        # angle of the moving point around the centre, in [0, 2*pi); count laps on each wrap
         alpha = math.atan2(y, x)
         if visited_other_side and alpha > 0:
             laps += 1
@@ -92,6 +138,7 @@ def create_track():
         if alpha < 0:
             visited_other_side = True
             alpha += 2*math.pi
+        # find the next checkpoint ahead of the current angle
         while True:
             failed = True
             while True:
@@ -106,12 +153,14 @@ def create_track():
                 break
             alpha -= 2*math.pi
             continue
+        # r1 = sideways direction (cos beta, sin beta), p1 = direction of travel (r1 rotated +90 degrees)
         r1x = math.cos(beta)
         r1y = math.sin(beta)
         p1x = -r1y
         p1y = r1x
         dest_dx = dest_x - x
         dest_dy = dest_y - y
+        # sideways offset of the checkpoint relative to the direction of travel; used to steer toward it
         proj = r1x*dest_dx + r1y*dest_dy
         while beta - alpha >  1.5*math.pi:
              beta -= 2*math.pi
@@ -119,10 +168,12 @@ def create_track():
              beta += 2*math.pi
         prev_beta = beta
         proj *= SCALE
+        # turn toward the checkpoint, limited to TRACK_TURN_RATE per step
         if proj >  0.3:
              beta -= min(TRACK_TURN_RATE, abs(0.001*proj))
         if proj < -0.3:
              beta += min(TRACK_TURN_RATE, abs(0.001*proj))
+        # step forward and record (angle around centre, average heading, x, y)
         x += p1x*TRACK_DETAIL_STEP
         y += p1y*TRACK_DETAIL_STEP
         track.append( (alpha,prev_beta*0.5 + beta*0.5,x,y) )
@@ -133,6 +184,7 @@ def create_track():
              break
 
     # Find closed loop
+    # search backwards for the last two passes through the start angle; the track between them is one lap
     i1, i2 = -1, -1
     i = len(track)
     while True:
@@ -155,6 +207,7 @@ def create_track():
     first_perp_y = math.sin(first_beta)
 
     # Length of perpendicular jump to put together head and tail
+    # reject the lap if the sideways gap between its start and end is more than one step
     well_glued_together = np.sqrt(
         np.square( first_perp_x*(track[0][2] - track[-1][2]) ) +
         np.square( first_perp_y*(track[0][3] - track[-1][3]) ))
@@ -173,6 +226,27 @@ def create_track():
 
 
 def convert_track(track, track_int, track_ext, iter):
+    """!
+    @brief Render a generated track to a gym map and save its files (see the file overview for the outputs).
+
+    The two walls are drawn as thick black lines on a white 20 x 20 inch
+    matplotlib figure, saved at 80 dpi (1600 x 1600 pixels), and converted to
+    grayscale with OpenCV.
+
+    The world frame is chosen so the first centreline point is at (0, 0). Pixel
+    positions are measured with matplotlib's transData, which works at the
+    figure's own 100 dpi, and scaled by 0.05 m per pixel. At the saved 80 dpi that is
+    0.05 * 100 / 80 = 0.0625 m per pixel, which is the resolution written to the YAML.
+
+    @param track     np.ndarray of shape (n, 2): centreline from create_track().
+    @param track_int np.ndarray: first wall from create_track().
+    @param track_ext np.ndarray: second wall from create_track().
+    @param iter      Map number, used in the file names (mapN.*).
+
+    @note The 0.05 / 0.0625 relationship relies on matplotlib's default figure dpi of 100.
+          A matplotlibrc that changes it would misalign the centreline and the image.
+    @note The "map size" printed is the figure size at 100 dpi, not the saved image size.
+    """
 
     # converts track to image and saves the centerline as waypoints
     fig, ax = plt.subplots()
@@ -194,8 +268,10 @@ def convert_track(track, track_int, track_ext, iter):
     origin_x_pix = xy_pixels[0, 0]
     origin_y_pix = xy_pixels[0, 1]
 
+    # shift so the first centreline point is the origin
     xy_pixels = xy_pixels - np.array([[origin_x_pix, origin_y_pix]])
 
+    # world position of the image's bottom-left corner
     map_origin_x = -origin_x_pix*0.05
     map_origin_y = -origin_y_pix*0.05
 
@@ -227,6 +303,7 @@ def convert_track(track, track_int, track_ext, iter):
 if __name__ == '__main__':
     for i in range(NUM_MAPS):
         try:
+            # create_track() returns False on failure, which makes this unpacking raise
             track, track_int, track_ext = create_track()
         except:
             print('Random generator failed, retrying')

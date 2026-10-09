@@ -1,0 +1,253 @@
+\doxysection{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+
+
+Multi-\/vehicle world: owns every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} and steps them together.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_acbc2861f2b29f2b575bbf56afd9b9e7e}{\+\_\+\+\_\+init\+\_\+\_}} (self, params, num\+\_\+agents, seed, time\+\_\+step=0.\+01, ego\+\_\+idx=0, integrator=\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4}}, lidar\+\_\+dist=0.\+0)
+\begin{DoxyCompactList}\small\item\em Create the world and one \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} per agent. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a1e35fe2c49a4705ddf0ea9269760e5d6}{set\+\_\+map}} (self, map\+\_\+path, map\+\_\+ext)
+\begin{DoxyCompactList}\small\item\em Load the map for the environment. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2fa37de273b9079c2aca22d14c5e59ff}{update\+\_\+params}} (self, params, agent\+\_\+idx=-\/1)
+\begin{DoxyCompactList}\small\item\em Update vehicle parameters for every car, or for one car. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}{check\+\_\+collision}} (self)
+\begin{DoxyCompactList}\small\item\em Detect car-\/to-\/car collisions with the GJK algorithm. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{step}} (self, control\+\_\+inputs)
+\begin{DoxyCompactList}\small\item\em Advance the whole world by one physics time step. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_afe92713e94ca33e090e124e21c39318b}{reset}} (self, poses)
+\begin{DoxyCompactList}\small\item\em Reset every car to a starting pose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ad99c964e6df64e8264ab729be118aa8c}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ad99c964e6df64e8264ab729be118aa8c} 
+{\bfseries num\+\_\+agents} = num\+\_\+agents
+\begin{DoxyCompactList}\small\item\em Number of vehicles in the environment. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a29aac87fff0560a4f709f66b82d48a64}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a29aac87fff0560a4f709f66b82d48a64} 
+{\bfseries seed} = seed
+\begin{DoxyCompactList}\small\item\em Seed passed to every car\textquotesingle{}s Li\+DAR noise generator. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_aab539724143dd42fca12ec1d6043c984}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_aab539724143dd42fca12ec1d6043c984} 
+{\bfseries time\+\_\+step} = time\+\_\+step
+\begin{DoxyCompactList}\small\item\em Physics time step in seconds. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a08fd902fa242da70c1bcf34a1fe80802}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a08fd902fa242da70c1bcf34a1fe80802} 
+{\bfseries ego\+\_\+idx} = ego\+\_\+idx
+\begin{DoxyCompactList}\small\item\em Index of the ego vehicle in \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ae665b35ec7d9ced7de789a02cafdd566}{agents}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a877c852c32ff108df0ff6bfa2ab3bf6f}{params}} = params
+\begin{DoxyCompactList}\small\item\em Vehicle parameter dictionary. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ade120757dde31d2130e4b0f9b01e3a7d}{agent\+\_\+poses}} = np.\+empty((self.\+num\+\_\+agents, 3))
+\begin{DoxyCompactList}\small\item\em Latest \+[x, y, yaw] of every car, shape (num\+\_\+agents, 3). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ae665b35ec7d9ced7de789a02cafdd566}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ae665b35ec7d9ced7de789a02cafdd566} 
+list {\bfseries agents} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em List of \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} objects, one per agent. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b}\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b} 
+{\bfseries collisions} = np.\+zeros((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Collision flag per car, shape (num\+\_\+agents,): 1.\+0 if the car hit a wall or another car this step. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a36360908455ca6fb36242684c2ad5b73}{collision\+\_\+idx}} = -\/1 \texorpdfstring{$\ast$}{*} np.\+ones((self.\+num\+\_\+agents, ))
+\begin{DoxyCompactList}\small\item\em Index of the car each car collided with, shape (num\+\_\+agents,); -\/1 if none. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Multi-\/vehicle world: owns every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} and steps them together. 
+
+The \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{Simulator} handles what a single \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} cannot do alone: stepping all cars together, detecting car-\/to-\/car collisions, and making cars visible in each other\textquotesingle{}s Li\+DAR scans. \doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{F110\+Env} wraps this class and adds lap counting, rendering and the gym interface on top. 
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-constructors}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_acbc2861f2b29f2b575bbf56afd9b9e7e}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_acbc2861f2b29f2b575bbf56afd9b9e7e} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{params}{, }\item[{}]{num\+\_\+agents}{, }\item[{}]{seed}{, }\item[{}]{time\+\_\+step}{ = {\ttfamily 0.01}, }\item[{}]{ego\+\_\+idx}{ = {\ttfamily 0}, }\item[{}]{integrator}{ = {\ttfamily \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4}}}, }\item[{}]{lidar\+\_\+dist}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+
+
+Create the world and one \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} per agent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Vehicle parameter dictionary, shared by every car (see \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a08449770a692aa883a43346987eb9cad}{Race\+Car.\+\_\+\+\_\+init\+\_\+\_} for its keys). \\
+\hline
+{\em num\+\_\+agents} & Number of vehicles in the environment. \\
+\hline
+{\em seed} & Seed for the Li\+DAR noise generators. \\
+\hline
+{\em time\+\_\+step} & Physics time step in seconds. \\
+\hline
+{\em ego\+\_\+idx} & Index of the ego vehicle in \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ae665b35ec7d9ced7de789a02cafdd566}{agents}. \\
+\hline
+{\em integrator} & \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}{Integrator} for every car. Note the default here is \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{Integrator.\+RK4}, while \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} on its own defaults to Euler. \\
+\hline
+{\em lidar\+\_\+dist} & Forward distance from the vehicle reference point to the Li\+DAR (m). \\
+\hline
+\end{DoxyParams}
+
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!check\_collision@{check\_collision}}
+\index{check\_collision@{check\_collision}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{check\_collision()}{check\_collision()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+check\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Detect car-\/to-\/car collisions with the GJK algorithm. 
+
+Each car is modelled as a length x width rectangle at its current pose. Every pair of rectangles is tested for overlap with GJK (Gilbert-\/\+Johnson-\/\+Keerthi), a fast test for intersecting convex shapes.
+
+Overwrites \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b}{collisions} and \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a36360908455ca6fb36242684c2ad5b73}{collision\+\_\+idx}. Wall collisions are added to \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b}{collisions} afterwards in \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{step()}. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_afe92713e94ca33e090e124e21c39318b}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!reset@{reset}}
+\index{reset@{reset}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_afe92713e94ca33e090e124e21c39318b} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+reset (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{poses}{}\end{DoxyParamCaption})}
+
+
+
+Reset every car to a starting pose. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em poses} & np.\+ndarray of shape (num\+\_\+agents, 3). Row i is \+[x, y, yaw] for car i.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Value\+Error} & If the number of rows in {\ttfamily poses} is not num\+\_\+agents.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b}{collisions} and \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a36360908455ca6fb36242684c2ad5b73}{collision\+\_\+idx} are not cleared here. They are overwritten by the next \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{step()}. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a1e35fe2c49a4705ddf0ea9269760e5d6}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!set\_map@{set\_map}}
+\index{set\_map@{set\_map}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{set\_map()}{set\_map()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a1e35fe2c49a4705ddf0ea9269760e5d6} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+set\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{map\+\_\+path}{, }\item[{}]{map\+\_\+ext}{}\end{DoxyParamCaption})}
+
+
+
+Load the map for the environment. 
+
+Every car\textquotesingle{}s \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a1e35fe2c49a4705ddf0ea9269760e5d6}{set\+\_\+map()} is called, although they all share one scan simulator, so the map is effectively loaded once.
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+path} & Path to the map\textquotesingle{}s YAML metadata file. \\
+\hline
+{\em map\+\_\+ext} & File extension of the map image (e.\+g. "{}.\+png"{}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!step@{step}}
+\index{step@{step}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+step (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{control\+\_\+inputs}{}\end{DoxyParamCaption})}
+
+
+
+Advance the whole world by one physics time step. 
+
+The steps are:
+\begin{DoxyEnumerate}
+\item Move every car (\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a7a2d1fe796b39619a539b69411265c5c}{Race\+Car.\+update\+\_\+pose}) and record its new pose. Each car also takes a scan against the static map.
+\item Check car-\/to-\/car collisions on the new poses (check\+\_\+collision).
+\item For each car: give it the other cars\textquotesingle{} poses, check for a wall collision, and add the other cars to its scan (\doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_ad6c4539dfae27037296311db875230b0}{Race\+Car.\+update\+\_\+scan}). A wall collision also sets that car\textquotesingle{}s entry in \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2266104910535f06f31c1212e62fde8b}{collisions}.
+\item Build and return the observation dictionary.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em control\+\_\+inputs} & np.\+ndarray of shape (num\+\_\+agents, 2). Row i is \+[desired steering angle (rad), desired speed (m/\+s)] for car i. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Observation dictionary with keys:
+\begin{DoxyItemize}
+\item {\ttfamily ego\+\_\+idx} index of the ego vehicle
+\item {\ttfamily scans} list of Li\+DAR scans, each np.\+ndarray of shape (num\+\_\+beams,)
+\item {\ttfamily poses\+\_\+x} list of x positions (m)
+\item {\ttfamily poses\+\_\+y} list of y positions (m)
+\item {\ttfamily poses\+\_\+theta} list of yaw angles (rad)
+\item {\ttfamily linear\+\_\+vels\+\_\+x} list of longitudinal speeds (m/\+s)
+\item {\ttfamily linear\+\_\+vels\+\_\+y} list of lateral speeds. Always 0; this is not simulated.
+\item {\ttfamily ang\+\_\+vels\+\_\+z} list of yaw rates (rad/\+s)
+\item {\ttfamily collisions} np.\+ndarray of collision flags (1.\+0 = collided) 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2fa37de273b9079c2aca22d14c5e59ff}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!update\_params@{update\_params}}
+\index{update\_params@{update\_params}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{update\_params()}{update\_params()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a2fa37de273b9079c2aca22d14c5e59ff} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+update\+\_\+params (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{params}{, }\item[{}]{agent\+\_\+idx}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Update vehicle parameters for every car, or for one car. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & New parameter dictionary (see \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car_a08449770a692aa883a43346987eb9cad}{Race\+Car.\+\_\+\+\_\+init\+\_\+\_} for its keys). \\
+\hline
+{\em agent\+\_\+idx} & Index of the car to update. If negative (the default), every car is updated.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Index\+Error} & If {\ttfamily agent\+\_\+idx} is \texorpdfstring{$>$}{>}= num\+\_\+agents.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Only the cars\textquotesingle{} params are updated. \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a877c852c32ff108df0ff6bfa2ab3bf6f}{Simulator.\+params}, which \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a132361ffe37fb81c0bf92c0c6c0ea4d8}{check\+\_\+collision()} uses for footprint size, is not changed. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ade120757dde31d2130e4b0f9b01e3a7d}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!agent\_poses@{agent\_poses}}
+\index{agent\_poses@{agent\_poses}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{agent\_poses}{agent\_poses}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_ade120757dde31d2130e4b0f9b01e3a7d} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+agent\+\_\+poses = np.\+empty((self.\+num\+\_\+agents, 3))}
+
+
+
+Latest \+[x, y, yaw] of every car, shape (num\+\_\+agents, 3). 
+
+Filled in by \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_abbfac2b093e12f8a42a15730df277470}{step()}. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a36360908455ca6fb36242684c2ad5b73}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!collision\_idx@{collision\_idx}}
+\index{collision\_idx@{collision\_idx}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{collision\_idx}{collision\_idx}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a36360908455ca6fb36242684c2ad5b73} 
+int f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+collision\+\_\+idx = -\/1 \texorpdfstring{$\ast$}{*} np.\+ones((self.\+num\+\_\+agents, ))}
+
+
+
+Index of the car each car collided with, shape (num\+\_\+agents,); -\/1 if none. 
+
+Only car-\/to-\/car collisions are recorded here, not wall collisions. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a877c852c32ff108df0ff6bfa2ab3bf6f}\index{f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}!params@{params}}
+\index{params@{params}!f110\_gym.envs.base\_classes.Simulator@{f110\_gym.envs.base\_classes.Simulator}}
+\doxysubsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_simulator_a877c852c32ff108df0ff6bfa2ab3bf6f} 
+f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator.\+params = params}
+
+
+
+Vehicle parameter dictionary. 
+
+Its length and width are used for collision footprints. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{base__classes_8py}{base\+\_\+classes.\+py}}\end{DoxyCompactItemize}

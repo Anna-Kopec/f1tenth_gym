@@ -1,0 +1,23 @@
+\doxysection{f110\+\_\+gym.\+unittest Namespace Reference}
+\hypertarget{namespacef110__gym_1_1unittest}{}\label{namespacef110__gym_1_1unittest}\index{f110\_gym.unittest@{f110\_gym.unittest}}
+
+
+Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator.  
+
+
+
+
+\doxysubsection{Detailed Description}
+Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. 
+
+Nothing in the gym imports these modules. The maintained code lives in \doxylink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}.
+\begin{DoxyItemize}
+\item \doxylink{collision__checks_8py}{collision\+\_\+checks.\+py}, \doxylink{dynamics__test_8py}{dynamics\+\_\+test.\+py}, \doxylink{scan__sim_8py}{scan\+\_\+sim.\+py}: older prototypes of \doxylink{collision__models_8py}{collision\+\_\+models.\+py}, \doxylink{dynamic__models_8py}{dynamic\+\_\+models.\+py} and \doxylink{laser__models_8py}{laser\+\_\+models.\+py}.
+\item \doxylink{legacy__scan__gen_8py}{legacy\+\_\+scan\+\_\+gen.\+py}: generated legacy\+\_\+scan.\+npz using the old C++ gym.
+\item \doxylink{pyglet__test_8py}{pyglet\+\_\+test.\+py}, \doxylink{pyglet__test__camera_8py}{pyglet\+\_\+test\+\_\+camera.\+py}: rendering and camera experiments.
+\item \doxylink{random__trackgen_8py}{random\+\_\+trackgen.\+py}: generates random race tracks (map image + YAML + centreline).
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+The import below refers to {\ttfamily gym.\+envs.\+unittest.\+scan\+\_\+sim}, which does not exist (gym\textquotesingle{}s own {\ttfamily gym.\+envs.\+unittest} package has no scan\+\_\+sim), so {\ttfamily import} \doxylink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest} raises Module\+Not\+Found\+Error. Run the scripts directly instead. 
+\end{DoxyNote}

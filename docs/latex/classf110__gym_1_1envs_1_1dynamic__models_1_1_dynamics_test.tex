@@ -1,0 +1,111 @@
+\doxysection{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+Dynamics\+Test Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test}{}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test}\index{f110\_gym.envs.dynamic\_models.DynamicsTest@{f110\_gym.envs.dynamic\_models.DynamicsTest}}
+
+
+Unit tests comparing the KS and ST models against Common\+Road reference values.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+Dynamics\+Test:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a3e3cab8740dffac6ad0654e76b801b0c}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a3e3cab8740dffac6ad0654e76b801b0c} 
+{\bfseries set\+Up} (self)
+\begin{DoxyCompactList}\small\item\em Set up the full-\/size test vehicle\textquotesingle{}s parameters. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a6877ede6beb8c71d422a94aa9742f7cc}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a6877ede6beb8c71d422a94aa9742f7cc} 
+{\bfseries test\+\_\+derivatives} (self)
+\begin{DoxyCompactList}\small\item\em Single derivative evaluations match the reference values, and the ST model runs faster than 5000 evaluations per second. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ac2a503d7af0e64d4ca6fe4ef9aa62bbe}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ac2a503d7af0e64d4ca6fe4ef9aa62bbe} 
+{\bfseries test\+\_\+zeroinit\+\_\+roll} (self)
+\begin{DoxyCompactList}\small\item\em From rest with zero input, both models stay exactly at rest (no singularity at v = 0). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ae03bd5ae49f6bf4f4c632ae1db2027e3}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ae03bd5ae49f6bf4f4c632ae1db2027e3} 
+{\bfseries test\+\_\+zeroinit\+\_\+dec} (self)
+\begin{DoxyCompactList}\small\item\em From rest with a braking input, the car reverses in a straight line, matching the reference after 1 s. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a8c65bcb8c7322d1c3e423ae05435c1d3}{test\+\_\+zeroinit\+\_\+acc}} (self)
+\begin{DoxyCompactList}\small\item\em From rest, accelerating while steering left matches the reference trajectory after 1 s. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a713ca9cb0d3f10f68574a80ff06f173e}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a713ca9cb0d3f10f68574a80ff06f173e} 
+{\bfseries test\+\_\+zeroinit\+\_\+rollleft} (self)
+\begin{DoxyCompactList}\small\item\em From rest, steering left with no throttle only changes the steering angle; the car does not move. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ae1a9a3df4621b95048f27ebe346a6340}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ae1a9a3df4621b95048f27ebe346a6340} 
+float {\bfseries mu} = 1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a8e10c08d9f1584e3917eeae1654d1a0f}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a8e10c08d9f1584e3917eeae1654d1a0f} 
+float {\bfseries C\+\_\+\+Sf} = 21.\+92/\+1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a506838b29189948f01c44c1ae9669526}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a506838b29189948f01c44c1ae9669526} 
+float {\bfseries C\+\_\+\+Sr} = 21.\+92/\+1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a6380dc99b2e4d91ba27cb03466ae5dd9}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a6380dc99b2e4d91ba27cb03466ae5dd9} 
+float {\bfseries lf} = 0.\+3048\texorpdfstring{$\ast$}{*}3.\+793293
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ade618ac6b44303c636e8b140ca62e1b0}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ade618ac6b44303c636e8b140ca62e1b0} 
+float {\bfseries lr} = 0.\+3048\texorpdfstring{$\ast$}{*}4.\+667707
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ac0f3ac38bc040925b426a31c2fac1f0e}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ac0f3ac38bc040925b426a31c2fac1f0e} 
+float {\bfseries h} = 0.\+3048\texorpdfstring{$\ast$}{*}2.\+01355
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a18e217c8d9f214845e0cd51bf39a9eaf}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a18e217c8d9f214845e0cd51bf39a9eaf} 
+float {\bfseries m} = 4.\+4482216152605/\+0.\+3048\texorpdfstring{$\ast$}{*}74.\+91452
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a803af594ca5d486286772ecb75ae9546}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a803af594ca5d486286772ecb75ae9546} 
+float {\bfseries I} = 4.\+4482216152605\texorpdfstring{$\ast$}{*}0.\+3048\texorpdfstring{$\ast$}{*}1321.\+416
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a7b333735d833183d6fc5f866269f31c3}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a7b333735d833183d6fc5f866269f31c3} 
+float {\bfseries s\+\_\+min} = -\/1.\+066
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a3db692f0488a7dbcdb2ee155cd58dfd9}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a3db692f0488a7dbcdb2ee155cd58dfd9} 
+float {\bfseries s\+\_\+max} = 1.\+066
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_afbae716f80f2208dfc8f1106d212af31}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_afbae716f80f2208dfc8f1106d212af31} 
+float {\bfseries sv\+\_\+min} = -\/0.\+4
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a893160c1e9d1f8db4ac99fa6e0af2273}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a893160c1e9d1f8db4ac99fa6e0af2273} 
+float {\bfseries sv\+\_\+max} = 0.\+4
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a1fd6c33424d240f472fc0c4e5a81ea2c}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a1fd6c33424d240f472fc0c4e5a81ea2c} 
+float {\bfseries v\+\_\+min} = -\/13.\+6
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_adcbd9354fa00ca9d8f4830e47450c02b}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_adcbd9354fa00ca9d8f4830e47450c02b} 
+float {\bfseries v\+\_\+max} = 50.\+8
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ab65c97f4001549761d2f36d4bf533d60}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_ab65c97f4001549761d2f36d4bf533d60} 
+float {\bfseries v\+\_\+switch} = 7.\+319
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a5aa2d8c3f9d6f1023b9b02c108e7e313}\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a5aa2d8c3f9d6f1023b9b02c108e7e313} 
+float {\bfseries a\+\_\+max} = 11.\+5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit tests comparing the KS and ST models against Common\+Road reference values. 
+
+The test vehicle is the full-\/size Common\+Road reference car (converted from imperial units), not the F1\+TENTH car, so the parameters differ greatly from the gym defaults.
+
+Run with: {\ttfamily python} \doxylink{dynamic__models_8py}{dynamic\+\_\+models.\+py} 
+
+\label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a8c65bcb8c7322d1c3e423ae05435c1d3}\index{f110\_gym.envs.dynamic\_models.DynamicsTest@{f110\_gym.envs.dynamic\_models.DynamicsTest}!test\_zeroinit\_acc@{test\_zeroinit\_acc}}
+\index{test\_zeroinit\_acc@{test\_zeroinit\_acc}!f110\_gym.envs.dynamic\_models.DynamicsTest@{f110\_gym.envs.dynamic\_models.DynamicsTest}}
+\doxysubsubsection{\texorpdfstring{test\_zeroinit\_acc()}{test\_zeroinit\_acc()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test_a8c65bcb8c7322d1c3e423ae05435c1d3} 
+f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+Dynamics\+Test.\+test\+\_\+zeroinit\+\_\+acc (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+From rest, accelerating while steering left matches the reference trajectory after 1 s. 
+
+The ST model passes through the low-\/speed KS fallback into the dynamic regime, so this also checks that switching between them. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{dynamic__models_8py}{dynamic\+\_\+models.\+py}}\end{DoxyCompactItemize}

@@ -22,26 +22,32 @@
 
 
 
-"""
-Utility functions to generate sample scan data from legacy C++ backend
-Author: Hongrui Zheng
+"""!
+@file legacy_scan_gen.py
+@brief Script that generated legacy_scan.npz: reference LiDAR scans from the old C++-backed gym.
 
-The script generates sample scan data for 3 different maps used in the unit tests.
+For each of three maps (vegas, berlin, skirk), it resets the old environment at
+10 test poses (at the origin, yaw from -1 to 1 rad) and records the ego car's
+1080-beam scan. The scans are saved to legacy_scan.npz under the keys
+@c vegas, @c berlin and @c skirk, and scan_sim.py's tests compare against them.
 
-Map 1: Levine
+@warning This script uses the **old** gym API (init_map(), update_params() with a
+         C++ executable directory, reset() with a dict of poses), which the current
+         F110Env does not have, and paths to a C++ build and maps that are not in this
+         repository. It is kept as a record of how the data was made and will not run as-is.
 
-Map 2: Berlin
-
-Map 3: Skirkanich
+@author Hongrui Zheng
 """
 
 import numpy as np
 import gym
 import matplotlib.pyplot as plt
 
+## Beam angles of the legacy 1080-beam, 4.7 rad scan (unused below; kept for plotting).
 thetas = np.linspace(-2.35, 2.35, num=1080)
 
-# init
+# init: vehicle parameters for the legacy simulator
+## Directory of the compiled legacy C++ simulator.
 executable_dir = '../../../build/'
 mass= 3.74
 l_r = 0.17145
@@ -51,7 +57,8 @@ h_cg = 0.074
 cs_f = 4.718
 cs_r = 5.4562
 
-# test poses
+# test poses: rotate in place at the origin, yaw from -1 to 1 rad
+## Number of test poses per map.
 num_test = 10
 test_poses = np.zeros((num_test, 3))
 test_poses[:, 2] = np.linspace(-1., 1., num=num_test)
@@ -64,6 +71,7 @@ racecar_env.init_map(map_path, map_ext, False, False)
 racecar_env.update_params(mu, h_cg, l_r, cs_f, cs_r, I_z, mass, executable_dir, double_finish=True)
 vegas_scan = np.empty((num_test, 1080))
 for i in range(test_poses.shape[0]):
+    # the legacy env always had 2 cars; park the second one far away at (200, 200)
     x = [test_poses[i, 0], 200.]
     y = [test_poses[i, 1], 200.]
     theta = [test_poses[i, 2], 0.]

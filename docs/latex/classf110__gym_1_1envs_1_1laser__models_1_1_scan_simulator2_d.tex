@@ -1,0 +1,260 @@
+\doxysection{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2D Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+
+
+2D Li\+DAR simulator: holds a map and its distance transform, and produces noisy scans.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2D:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a292b8f33f540341d27c940ce18e3d8fe}{\+\_\+\+\_\+init\+\_\+\_}} (self, num\+\_\+beams, fov, eps=0.\+0001, theta\+\_\+dis=2000, max\+\_\+range=30.\+0)
+\begin{DoxyCompactList}\small\item\em Configure the Li\+DAR and build the angle lookup tables. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map}} (self, map\+\_\+path, map\+\_\+ext)
+\begin{DoxyCompactList}\small\item\em Load a map (YAML + image), binarise it, and compute its distance transform. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a374ae897754689bc9bdbce180a626cb0}{scan}} (self, pose, rng, std\+\_\+dev=0.\+01)
+\begin{DoxyCompactList}\small\item\em Simulate one Li\+DAR scan from {\ttfamily pose}, with optional Gaussian noise. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a8394af4bb9ccec968740ee66400e1f9d}{get\+\_\+increment}} (self)
+\begin{DoxyCompactList}\small\item\em Angle between neighbouring beams. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a8fd8d9f11c319090584c221e51aa4975}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a8fd8d9f11c319090584c221e51aa4975} 
+{\bfseries num\+\_\+beams} = num\+\_\+beams
+\begin{DoxyCompactList}\small\item\em Number of beams per scan. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_ae57ad1092f12be1967de4853eca1327d}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_ae57ad1092f12be1967de4853eca1327d} 
+{\bfseries fov} = fov
+\begin{DoxyCompactList}\small\item\em Field of view (rad). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a02bf0c833e93628643a20cceeb33b029}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a02bf0c833e93628643a20cceeb33b029} 
+{\bfseries eps} = eps
+\begin{DoxyCompactList}\small\item\em Sphere-\/tracing stop tolerance (m). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af21e0a0ddd2fc95ec4291db6b33cd591}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af21e0a0ddd2fc95ec4291db6b33cd591} 
+{\bfseries theta\+\_\+dis} = theta\+\_\+dis
+\begin{DoxyCompactList}\small\item\em Number of discrete angles in the lookup table. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af08e1ef6b6397c51fdd3e612dceb17b5}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af08e1ef6b6397c51fdd3e612dceb17b5} 
+{\bfseries max\+\_\+range} = max\+\_\+range
+\begin{DoxyCompactList}\small\item\em Maximum range (m). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a68ab73d8b055703de7c4eb33ec54520a}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a68ab73d8b055703de7c4eb33ec54520a} 
+{\bfseries angle\+\_\+increment} = self.\+fov /\+ (self.\+num\+\_\+beams -\/ 1)
+\begin{DoxyCompactList}\small\item\em Angle between neighbouring beams (rad). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aabde525512f31433f532639175f50ba3}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aabde525512f31433f532639175f50ba3} 
+{\bfseries theta\+\_\+index\+\_\+increment} = \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af21e0a0ddd2fc95ec4291db6b33cd591}{theta\+\_\+dis}} \texorpdfstring{$\ast$}{*} self.\+angle\+\_\+increment /\+ (2. \texorpdfstring{$\ast$}{*} np.\+pi)
+\begin{DoxyCompactList}\small\item\em Angle between neighbouring beams, in lookup-\/table index units. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a12a635318c521153364d75b103905673}{orig\+\_\+c}} = None
+\begin{DoxyCompactList}\small\item\em cos(map origin yaw). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aedb545195be8c54364e38ccf0c0b3d00}{orig\+\_\+s}} = None
+\begin{DoxyCompactList}\small\item\em sin(map origin yaw). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aecd0f30707bb8c82f59ae48ae2a478c2}{orig\+\_\+x}} = None
+\begin{DoxyCompactList}\small\item\em World x of the map origin (m). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a03e555b505b745f98dfd8a5cc4e1d013}{orig\+\_\+y}} = None
+\begin{DoxyCompactList}\small\item\em World y of the map origin (m). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_ae2c136fdda428bed3de1f7ab30cda72c}{map\+\_\+height}} = None
+\begin{DoxyCompactList}\small\item\em Map height in cells. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a53beebf974cdf3cb04dac5e4311b2f36}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a53beebf974cdf3cb04dac5e4311b2f36} 
+{\bfseries map\+\_\+width} = None
+\begin{DoxyCompactList}\small\item\em Map width in cells. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a11d13f00e6d8a08d7b758f420ff464c5}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a11d13f00e6d8a08d7b758f420ff464c5} 
+{\bfseries map\+\_\+resolution} = None
+\begin{DoxyCompactList}\small\item\em Map resolution (metres per cell). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a617e6b987673100484c5fdb0c17c9848}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a617e6b987673100484c5fdb0c17c9848} 
+{\bfseries dt} = None
+\begin{DoxyCompactList}\small\item\em Distance transform of the map (metres to the nearest obstacle per cell). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a76ce07e27a1f3efecae222b25bfd3c98}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a76ce07e27a1f3efecae222b25bfd3c98} 
+{\bfseries sines} = np.\+sin(theta\+\_\+arr)
+\begin{DoxyCompactList}\small\item\em Lookup table of sin(angle) over 0 to 2\texorpdfstring{$\ast$}{*}pi. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aedc4121c126a5bcda9b5f321cb679208}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aedc4121c126a5bcda9b5f321cb679208} 
+{\bfseries cosines} = np.\+cos(theta\+\_\+arr)
+\begin{DoxyCompactList}\small\item\em Lookup table of cos(angle) over 0 to 2\texorpdfstring{$\ast$}{*}pi. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af63828a83efca93f50b04324fdd74820}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_af63828a83efca93f50b04324fdd74820} 
+{\bfseries map\+\_\+img} = np.\+array(Image.\+open(map\+\_\+img\+\_\+path).transpose(Image.\+FLIP\+\_\+\+TOP\+\_\+\+BOTTOM))
+\begin{DoxyCompactList}\small\item\em Binarised map image (0 = obstacle, 255 = free), flipped so row 0 is the bottom. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a301f79d5db56a5c5eeb44f33ac3d0b7d}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a301f79d5db56a5c5eeb44f33ac3d0b7d} 
+{\bfseries origin} = map\+\_\+metadata\+[\textquotesingle{}origin\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Map origin \+[x, y, yaw] from the YAML: world pose of the bottom-\/left cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+2D Li\+DAR simulator: holds a map and its distance transform, and produces noisy scans. 
+
+Usage: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sim\ =\ ScanSimulator2D(num\_beams=1080,\ fov=4.7)}
+\DoxyCodeLine{sim.set\_map(\textcolor{stringliteral}{'maps/vegas.yaml'},\ \textcolor{stringliteral}{'.png'})}
+\DoxyCodeLine{ranges\ =\ sim.scan(np.array([x,\ y,\ yaw]),\ np.random.default\_rng(0))}
+
+\end{DoxyCode}
+ 
+
+\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-constructors}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a292b8f33f540341d27c940ce18e3d8fe}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a292b8f33f540341d27c940ce18e3d8fe} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{num\+\_\+beams}{, }\item[{}]{fov}{, }\item[{}]{eps}{ = {\ttfamily 0.0001}, }\item[{}]{theta\+\_\+dis}{ = {\ttfamily 2000}, }\item[{}]{max\+\_\+range}{ = {\ttfamily 30.0}}\end{DoxyParamCaption})}
+
+
+
+Configure the Li\+DAR and build the angle lookup tables. 
+
+No map is loaded yet; call \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+beams} & Number of beams per scan. \\
+\hline
+{\em fov} & Field of view (rad). Beams are evenly spaced from -\/fov/\+2 to +fov/\+2. \\
+\hline
+{\em eps} & Sphere-\/tracing stop tolerance (m): a ray counts as hitting something once it is this close to an obstacle. \\
+\hline
+{\em theta\+\_\+dis} & Number of discrete angles in the 0 to 2\texorpdfstring{$\ast$}{*}pi lookup table. A larger value gives more precise beam directions. \\
+\hline
+{\em max\+\_\+range} & Maximum Li\+DAR range (m).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The table is built with np.\+linspace(0, 2\texorpdfstring{$\ast$}{*}pi, theta\+\_\+dis), which includes both endpoints, so its spacing is 2\texorpdfstring{$\ast$}{*}pi/(theta\+\_\+dis-\/1). Indices are computed as if the spacing were 2\texorpdfstring{$\ast$}{*}pi/\+theta\+\_\+dis. The resulting angle error is at most one table step (about 0.\+18 degrees at the default). 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a8394af4bb9ccec968740ee66400e1f9d}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!get\_increment@{get\_increment}}
+\index{get\_increment@{get\_increment}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{get\_increment()}{get\_increment()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a8394af4bb9ccec968740ee66400e1f9d} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+get\+\_\+increment (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Angle between neighbouring beams. 
+
+\begin{DoxyReturn}{Returns}
+Beam spacing (rad), equal to fov / (num\+\_\+beams -\/ 1). 
+\end{DoxyReturn}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a374ae897754689bc9bdbce180a626cb0}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!scan@{scan}}
+\index{scan@{scan}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a374ae897754689bc9bdbce180a626cb0} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+scan (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{pose}{, }\item[{}]{rng}{, }\item[{}]{std\+\_\+dev}{ = {\ttfamily 0.01}}\end{DoxyParamCaption})}
+
+
+
+Simulate one Li\+DAR scan from {\ttfamily pose}, with optional Gaussian noise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the sensor in the world. \\
+\hline
+{\em rng} & np.\+random.\+Generator used for noise, or None for a noise-\/free scan. \\
+\hline
+{\em std\+\_\+dev} & Standard deviation of the zero-\/mean Gaussian noise added to every beam (m). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): beam ranges (m), from the rightmost beam to the leftmost. Noise is added after clipping, so values can be slightly above max\+\_\+range or slightly below 0.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Value\+Error} & If no map has been loaded with \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!set\_map@{set\_map}}
+\index{set\_map@{set\_map}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{set\_map()}{set\_map()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+set\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{map\+\_\+path}{, }\item[{}]{map\+\_\+ext}{}\end{DoxyParamCaption})}
+
+
+
+Load a map (YAML + image), binarise it, and compute its distance transform. 
+
+The image path is the YAML path with its extension replaced by {\ttfamily map\+\_\+ext}. The YAML\textquotesingle{}s own {\ttfamily image} field is ignored, so the image must sit next to the YAML with the same base name. The image is:
+\begin{DoxyItemize}
+\item flipped vertically, so row 0 is the bottom of the map, matching the world y axis;
+\item thresholded at 128: pixels \texorpdfstring{$<$}{<}= 128 become obstacles (0) and brighter pixels free space (255).
+\end{DoxyItemize}
+
+From the YAML only {\ttfamily resolution} and {\ttfamily origin} (\+[x, y, yaw]) are read.
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+path} & Path to the map YAML file. \\
+\hline
+{\em map\+\_\+ext} & Image extension {\itshape including the dot}, e.\+g. "{}.\+png"{} or "{}.\+pgm"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Always True.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If the YAML fails to parse, the error is printed and the method carries on, failing later with an Attribute\+Error on {\ttfamily self.\+origin}. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_ae2c136fdda428bed3de1f7ab30cda72c}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!map\_height@{map\_height}}
+\index{map\_height@{map\_height}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{map\_height}{map\_height}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_ae2c136fdda428bed3de1f7ab30cda72c} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+map\+\_\+height = None}
+
+
+
+Map height in cells. 
+
+None until a map is loaded. \Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a12a635318c521153364d75b103905673}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!orig\_c@{orig\_c}}
+\index{orig\_c@{orig\_c}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{orig\_c}{orig\_c}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a12a635318c521153364d75b103905673} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+orig\+\_\+c = None}
+
+
+
+cos(map origin yaw). 
+
+Set by \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}. \Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aedb545195be8c54364e38ccf0c0b3d00}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!orig\_s@{orig\_s}}
+\index{orig\_s@{orig\_s}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{orig\_s}{orig\_s}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aedb545195be8c54364e38ccf0c0b3d00} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+orig\+\_\+s = None}
+
+
+
+sin(map origin yaw). 
+
+Set by \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}. \Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aecd0f30707bb8c82f59ae48ae2a478c2}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!orig\_x@{orig\_x}}
+\index{orig\_x@{orig\_x}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{orig\_x}{orig\_x}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aecd0f30707bb8c82f59ae48ae2a478c2} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+orig\+\_\+x = None}
+
+
+
+World x of the map origin (m). 
+
+Set by \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}. \Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a03e555b505b745f98dfd8a5cc4e1d013}\index{f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}!orig\_y@{orig\_y}}
+\index{orig\_y@{orig\_y}!f110\_gym.envs.laser\_models.ScanSimulator2D@{f110\_gym.envs.laser\_models.ScanSimulator2D}}
+\doxysubsubsection{\texorpdfstring{orig\_y}{orig\_y}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_a03e555b505b745f98dfd8a5cc4e1d013} 
+f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2\+D.\+orig\+\_\+y = None}
+
+
+
+World y of the map origin (m). 
+
+Set by \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d_aa7814ff6cd05c5a1a940448ac5ccf8cf}{set\+\_\+map()}. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{laser__models_8py}{laser\+\_\+models.\+py}}\end{DoxyCompactItemize}

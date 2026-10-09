@@ -1,0 +1,56 @@
+\doxysection{f110\+\_\+gym/\+envs/\+base\+\_\+classes.py File Reference}
+\hypertarget{base__classes_8py}{}\label{base__classes_8py}\index{f110\_gym/envs/base\_classes.py@{f110\_gym/envs/base\_classes.py}}
+
+
+Core simulation classes for the F1\+TENTH gym: a single vehicle (Race\+Car) and the multi-\/vehicle world that steps them together (Simulator).  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Integrator}}
+\begin{DoxyCompactList}\small\item\em Numerical integration scheme used to advance the vehicle dynamics. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Race\+Car}}
+\begin{DoxyCompactList}\small\item\em A single simulated vehicle: physics, Li\+DAR, and wall-\/collision detection. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_simulator}{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Simulator}}
+\begin{DoxyCompactList}\small\item\em Multi-\/vehicle world: owns every \doxylink{classf110__gym_1_1envs_1_1base__classes_1_1_race_car}{Race\+Car} and steps them together. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Core simulation classes for the F1\+TENTH gym: a single vehicle (Race\+Car) and the multi-\/vehicle world that steps them together (Simulator). 
+
+These are Python replacements for the original C++ Race\+Car / Simulator classes.\hypertarget{base__classes_8py_base_classes_state_layout}{}\doxysubsection{\texorpdfstring{Vehicle state vector}{Vehicle state vector}}\label{base__classes_8py_base_classes_state_layout}
+Every Race\+Car keeps its full dynamic state in a 7-\/element numpy array, laid out as:
+
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Index  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Symbol  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Meaning  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Units  \\
+0  &x  &world-\/frame x of the vehicle reference point  &m  \\
+1  &y  &world-\/frame y of the vehicle reference point  &m  \\
+2  &delta  &front-\/wheel steering angle  &rad  \\
+3  &v  &longitudinal velocity  &m/\+s  \\
+4  &psi  &yaw (heading), wrapped to \+[0, 2\texorpdfstring{$\ast$}{*}pi]  &rad  \\
+5  &psi\+\_\+dot  &yaw rate  &rad/\+s  \\
+6  &beta  &slip angle at the centre of gravity  &rad  \\
+\end{DoxyTable}
+
+
+The reference point (x, y) is the centre of gravity when the dynamic single-\/track model is active (\texorpdfstring{$\vert$}{|}v\texorpdfstring{$\vert$}{|} \texorpdfstring{$>$}{>}= 0.\+5 m/\+s). Below that speed the model switches to kinematic equations written for the rear axle; see dynamic\+\_\+models.\+vehicle\+\_\+dynamics\+\_\+st(). The collision rectangle and the Li\+DAR offset are both measured from (x, y).\hypertarget{base__classes_8py_base_classes_step_order}{}\doxysubsection{\texorpdfstring{Order of operations in one simulation step}{Order of operations in one simulation step}}\label{base__classes_8py_base_classes_step_order}
+
+\begin{DoxyEnumerate}
+\item Each car\textquotesingle{}s physics is integrated forward (Race\+Car.\+update\+\_\+pose), which also produces a raw Li\+DAR scan against the static map only.
+\item Car-\/to-\/car collisions are checked with GJK on the cars\textquotesingle{} rectangular footprints (Simulator.\+check\+\_\+collision).
+\item Each car is told where the others now are; its scan is checked for an imminent wall collision (i\+TTC) and then the other cars are ray-\/cast into it (Race\+Car.\+update\+\_\+scan).
+\item An observation dictionary is assembled and returned.
+\end{DoxyEnumerate}
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}

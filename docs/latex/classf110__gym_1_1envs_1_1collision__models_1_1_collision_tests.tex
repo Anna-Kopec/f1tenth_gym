@@ -1,0 +1,73 @@
+\doxysection{f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+Collision\+Tests Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests}{}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests}\index{f110\_gym.envs.collision\_models.CollisionTests@{f110\_gym.envs.collision\_models.CollisionTests}}
+
+
+Unit tests for \doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()}, \doxylink{collision__models_8py_af3bd441b36109b97657a02b03b499b55}{collision()} and \doxylink{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}{collision\+\_\+multiple()}.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+Collision\+Tests:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a7be3f43152ce6226b4e9534e0e6d7187}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a7be3f43152ce6226b4e9534e0e6d7187} 
+{\bfseries set\+Up} (self)
+\begin{DoxyCompactList}\small\item\em Fix the random seed and define a test polygon and car size. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_acd1eec39d6ce27daeace7cecb1ffbe14}{test\+\_\+get\+\_\+vert}} (self)
+\begin{DoxyCompactList}\small\item\em \doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()} returns a (4, 2) array, and plots the rectangle for visual inspection. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a845367c12d64235809030b1d76cadbe3}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a845367c12d64235809030b1d76cadbe3} 
+{\bfseries test\+\_\+get\+\_\+vert\+\_\+fps} (self)
+\begin{DoxyCompactList}\small\item\em \doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()} runs faster than 500 calls per second. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_aa43cfa7a28711fab4a38ad259620086a}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_aa43cfa7a28711fab4a38ad259620086a} 
+{\bfseries test\+\_\+random\+\_\+collision} (self)
+\begin{DoxyCompactList}\small\item\em Two slightly perturbed copies of the same polygon always collide. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_ae5a00e29cc5cd26cb4534389a065b12b}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_ae5a00e29cc5cd26cb4534389a065b12b} 
+{\bfseries test\+\_\+multiple\+\_\+collisions} (self)
+\begin{DoxyCompactList}\small\item\em \doxylink{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}{collision\+\_\+multiple()} flags six overlapping bodies and leaves one distant body (g) clear. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a2f849d0b2cbdcfe07fbfc7a6a7c9d9b3}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a2f849d0b2cbdcfe07fbfc7a6a7c9d9b3} 
+{\bfseries test\+\_\+fps} (self)
+\begin{DoxyCompactList}\small\item\em \doxylink{collision__models_8py_af3bd441b36109b97657a02b03b499b55}{collision()} runs faster than 500 calls per second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a8ec590c2d0ff249236b6167903b177e4}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a8ec590c2d0ff249236b6167903b177e4} 
+{\bfseries vertices1} = np.\+asarray(\+[\+[4,11.]\+,\+[5,5]\+,\+[9,9]\+,\+[10,10]\+]\+)
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a15a197020d58fc5bb1ece45ef2651cd4}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a15a197020d58fc5bb1ece45ef2651cd4} 
+float {\bfseries length} = 0.\+32
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a36fd5a628d911e225c7213f13525109b}\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_a36fd5a628d911e225c7213f13525109b} 
+float {\bfseries width} = 0.\+22
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit tests for \doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()}, \doxylink{collision__models_8py_af3bd441b36109b97657a02b03b499b55}{collision()} and \doxylink{collision__models_8py_afe1ce61a14b64f0b8365bc0816aab3e2}{collision\+\_\+multiple()}. 
+
+Run with: {\ttfamily python} \doxylink{collision__models_8py}{collision\+\_\+models.\+py} 
+
+\label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_acd1eec39d6ce27daeace7cecb1ffbe14}\index{f110\_gym.envs.collision\_models.CollisionTests@{f110\_gym.envs.collision\_models.CollisionTests}!test\_get\_vert@{test\_get\_vert}}
+\index{test\_get\_vert@{test\_get\_vert}!f110\_gym.envs.collision\_models.CollisionTests@{f110\_gym.envs.collision\_models.CollisionTests}}
+\doxysubsubsection{\texorpdfstring{test\_get\_vert()}{test\_get\_vert()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1collision__models_1_1_collision_tests_acd1eec39d6ce27daeace7cecb1ffbe14} 
+f110\+\_\+gym.\+envs.\+collision\+\_\+models.\+Collision\+Tests.\+test\+\_\+get\+\_\+vert (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{collision__models_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()} returns a (4, 2) array, and plots the rectangle for visual inspection. 
+
+\begin{DoxyNote}{Note}
+This opens a matplotlib window and blocks until it is closed. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{collision__models_8py}{collision\+\_\+models.\+py}}\end{DoxyCompactItemize}

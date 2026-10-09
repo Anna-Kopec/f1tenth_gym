@@ -1,0 +1,101 @@
+\doxysection{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera Class Reference}
+\hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera}{}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera}\index{f110\_gym.unittest.pyglet\_test.CenteredCamera@{f110\_gym.unittest.pyglet\_test.CenteredCamera}}
+
+
+\doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{Camera} variant where (0, 0) is the centre of the window instead of the bottom-\/left corner.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc}{begin}} (self)
+\begin{DoxyCompactList}\small\item\em Apply the camera, shifted by half the window size so the offset point is centred. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1646c6488aa5ff1e06db01b1f1099583}{end}} (self)
+\begin{DoxyCompactList}\small\item\em Undo \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc}{begin()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a8478e89fd7599728e5535e20d546000f}{\+\_\+\+\_\+init\+\_\+\_}} (self, pyglet.\+window.\+Window window, scroll\+\_\+speed=1, min\+\_\+zoom=1, max\+\_\+zoom=4)
+\begin{DoxyCompactList}\small\item\em Create a camera for {\ttfamily window}, at offset (0, 0) and zoom 1 (clamped to the zoom limits). \end{DoxyCompactList}\item 
+{\bfseries zoom} (self)
+\begin{DoxyCompactList}\small\item\em Current zoom factor. \end{DoxyCompactList}\item 
+{\bfseries zoom} (self, value)
+\begin{DoxyCompactList}\small\item\em Set the zoom factor, clamped to \+[min\+\_\+zoom, max\+\_\+zoom]. \end{DoxyCompactList}\item 
+{\bfseries position} (self)
+\begin{DoxyCompactList}\small\item\em Current scroll offset as a tuple (offset\+\_\+x, offset\+\_\+y). \end{DoxyCompactList}\item 
+{\bfseries position} (self, value)
+\begin{DoxyCompactList}\small\item\em Set the scroll offset directly from a tuple (x, y). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}{move}} (self, axis\+\_\+x, axis\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Move the offset by scroll\+\_\+speed in the given direction, e.\+g. \end{DoxyCompactList}\item 
+{\bfseries \+\_\+\+\_\+enter\+\_\+\_} (self)
+\begin{DoxyCompactList}\small\item\em Context-\/manager entry: calls \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin()}. \end{DoxyCompactList}\item 
+{\bfseries \+\_\+\+\_\+exit\+\_\+\_} (self, exception\+\_\+type, exception\+\_\+value, traceback)
+\begin{DoxyCompactList}\small\item\em Context-\/manager exit: calls \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}{end()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries scroll\+\_\+speed} = scroll\+\_\+speed
+\begin{DoxyCompactList}\small\item\em Distance moved per unit of \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}{move()} input. \end{DoxyCompactList}\item 
+{\bfseries max\+\_\+zoom} = max\+\_\+zoom
+\begin{DoxyCompactList}\small\item\em Largest allowed zoom. \end{DoxyCompactList}\item 
+{\bfseries min\+\_\+zoom} = min\+\_\+zoom
+\begin{DoxyCompactList}\small\item\em Smallest allowed zoom. \end{DoxyCompactList}\item 
+int {\bfseries offset\+\_\+x} = 0
+\begin{DoxyCompactList}\small\item\em Horizontal scroll offset. \end{DoxyCompactList}\item 
+int {\bfseries offset\+\_\+y} = 0
+\begin{DoxyCompactList}\small\item\em Vertical scroll offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \+\_\+window} = window
+\item 
+{\bfseries \+\_\+zoom} = max(min(1, self.\+max\+\_\+zoom), self.\+min\+\_\+zoom)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{Camera} variant where (0, 0) is the centre of the window instead of the bottom-\/left corner. 
+
+\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_doc-func-members}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc}\index{f110\_gym.unittest.pyglet\_test.CenteredCamera@{f110\_gym.unittest.pyglet\_test.CenteredCamera}!begin@{begin}}
+\index{begin@{begin}!f110\_gym.unittest.pyglet\_test.CenteredCamera@{f110\_gym.unittest.pyglet\_test.CenteredCamera}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera.\+begin (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Apply the camera, shifted by half the window size so the offset point is centred. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}.
+
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1646c6488aa5ff1e06db01b1f1099583}\index{f110\_gym.unittest.pyglet\_test.CenteredCamera@{f110\_gym.unittest.pyglet\_test.CenteredCamera}!end@{end}}
+\index{end@{end}!f110\_gym.unittest.pyglet\_test.CenteredCamera@{f110\_gym.unittest.pyglet\_test.CenteredCamera}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1646c6488aa5ff1e06db01b1f1099583} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera.\+end (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Undo \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc}{begin()}. 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+unittest/\doxymbox{\hyperlink{pyglet__test_8py}{pyglet\+\_\+test.\+py}}\end{DoxyCompactItemize}

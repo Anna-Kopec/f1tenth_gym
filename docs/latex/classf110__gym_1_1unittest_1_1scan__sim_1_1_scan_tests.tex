@@ -1,0 +1,62 @@
+\doxysection{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+Scan\+Tests Class Reference}
+\hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests}{}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests}\index{f110\_gym.unittest.scan\_sim.ScanTests@{f110\_gym.unittest.scan\_sim.ScanTests}}
+
+
+Tests comparing this simulator against scans from the legacy C++ simulator.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+Scan\+Tests:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a7a87bec9a4d3a4560026eabeb288c12f}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a7a87bec9a4d3a4560026eabeb288c12f} 
+{\bfseries set\+Up} (self)
+\begin{DoxyCompactList}\small\item\em Set Li\+DAR settings, test poses rotating in place at the origin, and load the legacy reference scans. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a01bd5496875584147c7d4fb0899eb2cb}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a01bd5496875584147c7d4fb0899eb2cb} 
+{\bfseries test\+\_\+map\+\_\+berlin} (self)
+\begin{DoxyCompactList}\small\item\em Mean squared error against the legacy berlin scans is below 2; also plots one scan (blocks until closed). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a4654466c3d1681c29f95e85dd4bb6b7a}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a4654466c3d1681c29f95e85dd4bb6b7a} 
+{\bfseries test\+\_\+map\+\_\+skirk} (self)
+\begin{DoxyCompactList}\small\item\em Mean squared error against the legacy skirk scans is below 2; also plots one scan (blocks until closed). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a773e4b9a4ebc06a74fd9a09c579b8794}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a773e4b9a4ebc06a74fd9a09c579b8794} 
+{\bfseries test\+\_\+fps} (self)
+\begin{DoxyCompactList}\small\item\em Scanning the skirk map runs faster than 500 scans per second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a247d119070cd8ed34451ab67e1567c72}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a247d119070cd8ed34451ab67e1567c72} 
+int {\bfseries num\+\_\+beams} = 1080
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a75370d218dde60674b47e124d302b355}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a75370d218dde60674b47e124d302b355} 
+float {\bfseries fov} = 4.\+7
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a3beafc32194d2dd32a0a97885ba97539}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a3beafc32194d2dd32a0a97885ba97539} 
+int {\bfseries num\+\_\+test} = 10
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_ad63cebbd6245dfa62dd57168287598b1}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_ad63cebbd6245dfa62dd57168287598b1} 
+{\bfseries test\+\_\+poses} = np.\+zeros((self.\+num\+\_\+test, 3))
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a44186810ed5ab4fecb230b7a842d294a}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a44186810ed5ab4fecb230b7a842d294a} 
+{\bfseries berlin\+\_\+scan} = sample\+\_\+scan\+[\textquotesingle{}berlin\textquotesingle{}]
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a9c595846d38b4691fd34352eea08cdcf}\label{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a9c595846d38b4691fd34352eea08cdcf} 
+{\bfseries skirk\+\_\+scan} = sample\+\_\+scan\+[\textquotesingle{}skirk\textquotesingle{}]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tests comparing this simulator against scans from the legacy C++ simulator. 
+
+\begin{DoxyNote}{Note}
+\doxylink{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests_a7a87bec9a4d3a4560026eabeb288c12f}{set\+Up()} loads legacy\+\_\+scan.\+npz from the current directory, and the map paths (\textquotesingle{}../../../\+maps/...\textquotesingle{}) do not exist in this repository, so these tests do not run as-\/is. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+unittest/\doxymbox{\hyperlink{scan__sim_8py}{scan\+\_\+sim.\+py}}\end{DoxyCompactItemize}

@@ -12,12 +12,50 @@
 
 
 
-"""
-Prototype of vehicle dynamics functions and classes for simulating 2D Single
-Track dynamic model
-Following the implementation of commanroad's Single Track Dynamics model
+"""!
+@file dynamic_models.py
+@brief Vehicle dynamics for the F1TENTH gym: single-track (bicycle) models,
+       input constraints, and the low-level speed / steering controller.
+
+Follows the CommonRoad single-track vehicle models.
 Original implementation: https://gitlab.lrz.de/tum-cps/commonroad-vehicle-models/
-Author: Hongrui Zheng
+
+@section dynamic_models_models Models in this file
+- **Kinematic single-track (KS)**, vehicle_dynamics_ks(): a 5-state bicycle model
+  with no tyre slip. The wheels go exactly where they point. Accurate at low
+  speed, wrong when cornering hard.
+- **Dynamic single-track (ST)**, vehicle_dynamics_st(): a 7-state bicycle model with
+  a linear tyre model, slip angle and yaw dynamics, including load transfer from
+  longitudinal acceleration. Below 0.5 m/s it switches to the KS equations,
+  because the ST equations divide by the speed.
+
+Both functions return the state *derivative* f(x, u). They do not step the
+state themselves; an integrator (Euler or RK4 in base_classes.RaceCar.update_pose)
+does that.
+
+@section dynamic_models_inputs Control inputs
+The models take u = [steering angle velocity, longitudinal acceleration].
+The gym's users command a *desired steering angle and speed* instead, so pid()
+converts between the two. Every model call first passes u through
+steering_constraint() and accl_constraints() to enforce the physical limits.
+
+@section dynamic_models_params Vehicle parameters (shared by every function)
+| Name      | Meaning                                                         | Units    |
+|-----------|-----------------------------------------------------------------|----------|
+| mu        | tyre-road friction coefficient                                  | -        |
+| C_Sf      | front cornering stiffness coefficient (per unit of normal load) | 1/rad    |
+| C_Sr      | rear cornering stiffness coefficient                            | 1/rad    |
+| lf, lr    | distance from centre of gravity to front / rear axle            | m        |
+| h         | height of the centre of gravity                                 | m        |
+| m         | vehicle mass                                                    | kg       |
+| I         | yaw moment of inertia about the z axis                          | kg m^2   |
+| s_min/max | steering angle limits                                           | rad      |
+| sv_min/max| steering angle velocity limits                                  | rad/s    |
+| v_switch  | speed above which acceleration is limited by motor power        | m/s      |
+| a_max     | maximum longitudinal acceleration magnitude                     | m/s^2    |
+| v_min/max | speed limits (v_min is negative, for reversing)                 | m/s      |
+
+@author Hongrui Zheng
 """
 
 import numpy as np
@@ -28,22 +66,27 @@ import time
 
 @njit(cache=True)
 def accl_constraints(vel, accl, v_switch, a_max, v_min, v_max):
+    """!
+    @brief Clamp a requested longitudinal acceleration to what the vehicle can do.
+
+    Three limits are applied:
+    - **Power limit:** above @p v_switch, the maximum forward acceleration falls
+      off as a_max * v_switch / vel. This models a motor with constant power,
+      where force (and so acceleration) is proportional to 1/speed.
+    - **Speed limits:** once the car is at @p v_min it cannot accelerate further
+      negative, and once at @p v_max it cannot accelerate further positive.
+    - **Braking limit:** deceleration is capped at -a_max.
+
+    @param vel      Current longitudinal velocity (m/s).
+    @param accl     Requested (unconstrained) acceleration (m/s^2).
+    @param v_switch Switching velocity: above it, acceleration is power-limited (m/s).
+    @param a_max    Maximum acceleration magnitude (m/s^2).
+    @param v_min    Minimum allowed velocity (m/s, negative for reverse).
+    @param v_max    Maximum allowed velocity (m/s).
+    @return The constrained acceleration (m/s^2).
     """
-    Acceleration constraints, adjusts the acceleration based on constraints
 
-        Args:
-            vel (float): current velocity of the vehicle
-            accl (float): unconstraint desired acceleration
-            v_switch (float): switching velocity (velocity at which the acceleration is no longer able to create wheel spin)
-            a_max (float): maximum allowed acceleration
-            v_min (float): minimum allowed velocity
-            v_max (float): maximum allowed velocity
-
-        Returns:
-            accl (float): adjusted acceleration
-    """
-
-    # positive accl limit
+    # positive accl limit (power-limited above v_switch)
     if vel > v_switch:
         pos_limit = a_max*v_switch/vel
     else:
@@ -51,6 +94,7 @@ def accl_constraints(vel, accl, v_switch, a_max, v_min, v_max):
 
     # accl limit reached?
     if (vel <= v_min and accl <= 0) or (vel >= v_max and accl >= 0):
+        # already at a speed limit and pushing past it: no acceleration
         accl = 0.
     elif accl <= -a_max:
         accl = -a_max
@@ -61,23 +105,26 @@ def accl_constraints(vel, accl, v_switch, a_max, v_min, v_max):
 
 @njit(cache=True)
 def steering_constraint(steering_angle, steering_velocity, s_min, s_max, sv_min, sv_max):
-    """
-    Steering constraints, adjusts the steering velocity based on constraints
+    """!
+    @brief Clamp a requested steering angle velocity to the steering limits.
 
-        Args:
-            steering_angle (float): current steering_angle of the vehicle
-            steering_velocity (float): unconstraint desired steering_velocity
-            s_min (float): minimum steering angle
-            s_max (float): maximum steering angle
-            sv_min (float): minimum steering velocity
-            sv_max (float): maximum steering velocity
+    - If the wheels are already at a lock (@p s_min or @p s_max) and the request
+      would turn them further, the steering velocity is set to 0.
+    - Otherwise the rate is clamped to [@p sv_min, @p sv_max], which models the
+      top speed of the steering servo.
 
-        Returns:
-            steering_velocity (float): adjusted steering velocity
+    @param steering_angle    Current front-wheel steering angle (rad).
+    @param steering_velocity Requested (unconstrained) steering angle velocity (rad/s).
+    @param s_min             Minimum steering angle (rad).
+    @param s_max             Maximum steering angle (rad).
+    @param sv_min            Minimum steering velocity (rad/s).
+    @param sv_max            Maximum steering velocity (rad/s).
+    @return The constrained steering velocity (rad/s).
     """
 
     # constraint steering velocity
     if (steering_angle <= s_min and steering_velocity <= 0) or (steering_angle >= s_max and steering_velocity >= 0):
+        # at full lock and still turning further: hold the angle
         steering_velocity = 0.
     elif steering_velocity <= sv_min:
         steering_velocity = sv_min
@@ -89,22 +136,33 @@ def steering_constraint(steering_angle, steering_velocity, s_min, s_max, sv_min,
 
 @njit(cache=True)
 def vehicle_dynamics_ks(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max):
-    """
-    Single Track Kinematic Vehicle Dynamics.
+    """!
+    @brief Kinematic single-track (bicycle) model: state derivative f(x, u).
 
-        Args:
-            x (numpy.ndarray (3, )): vehicle state vector (x1, x2, x3, x4, x5)
-                x1: x position in global coordinates
-                x2: y position in global coordinates
-                x3: steering angle of front wheels
-                x4: velocity in x direction
-                x5: yaw angle
-            u (numpy.ndarray (2, )): control input vector (u1, u2)
-                u1: steering angle velocity of front wheels
-                u2: longitudinal acceleration
+    It assumes the tyres roll without slipping, so the rear axle always moves
+    along the car's heading and the yaw rate is set purely by geometry:
 
-        Returns:
-            f (numpy.ndarray): right hand side of differential equations
+        x_dot     = v * cos(psi)
+        y_dot     = v * sin(psi)
+        delta_dot = u[0]  (steering velocity)
+        v_dot     = u[1]  (acceleration)
+        psi_dot   = v / (lf + lr) * tan(delta)
+
+    Here (x, y) is the rear-axle position.
+
+    @param x      np.ndarray of shape (5,): state [x, y, delta, v, psi]
+                  - x[0]: x position in global coordinates (m)
+                  - x[1]: y position in global coordinates (m)
+                  - x[2]: front-wheel steering angle delta (rad)
+                  - x[3]: longitudinal velocity v (m/s)
+                  - x[4]: yaw angle psi (rad)
+    @param u_init np.ndarray of shape (2,): requested input [steering velocity (rad/s),
+                  longitudinal acceleration (m/s^2)]. It is clamped by
+                  steering_constraint() and accl_constraints() before use.
+    @param mu,C_Sf,C_Sr,lf,lr,h,m,I,s_min,s_max,sv_min,sv_max,v_switch,a_max,v_min,v_max
+                  Vehicle parameters (see the parameter table in the file documentation).
+                  Only lf, lr and the constraint limits are used by this model.
+    @return np.ndarray of shape (5,): the state derivative dx/dt.
     """
     # wheelbase
     lwb = lf + lr
@@ -122,24 +180,45 @@ def vehicle_dynamics_ks(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max
 
 @njit(cache=True)
 def vehicle_dynamics_st(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max):
-    """
-    Single Track Dynamic Vehicle Dynamics.
+    """!
+    @brief Dynamic single-track (bicycle) model with tyre slip: state derivative f(x, u).
 
-        Args:
-            x (numpy.ndarray (3, )): vehicle state vector (x1, x2, x3, x4, x5, x6, x7)
-                x1: x position in global coordinates
-                x2: y position in global coordinates
-                x3: steering angle of front wheels
-                x4: velocity in x direction
-                x5: yaw angle
-                x6: yaw rate
-                x7: slip angle at vehicle center
-            u (numpy.ndarray (2, )): control input vector (u1, u2)
-                u1: steering angle velocity of front wheels
-                u2: longitudinal acceleration
+    **Above 0.5 m/s** (the dynamic model):
+    - Position moves along the *velocity* direction, psi + beta, not the heading
+      psi. The car can drift sideways.
+    - Each axle's lateral tyre force is linear in its slip angle. The force is
+      scaled by mu, by that axle's cornering stiffness (C_Sf or C_Sr) and by the
+      axle's normal load.
+    - Normal loads include longitudinal load transfer. The front axle carries
+      m*(g*lr - a*h)/(lf + lr) and the rear axle m*(g*lf + a*h)/(lf + lr), so
+      accelerating (a > 0) shifts load to the rear and braking shifts it to the front.
+    - The yaw acceleration (x[5] derivative) and slip angle rate (x[6] derivative)
+      come from the lateral force and moment balance on these tyre forces.
 
-        Returns:
-            f (numpy.ndarray): right hand side of differential equations
+    **Below 0.5 m/s** (kinematic fallback): the dynamic equations divide by v and
+    v^2, so they blow up near standstill. The KS model is used instead for the
+    first five states, and:
+    - the yaw rate derivative is the time derivative of the KS yaw rate,
+      d/dt [ v / lwb * tan(delta) ] = a/lwb * tan(delta) + v/(lwb * cos^2(delta)) * delta_dot.
+    - the slip angle derivative is 0, so the slip angle is held constant.
+
+    @param x      np.ndarray of shape (7,): state [x, y, delta, v, psi, psi_dot, beta]
+                  - x[0]: x position in global coordinates (m)
+                  - x[1]: y position in global coordinates (m)
+                  - x[2]: front-wheel steering angle delta (rad)
+                  - x[3]: longitudinal velocity v (m/s)
+                  - x[4]: yaw angle psi (rad)
+                  - x[5]: yaw rate psi_dot (rad/s)
+                  - x[6]: slip angle beta at the centre of gravity (rad)
+    @param u_init np.ndarray of shape (2,): requested input [steering velocity (rad/s),
+                  longitudinal acceleration (m/s^2)]. It is clamped before use.
+    @param mu,C_Sf,C_Sr,lf,lr,h,m,I,s_min,s_max,sv_min,sv_max,v_switch,a_max,v_min,v_max
+                  Vehicle parameters (see the parameter table in the file documentation).
+    @return np.ndarray of shape (7,): the state derivative dx/dt.
+
+    @note (x, y) is the centre of gravity in the dynamic branch, but the KS
+          fallback treats it as the rear axle. The difference is ignored when
+          switching between them.
     """
 
     # gravity constant m/s^2
@@ -153,7 +232,8 @@ def vehicle_dynamics_st(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max
         # wheelbase
         lwb = lf + lr
 
-        # system dynamics
+        # system dynamics: KS for the first 5 states, then
+        # yaw-rate derivative = d/dt of the KS yaw rate, and slip angle held constant
         x_ks = x[0:5]
         f_ks = vehicle_dynamics_ks(x_ks, u, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max)
         f = np.hstack((f_ks, np.array([u[1]/lwb*np.tan(x[2])+x[3]/(lwb*np.cos(x[2])**2)*u[0],
@@ -161,14 +241,23 @@ def vehicle_dynamics_st(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max
 
     else:
         # system dynamics
-        f = np.array([x[3]*np.cos(x[6] + x[4]),
+        # Terms (g*lr - u[1]*h) and (g*lf + u[1]*h) are the front / rear normal
+        # loads (per unit mass, times wheelbase) including longitudinal load transfer.
+        f = np.array([
+            # x_dot, y_dot: move along the velocity direction (heading + slip)
+            x[3]*np.cos(x[6] + x[4]),
             x[3]*np.sin(x[6] + x[4]),
+            # delta_dot, v_dot: the constrained inputs
             u[0],
             u[1],
+            # psi_dot: yaw rate is itself a state
             x[5],
+            # psi_ddot: yaw moment from front and rear lateral tyre forces / I.
+            # The three terms are the contributions of yaw rate, slip angle and steering angle.
             -mu*m/(x[3]*I*(lr+lf))*(lf**2*C_Sf*(g*lr-u[1]*h) + lr**2*C_Sr*(g*lf + u[1]*h))*x[5] \
                 +mu*m/(I*(lr+lf))*(lr*C_Sr*(g*lf + u[1]*h) - lf*C_Sf*(g*lr - u[1]*h))*x[6] \
                 +mu*m/(I*(lr+lf))*lf*C_Sf*(g*lr - u[1]*h)*x[2],
+            # beta_dot: lateral force balance, with the same three contributions
             (mu/(x[3]**2*(lr+lf))*(C_Sr*(g*lf + u[1]*h)*lr - C_Sf*(g*lr - u[1]*h)*lf)-1)*x[5] \
                 -mu/(x[3]*(lr+lf))*(C_Sr*(g*lf + u[1]*h) + C_Sf*(g*lr-u[1]*h))*x[6] \
                 +mu/(x[3]*(lr+lf))*(C_Sf*(g*lr-u[1]*h))*x[2]])
@@ -177,25 +266,50 @@ def vehicle_dynamics_st(x, u_init, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max
 
 @njit(cache=True)
 def pid(speed, steer, current_speed, current_steer, max_sv, max_a, max_v, min_v):
-    """
-    Basic controller for speed/steer -> accl./steer vel.
+    """!
+    @brief Low-level controller: desired (speed, steering angle) -> (acceleration, steering velocity).
 
-        Args:
-            speed (float): desired input speed
-            steer (float): desired input steering angle
+    This is what lets the gym take "go this fast, steer this much" as its action.
 
-        Returns:
-            accl (float): desired input acceleration
-            sv (float): desired input steering velocity
+    **Steering (bang-bang):** if the steering angle is off target by more than
+    1e-4 rad, steer toward the target at full rate (+/- @p max_sv). Otherwise
+    hold still. The angle can overshoot by up to max_sv * dt in one step.
+
+    **Speed (proportional only, no integral or derivative term):**
+    acceleration = kp * (target speed - current speed). The gain kp depends on
+    the situation:
+
+    | Current speed     | Speed error      | Situation       | kp                      |
+    |-------------------|------------------|-----------------|-------------------------|
+    | forward (v > 0)   | positive         | speeding up     | 10 * max_a / max_v      |
+    | forward (v > 0)   | zero or negative | braking         | 10 * max_a / (-min_v)   |
+    | v <= 0            | positive         | braking         | 2 * max_a / max_v       |
+    | v <= 0            | zero or negative | speeding up     | 2 * max_a / (-min_v)    |
+
+    A car at a standstill (v == 0) uses the v <= 0 rows, so pulling away from
+    rest uses the gentler gain of 2 rather than 10.
+
+    Outputs are not clamped here. accl_constraints() and steering_constraint()
+    clamp them inside the dynamics model.
+
+    @param speed         Desired longitudinal speed (m/s).
+    @param steer         Desired steering angle (rad).
+    @param current_speed Current longitudinal speed (m/s).
+    @param current_steer Current steering angle (rad).
+    @param max_sv        Maximum steering velocity (rad/s).
+    @param max_a         Maximum acceleration (m/s^2).
+    @param max_v         Maximum speed (m/s).
+    @param min_v         Minimum speed (m/s, negative).
+    @return Tuple (accl, sv): acceleration command (m/s^2) and steering velocity command (rad/s).
     """
-    # steering
+    # steering: full-rate toward the target, or hold if close enough
     steer_diff = steer - current_steer
     if np.fabs(steer_diff) > 1e-4:
         sv = (steer_diff / np.fabs(steer_diff)) * max_sv
     else:
         sv = 0.0
 
-    # accl
+    # accl: proportional on speed error, gain chosen by direction of travel
     vel_diff = speed - current_speed
     # currently forward
     if current_speed > 0.:
@@ -221,15 +335,48 @@ def pid(speed, steer, current_speed, current_steer, max_sv, max_a, max_v, min_v)
     return accl, sv
 
 def func_KS(x, t, u, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max):
+    """!
+    @brief Adapter for scipy.integrate.odeint: wraps vehicle_dynamics_ks() with the (x, t, ...) signature odeint expects.
+
+    @param x State, as in vehicle_dynamics_ks().
+    @param t Time (unused; the model does not depend on time).
+    @param u Input, as in vehicle_dynamics_ks().
+    @param mu,C_Sf,C_Sr,lf,lr,h,m,I,s_min,s_max,sv_min,sv_max,v_switch,a_max,v_min,v_max
+             Vehicle parameters, passed through unchanged.
+    @return The state derivative from vehicle_dynamics_ks().
+    """
     f = vehicle_dynamics_ks(x, u, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max)
     return f
 
 def func_ST(x, t, u, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max):
+    """!
+    @brief Adapter for scipy.integrate.odeint: wraps vehicle_dynamics_st() with the (x, t, ...) signature odeint expects.
+
+    @param x State, as in vehicle_dynamics_st().
+    @param t Time (unused; the model does not depend on time).
+    @param u Input, as in vehicle_dynamics_st().
+    @param mu,C_Sf,C_Sr,lf,lr,h,m,I,s_min,s_max,sv_min,sv_max,v_switch,a_max,v_min,v_max
+             Vehicle parameters, passed through unchanged.
+    @return The state derivative from vehicle_dynamics_st().
+    """
     f = vehicle_dynamics_st(x, u, mu, C_Sf, C_Sr, lf, lr, h, m, I, s_min, s_max, sv_min, sv_max, v_switch, a_max, v_min, v_max)
     return f
 
 class DynamicsTest(unittest.TestCase):
+    """!
+    @brief Unit tests comparing the KS and ST models against CommonRoad reference values.
+
+    The test vehicle is the full-size CommonRoad reference car (converted from
+    imperial units), not the F1TENTH car, so the parameters differ greatly from
+    the gym defaults.
+
+    Run with: @c python dynamic_models.py
+    """
+
     def setUp(self):
+        """!
+        @brief Set up the full-size test vehicle's parameters.
+        """
         # test params
         self.mu = 1.0489
         self.C_Sf = 21.92/1.0489
@@ -253,6 +400,10 @@ class DynamicsTest(unittest.TestCase):
         self.a_max = 11.5  #maximum absolute acceleration [m/s^2]
 
     def test_derivatives(self):
+        """!
+        @brief Single derivative evaluations match the reference values, and the ST
+               model runs faster than 5000 evaluations per second.
+        """
         # ground truth derivatives
         f_ks_gt = [16.3475935934250209, 0.4819314886013121, 0.1500000000000000, 5.1464424102339752, 0.2401426578627629]
         f_st_gt = [15.7213512030862397, 0.0925527979719355, 0.1500000000000000, 5.3536773276413925, 0.0529001056654038, 0.6435589397748606, 0.0313297971641291]
@@ -279,6 +430,9 @@ class DynamicsTest(unittest.TestCase):
         self.assertGreater(avg_fps, 5000)
 
     def test_zeroinit_roll(self):
+        """!
+        @brief From rest with zero input, both models stay exactly at rest (no singularity at v = 0).
+        """
         from scipy.integrate import odeint
 
         # testing for zero initial state, zero input singularities
@@ -311,6 +465,9 @@ class DynamicsTest(unittest.TestCase):
         self.assertTrue(all(x_roll_ks[-1]==x0_KS))
 
     def test_zeroinit_dec(self):
+        """!
+        @brief From rest with a braking input, the car reverses in a straight line, matching the reference after 1 s.
+        """
         from scipy.integrate import odeint
 
         # testing for zero initial state, decelerating input singularities
@@ -348,6 +505,12 @@ class DynamicsTest(unittest.TestCase):
         self.assertTrue(all(abs(x_dec_ks[-1] - x_dec_ks_gt) < 1e-2))
 
     def test_zeroinit_acc(self):
+        """!
+        @brief From rest, accelerating while steering left matches the reference trajectory after 1 s.
+
+        The ST model passes through the low-speed KS fallback into the dynamic
+        regime, so this also checks that switching between them.
+        """
         from scipy.integrate import odeint
 
         # testing for zero initial state, accelerating with left steer input singularities
@@ -369,7 +532,7 @@ class DynamicsTest(unittest.TestCase):
         # time vector
         t = np.arange(t_start, t_final, 1e-4)
 
-        # set decel input
+        # set accelerate + steer-left input
         u = np.array([0.15, 0.63*g])
 
         # simulate single-track model
@@ -386,6 +549,9 @@ class DynamicsTest(unittest.TestCase):
         self.assertTrue(all(abs(x_acc_ks[-1] - x_acc_ks_gt) < 1e-2))
 
     def test_zeroinit_rollleft(self):
+        """!
+        @brief From rest, steering left with no throttle only changes the steering angle; the car does not move.
+        """
         from scipy.integrate import odeint
 
         # testing for zero initial state, rolling and steering left input singularities
@@ -406,7 +572,7 @@ class DynamicsTest(unittest.TestCase):
         # time vector
         t = np.arange(t_start, t_final, 1e-4)
 
-        # set decel input
+        # set steer-left input, no acceleration
         u = np.array([0.15, 0.])
 
         # simulate single-track model

@@ -22,10 +22,21 @@
 
 
 
-"""
-Prototype of Utility functions and GJK algorithm for Collision checks between vehicles
-Originally from https://github.com/kroitor/gjk.c
-Author: Hongrui Zheng
+"""!
+@file collision_checks.py
+@brief Older standalone prototype of the GJK collision code. Superseded by collision_models.py.
+
+This file is kept for reference only; nothing in the gym imports it. Its functions
+are identical to the ones in envs/collision_models.py, except that it has
+**no collision_multiple()** (the pairwise check across many cars that the Simulator
+uses) and no test for it.
+
+For how GJK works and detailed per-function documentation, see collision_models.py.
+
+Run the tests with: @c python collision_checks.py
+(test_get_vert opens a matplotlib window and blocks until it is closed).
+
+@author Hongrui Zheng
 """
 
 import numpy as np
@@ -33,14 +44,12 @@ from numba import njit
 
 @njit(cache=True)
 def perpendicular(pt):
-    """
-    Return a 2-vector's perpendicular vector
+    """!
+    @brief Rotate a 2D vector by -90 degrees: (x, y) -> (y, -x). Modifies @p pt in place.
 
-    Args:
-        pt (np.ndarray, (2,)): input vector
-
-    Returns:
-        pt (np.ndarray, (2,)): perpendicular vector
+    @param pt np.ndarray of shape (2,).
+    @return The same array, now perpendicular to its original direction.
+    @see collision_models.py: perpendicular()
     """
     temp = pt[0]
     pt[0] = pt[1]
@@ -50,14 +59,12 @@ def perpendicular(pt):
 
 @njit(cache=True)
 def tripleProduct(a, b, c):
-    """
-    Return triple product of three vectors
+    """!
+    @brief 2D vector triple product (a x b) x c = b(a.c) - a(b.c).
 
-    Args:
-        a, b, c (np.ndarray, (2,)): input vectors
-
-    Returns:
-        (np.ndarray, (2,)): triple product
+    @param a, b, c np.ndarray of shape (2,).
+    @return np.ndarray of shape (2,).
+    @see collision_models.py: tripleProduct()
     """
     ac = a.dot(c)
     bc = b.dot(c)
@@ -66,44 +73,39 @@ def tripleProduct(a, b, c):
 
 @njit(cache=True)
 def avgPoint(vertices):
-    """
-    Return the average point of multiple vertices
+    """!
+    @brief Mean of a set of vertices.
 
-    Args:
-        vertices (np.ndarray, (n, 2)): the vertices we want to find avg on
-
-    Returns:
-        avg (np.ndarray, (2,)): average point of the vertices
+    @param vertices np.ndarray of shape (n, 2).
+    @return np.ndarray of shape (2,).
+    @see collision_models.py: avgPoint()
     """
     return np.sum(vertices, axis=0)/vertices.shape[0]
 
 
 @njit(cache=True)
 def indexOfFurthestPoint(vertices, d):
-    """
-    Return the index of the vertex furthest away along a direction in the list of vertices
+    """!
+    @brief Index of the vertex with the largest dot product with direction @p d.
 
-    Args:
-        vertices (np.ndarray, (n, 2)): the vertices we want to find avg on
-
-    Returns:
-        idx (int): index of the furthest point
+    @param vertices np.ndarray of shape (n, 2).
+    @param d        np.ndarray of shape (2,): search direction.
+    @return int row index into @p vertices.
+    @see collision_models.py: indexOfFurthestPoint()
     """
     return np.argmax(vertices.dot(d))
 
 
 @njit(cache=True)
 def support(vertices1, vertices2, d):
-    """
-    Minkowski sum support function for GJK
+    """!
+    @brief Support point of the Minkowski difference (body1 - body2) in direction @p d.
 
-    Args:
-        vertices1 (np.ndarray, (n, 2)): vertices of the first body
-        vertices2 (np.ndarray, (n, 2)): vertices of the second body
-        d (np.ndarray, (2, )): direction to find the support along
-
-    Returns:
-        support (np.ndarray, (n, 2)): Minkowski sum
+    @param vertices1 np.ndarray of shape (n, 2): first body.
+    @param vertices2 np.ndarray of shape (m, 2): second body.
+    @param d         np.ndarray of shape (2,): search direction.
+    @return np.ndarray of shape (2,).
+    @see collision_models.py: support()
     """
     i = indexOfFurthestPoint(vertices1, d)
     j = indexOfFurthestPoint(vertices2, -d)
@@ -112,15 +114,13 @@ def support(vertices1, vertices2, d):
 
 @njit(cache=True)
 def collision(vertices1, vertices2):
-    """
-    GJK test to see whether two bodies overlap
+    """!
+    @brief GJK test: do two convex polygons overlap?
 
-    Args:
-        vertices1 (np.ndarray, (n, 2)): vertices of the first body
-        vertices2 (np.ndarray, (n, 2)): vertices of the second body
-
-    Returns:
-        overlap (boolean): True if two bodies collide
+    @param vertices1 np.ndarray of shape (n, 2): first convex body.
+    @param vertices2 np.ndarray of shape (m, 2): second convex body.
+    @return True if they overlap (touching counts), False otherwise.
+    @see collision_models.py: collision() for a step-by-step explanation.
     """
     index = 0
     simplex = np.empty((3, 2))
@@ -181,20 +181,18 @@ def collision(vertices1, vertices2):
         iter_count += 1
     return False
 
-"""
-Utility functions for getting vertices by pose and shape
-"""
+# ----------------------------------------------------------------------------
+# Utility functions for getting vertices by pose and shape
+# ----------------------------------------------------------------------------
 
 @njit(cache=True)
 def get_trmtx(pose):
-    """
-    Get transformation matrix of vehicle frame -> global frame
+    """!
+    @brief 4x4 homogeneous transform from the vehicle frame to the world frame.
 
-    Args:
-        pose (np.ndarray (3, )): current pose of the vehicle
-
-    return:
-        H (np.ndarray (4, 4)): transformation matrix
+    @param pose np.ndarray of shape (3,): [x, y, yaw].
+    @return np.ndarray of shape (4, 4).
+    @see collision_models.py: get_trmtx()
     """
     x = pose[0]
     y = pose[1]
@@ -206,16 +204,14 @@ def get_trmtx(pose):
 
 @njit(cache=True)
 def get_vertices(pose, length, width):
-    """
-    Utility function to return vertices of the car body given pose and size
+    """!
+    @brief World-frame corners of a rectangle centred on @p pose.
 
-    Args:
-        pose (np.ndarray, (3, )): current world coordinate pose of the vehicle
-        length (float): car length
-        width (float): car width
-
-    Returns:
-        vertices (np.ndarray, (4, 2)): corner vertices of the vehicle body
+    @param pose   np.ndarray of shape (3,): [x, y, yaw] of the rectangle centre.
+    @param length Rectangle length along the heading (m).
+    @param width  Rectangle width (m).
+    @return np.ndarray of shape (4, 2): rear-left, rear-right, front-right, front-left.
+    @see collision_models.py: get_vertices()
     """
     H = get_trmtx(pose)
     rl = H.dot(np.asarray([[-length/2],[width/2],[0.], [1.]])).flatten()
@@ -230,16 +226,22 @@ def get_vertices(pose, length, width):
     return vertices
 
 
-"""
-Unit tests for GJK collision checks
-Author: Hongrui Zheng
-"""
+# ----------------------------------------------------------------------------
+# Unit tests for GJK collision checks
+# Author: Hongrui Zheng
+# ----------------------------------------------------------------------------
 
 import time
 import unittest
 
 class CollisionTests(unittest.TestCase):
+    """!
+    @brief Unit tests for get_vertices() and collision().
+    """
     def setUp(self):
+        """!
+        @brief Fix the random seed and define a test polygon and car size.
+        """
         # test params
         np.random.seed(1234)
 
@@ -251,6 +253,9 @@ class CollisionTests(unittest.TestCase):
         self.width = 0.22
     
     def test_get_vert(self):
+        """!
+        @brief get_vertices() returns a (4, 2) array; also plots the rectangle (blocks until the window is closed).
+        """
         test_pose = np.array([2.3, 6.7, 0.8])
         vertices = get_vertices(test_pose, self.length, self.width)
         rect = np.vstack((vertices, vertices[0,:]))
@@ -264,6 +269,9 @@ class CollisionTests(unittest.TestCase):
         self.assertTrue(vertices.shape == (4, 2))
 
     def test_get_vert_fps(self):
+        """!
+        @brief get_vertices() runs faster than 500 calls per second.
+        """
         test_pose = np.array([2.3, 6.7, 0.8])
         start = time.time()
         for _ in range(1000):
@@ -274,6 +282,9 @@ class CollisionTests(unittest.TestCase):
         self.assertTrue(fps>500)
 
     def test_random_collision(self):
+        """!
+        @brief Two slightly perturbed copies of the same polygon always collide.
+        """
         # perturb the body by a small amount and make sure it all collides with the original body
         for _ in range(1000):
             a = self.vertices1 + np.random.normal(size=(self.vertices1.shape))/100.
@@ -281,6 +292,9 @@ class CollisionTests(unittest.TestCase):
             self.assertTrue(collision(a,b))
 
     def test_fps(self):
+        """!
+        @brief collision() runs faster than 500 calls per second.
+        """
         # also perturb the body but mainly want to test GJK speed
         start = time.time()
         for _ in range(1000):

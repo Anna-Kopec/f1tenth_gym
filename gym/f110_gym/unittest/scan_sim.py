@@ -22,9 +22,28 @@
 
 
 
-"""
-Prototype of Utility functions and classes for simulating 2D LIDAR scans
-Author: Hongrui Zheng
+"""!
+@file scan_sim.py
+@brief Older standalone prototype of the LiDAR simulator. Superseded by laser_models.py.
+
+This file is kept for reference only; nothing in the gym imports it. It differs
+from envs/laser_models.py in these ways:
+- **Noise:** ScanSimulator2D owns its noise generator and standard deviation
+  (@c seed and @c std_dev constructor arguments), and scan(pose) always adds noise.
+  In laser_models.py the caller passes a generator, or None for no noise.
+- **No range clipping:** trace_ray() does not clip the result to @c max_range,
+  so a beam can come back slightly longer than max_range.
+- **Missing functions:** none of the time-to-collision or other-car ray-casting
+  functions (check_ttc_jit, ray_cast, get_range, ...) exist here.
+- **Tests:** they compare scans against legacy_scan.npz (made by legacy_scan_gen.py
+  from the old C++ simulator), using map paths ('../../../maps/...') that do not
+  exist in this repository.
+- **Entry point:** running the file calls main(), not the tests, and main()
+  loads a map from a hard-coded path on the original author's machine.
+
+For how the ray tracing works and detailed per-function documentation, see laser_models.py.
+
+@author Hongrui Zheng
 """
 
 import numpy as np
@@ -38,34 +57,29 @@ import unittest
 import timeit
 
 def get_dt(bitmap, resolution):
-    """
-    Distance transformation, returns the distance matrix from the input bitmap.
-    Uses scipy.ndimage, cannot be JITted.
+    """!
+    @brief Distance transform of the map: distance (m) from each cell to the nearest obstacle (0-valued) cell.
 
-        Args:
-            bitmap (numpy.ndarray, (n, m)): input binary bitmap of the environment, where 0 is obstacles, and 255 (or anything > 0) is freespace
-            resolution (float): resolution of the input bitmap (m/cell)
-
-        Returns:
-            dt (numpy.ndarray, (n, m)): output distance matrix, where each cell has the corresponding distance (in meters) to the closest obstacle
+    @param bitmap     np.ndarray of shape (rows, cols): 0 = obstacle, > 0 = free.
+    @param resolution Map resolution (m per cell).
+    @return np.ndarray of shape (rows, cols).
+    @see laser_models.py: get_dt()
     """
     dt = resolution * edt(bitmap)
     return dt
 
 @njit(cache=True)
 def xy_2_rc(x, y, orig_x, orig_y, orig_c, orig_s, height, width, resolution):
-    """
-    Translate (x, y) coordinate into (r, c) in the matrix
+    """!
+    @brief World (x, y) to (row, column) in the map grid; (-1, -1) if outside the map.
 
-        Args:
-            x (float): coordinate in x (m)
-            y (float): coordinate in y (m)
-            orig_x (float): x coordinate of the map origin (m)
-            orig_y (float): y coordinate of the map origin (m)
-        
-        Returns:
-            r (int): row number in the transform matrix of the given point
-            c (int): column number in the transform matrix of the given point
+    @param x, y           World coordinates (m).
+    @param orig_x, orig_y World position of the map origin (m).
+    @param orig_c, orig_s cos / sin of the map origin yaw.
+    @param height, width  Map size in cells.
+    @param resolution     Map resolution (m per cell).
+    @return Tuple (r, c).
+    @see laser_models.py: xy_2_rc() (including a warning about how (-1, -1) is used)
     """
     # translation
     x_trans = x - orig_x
@@ -87,17 +101,11 @@ def xy_2_rc(x, y, orig_x, orig_y, orig_c, orig_s, height, width, resolution):
 
 @njit(cache=True)
 def distance_transform(x, y, orig_x, orig_y, orig_c, orig_s, height, width, resolution, dt):
-    """
-    Look up corresponding distance in the distance matrix
+    """!
+    @brief Distance from a world point to the nearest obstacle, read from the distance transform @p dt.
 
-        Args:
-            x (float): x coordinate of the lookup point
-            y (float): y coordinate of the lookup point
-            orig_x (float): x coordinate of the map origin (m)
-            orig_y (float): y coordinate of the map origin (m)
-
-        Returns:
-            distance (float): corresponding shortest distance to obstacle in meters
+    @return Distance (m).
+    @see laser_models.py: distance_transform()
     """
     r, c = xy_2_rc(x, y, orig_x, orig_y, orig_c, orig_s, height, width, resolution)
     distance = dt[r, c]
@@ -105,19 +113,12 @@ def distance_transform(x, y, orig_x, orig_y, orig_c, orig_s, height, width, reso
 
 @njit(cache=True)
 def trace_ray(x, y, theta_index, sines, cosines, eps, orig_x, orig_y, orig_c, orig_s, height, width, resolution, dt, max_range):
-    """
-    Find the length of a specific ray at a specific scan angle theta
-    Purely math calculation and loops, should be JITted.
+    """!
+    @brief Length of one beam, by sphere tracing through the distance transform.
 
-        Args:
-            x (float): current x coordinate of the ego (scan) frame
-            y (float): current y coordinate of the ego (scan) frame
-            theta_index(int): current index of the scan beam in the scan range
-            sines (numpy.ndarray (n, )): pre-calculated sines of the angle array
-            cosines (numpy.ndarray (n, )): pre-calculated cosines ...
-
-        Returns:
-            total_distance (float): the distance to first obstacle on the current scan beam
+    @note Unlike laser_models.py, the result is not clipped to @p max_range.
+    @return Distance to the first obstacle (m).
+    @see laser_models.py: trace_ray()
     """
     
     # int casting, and index precal trigs
@@ -144,18 +145,16 @@ def trace_ray(x, y, theta_index, sines, cosines, eps, orig_x, orig_y, orig_c, or
 
 @njit(cache=True)
 def get_scan(pose, theta_dis, fov, num_beams, theta_index_increment, sines, cosines, eps, orig_x, orig_y, orig_c, orig_s, height, width, resolution, dt, max_range):
-    """
-    Perform the scan for each discretized angle of each beam of the laser, loop heavy, should be JITted
+    """!
+    @brief Trace every beam of a scan from one pose (rightmost beam to leftmost).
 
-        Args:
-            pose (numpy.ndarray(3, )): current pose of the scan frame in the map
-            theta_dis (int): number of steps to discretize the angles between 0 and 2pi for look up
-            fov (float): field of view of the laser scan
-            num_beams (int): number of beams in the scan
-            theta_index_increment (float): increment between angle indices after discretization
-
-        Returns:
-            scan (numpy.ndarray(n, )): resulting laser scan at the pose, n=num_beams
+    @param pose np.ndarray of shape (3,): [x, y, yaw] of the sensor.
+    @param theta_dis, fov, num_beams, theta_index_increment, sines, cosines
+                Scan geometry and angle lookup tables (see ScanSimulator2D).
+    @param eps, orig_x, orig_y, orig_c, orig_s, height, width, resolution, dt, max_range
+                Passed through to trace_ray().
+    @return np.ndarray of shape (num_beams,): ranges (m).
+    @see laser_models.py: get_scan()
     """
     # empty scan array init
     scan = np.empty((num_beams,))
@@ -183,20 +182,24 @@ def get_scan(pose, theta_dis, fov, num_beams, theta_index_increment, sines, cosi
     return scan
 
 class ScanSimulator2D(object):
-    """
-    2D LIDAR scan simulator class
+    """!
+    @brief Prototype 2D LiDAR simulator holding a map, its distance transform, and its own noise generator.
 
-    Init params:
-        num_beams (int): number of beams in the scan
-        fov (float): field of view of the laser scan
-        std_dev (float, default=0.01): standard deviation of the generated whitenoise in the scan
-        eps (float, default=0.0001): ray tracing iteration termination condition
-        theta_dis (int, default=2000): number of steps to discretize the angles between 0 and 2pi for look up
-        max_range (float, default=30.0): maximum range of the laser
-        seed (int, default=123): seed for random number generator for the whitenoise in scan
+    @see laser_models.py: ScanSimulator2D, the maintained version.
     """
 
     def __init__(self, num_beams, fov, std_dev=0.01, eps=0.0001, theta_dis=2000, max_range=30.0, seed=123):
+        """!
+        @brief Configure the LiDAR, create the noise generator and build the angle lookup tables. Call set_map() next.
+
+        @param num_beams Number of beams per scan.
+        @param fov       Field of view (rad).
+        @param std_dev   Standard deviation of the Gaussian noise added to each beam (m).
+        @param eps       Sphere-tracing stop tolerance (m).
+        @param theta_dis Number of discrete angles in the 0 to 2*pi lookup table.
+        @param max_range Maximum range (m). Used to stop tracing, but results are not clipped to it.
+        @param seed      Seed for the noise generator.
+        """
         # initialization 
         self.num_beams = num_beams
         self.fov = fov
@@ -224,15 +227,13 @@ class ScanSimulator2D(object):
         self.cosines = np.cos(theta_arr)
     
     def set_map(self, map_path, map_ext):
-        """
-        Set the bitmap of the scan simulator by path
+        """!
+        @brief Load a map YAML and its image (same base name, extension @p map_ext), binarise it at 128, and compute its distance transform.
 
-            Args:
-                map_path (str): path to the map yaml file
-                map_ext (str): extension (image type) of the map image
-
-            Returns:
-                flag (bool): if image reading and loading is successful
+        @param map_path Path to the map YAML file.
+        @param map_ext  Image extension including the dot, e.g. ".png".
+        @return Always True.
+        @see laser_models.py: ScanSimulator2D.set_map()
         """
         # TODO: do we open the option to flip the images, and turn rgb into grayscale? or specify the exact requirements in documentation.
         # TODO: throw error if image specification isn't met
@@ -270,17 +271,12 @@ class ScanSimulator2D(object):
         return True
 
     def scan(self, pose):
-        """
-        Perform simulated 2D scan by pose on the given map
+        """!
+        @brief Simulate one scan from @p pose and add Gaussian noise from this simulator's own generator.
 
-            Args:
-                pose (numpy.ndarray (3, )): pose of the scan frame (x, y, theta)
-
-            Returns:
-                scan (numpy.ndarray (n, )): data array of the laserscan, n=num_beams
-
-            Raises:
-                ValueError: when scan is called before a map is set
+        @param pose np.ndarray of shape (3,): [x, y, yaw] of the sensor.
+        @return np.ndarray of shape (num_beams,): noisy ranges (m).
+        @exception ValueError If no map has been loaded.
         """
         if self.map_height is None:
             raise ValueError('Map is not set for scan simulator.')
@@ -290,21 +286,33 @@ class ScanSimulator2D(object):
         return final_scan
 
     def get_increment(self):
+        """!
+        @brief Angle between neighbouring beams (rad): fov / (num_beams - 1).
+        """
         return self.angle_increment
 
 
-"""
-Unit tests for the 2D scan simulator class
-Author: Hongrui Zheng
-
-Test cases:
-    1, 2: Comparison between generated scan array of the new simulator and the legacy C++ simulator, generated data used, MSE is used as the metric
-    2. FPS test, should be greater than 500
-"""
+# ----------------------------------------------------------------------------
+# Unit tests for the 2D scan simulator class
+# Author: Hongrui Zheng
+#
+# Test cases:
+#     1, 2: Comparison between generated scan array of the new simulator and the legacy C++ simulator, generated data used, MSE is used as the metric
+#     2. FPS test, should be greater than 500
+# ----------------------------------------------------------------------------
 
 
 class ScanTests(unittest.TestCase):
+    """!
+    @brief Tests comparing this simulator against scans from the legacy C++ simulator.
+
+    @note setUp() loads legacy_scan.npz from the current directory, and the map paths
+          ('../../../maps/...') do not exist in this repository, so these tests do not run as-is.
+    """
     def setUp(self):
+        """!
+        @brief Set LiDAR settings, test poses rotating in place at the origin, and load the legacy reference scans.
+        """
         # test params
         self.num_beams = 1080
         self.fov = 4.7
@@ -319,6 +327,9 @@ class ScanTests(unittest.TestCase):
         self.skirk_scan = sample_scan['skirk']
 
     def test_map_berlin(self):
+        """!
+        @brief Mean squared error against the legacy berlin scans is below 2; also plots one scan (blocks until closed).
+        """
         scan_sim = ScanSimulator2D(self.num_beams, self.fov)
         new_berlin = np.empty((self.num_test, self.num_beams))
         map_path = '../../../maps/berlin.yaml'
@@ -342,6 +353,9 @@ class ScanTests(unittest.TestCase):
         self.assertLess(mse, 2.)
 
     def test_map_skirk(self):
+        """!
+        @brief Mean squared error against the legacy skirk scans is below 2; also plots one scan (blocks until closed).
+        """
         scan_sim = ScanSimulator2D(self.num_beams, self.fov)
         new_skirk = np.empty((self.num_test, self.num_beams))
         map_path = '../../../maps/skirk.yaml'
@@ -366,6 +380,9 @@ class ScanTests(unittest.TestCase):
         self.assertLess(mse, 2.)
 
     def test_fps(self):
+        """!
+        @brief Scanning the skirk map runs faster than 500 scans per second.
+        """
         # scan fps should be greater than 500
         scan_sim = ScanSimulator2D(self.num_beams, self.fov)
         map_path = '../../../maps/skirk.yaml'
@@ -385,6 +402,11 @@ class ScanTests(unittest.TestCase):
 
 
 def main():
+    """!
+    @brief Manual demo: time 10000 scans, then animate a scan rotating in place on a polar plot.
+
+    @note The map path is hard-coded to the original author's machine; edit it before running.
+    """
     num_beams = 1080
     fov = 4.7
     # map_path = '../envs/maps/berlin.yaml'
@@ -415,6 +437,9 @@ def main():
     ax.set_ylim(0, 70)
     line, = ax.plot([], [], '.', lw=0)
     def update(i):
+        """!
+        @brief Animation frame @p i: rotate the sensor by -2*pi*i/100 and redraw the scan.
+        """
         # x_ani = i * 3. / num_iter
         theta_ani = -i * 2 * np.pi / num_iter
         x_ani = 0.

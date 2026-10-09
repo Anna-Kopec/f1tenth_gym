@@ -1,0 +1,93 @@
+\doxysection{f110\+\_\+gym.\+unittest.\+dynamics\+\_\+test.\+Dynamics\+Test Class Reference}
+\hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test}{}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test}\index{f110\_gym.unittest.dynamics\_test.DynamicsTest@{f110\_gym.unittest.dynamics\_test.DynamicsTest}}
+
+
+Unit tests comparing the KS and ST models against Common\+Road reference values (full-\/size Common\+Road test vehicle, not the F1\+TENTH car).  
+
+
+Inheritance diagram for f110\+\_\+gym.\+unittest.\+dynamics\+\_\+test.\+Dynamics\+Test:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a05d7045eb4f3a4d1a4748cd64810e5ab}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a05d7045eb4f3a4d1a4748cd64810e5ab} 
+{\bfseries set\+Up} (self)
+\begin{DoxyCompactList}\small\item\em Set up the full-\/size test vehicle\textquotesingle{}s parameters. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2f6651595a2a90c4c30403de7b48aeea}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2f6651595a2a90c4c30403de7b48aeea} 
+{\bfseries test\+\_\+derivatives} (self)
+\begin{DoxyCompactList}\small\item\em Single derivative evaluations match the reference values; ST runs faster than 5000 evaluations per second. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_aa1a31bfc380ef8a49b7d38fc7a715604}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_aa1a31bfc380ef8a49b7d38fc7a715604} 
+{\bfseries test\+\_\+zeroinit\+\_\+roll} (self)
+\begin{DoxyCompactList}\small\item\em From rest with zero input, both models stay exactly at rest. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2799f6d271c1169436baff4e9049f8c2}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2799f6d271c1169436baff4e9049f8c2} 
+{\bfseries test\+\_\+zeroinit\+\_\+dec} (self)
+\begin{DoxyCompactList}\small\item\em From rest with a braking input, the car reverses in a straight line, matching the reference after 1 s. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a78ccc476555f035eb8c6a9bf57d43139}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a78ccc476555f035eb8c6a9bf57d43139} 
+{\bfseries test\+\_\+zeroinit\+\_\+acc} (self)
+\begin{DoxyCompactList}\small\item\em From rest, accelerating while steering left matches the reference trajectory after 1 s. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ad4c461c1fcbe2e83082c5fa33b33643c}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ad4c461c1fcbe2e83082c5fa33b33643c} 
+{\bfseries test\+\_\+zeroinit\+\_\+rollleft} (self)
+\begin{DoxyCompactList}\small\item\em From rest, steering left with no throttle only changes the steering angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_aad990010cb8862791503dec2a7b63392}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_aad990010cb8862791503dec2a7b63392} 
+float {\bfseries mu} = 1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a83dbdcdfb0cc5918d192320f123a7018}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a83dbdcdfb0cc5918d192320f123a7018} 
+float {\bfseries C\+\_\+\+Sf} = 21.\+92/\+1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ade56ba0333b09aa8cf8944b80abfc3e9}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ade56ba0333b09aa8cf8944b80abfc3e9} 
+float {\bfseries C\+\_\+\+Sr} = 21.\+92/\+1.\+0489
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a20f070d34d5f3d8bcdc4d4a2663aaf01}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a20f070d34d5f3d8bcdc4d4a2663aaf01} 
+float {\bfseries lf} = 0.\+3048\texorpdfstring{$\ast$}{*}3.\+793293
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a331ed5b75423920d5b0959b5c288c9f4}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a331ed5b75423920d5b0959b5c288c9f4} 
+float {\bfseries lr} = 0.\+3048\texorpdfstring{$\ast$}{*}4.\+667707
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ada47889d9f1cdc7a141c85e0b911b592}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ada47889d9f1cdc7a141c85e0b911b592} 
+float {\bfseries h} = 0.\+3048\texorpdfstring{$\ast$}{*}2.\+01355
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ad4e68958f53b08e8d06f80c6e0ec9fdb}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ad4e68958f53b08e8d06f80c6e0ec9fdb} 
+float {\bfseries m} = 4.\+4482216152605/\+0.\+3048\texorpdfstring{$\ast$}{*}74.\+91452
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2d8c605c8f4623eee459226caa866f84}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2d8c605c8f4623eee459226caa866f84} 
+float {\bfseries I} = 4.\+4482216152605\texorpdfstring{$\ast$}{*}0.\+3048\texorpdfstring{$\ast$}{*}1321.\+416
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a5c69c2db372ebec74ca1d221edbe1473}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a5c69c2db372ebec74ca1d221edbe1473} 
+float {\bfseries s\+\_\+min} = -\/1.\+066
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a8ff75610d70ea26df31548cbf98a8a0c}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a8ff75610d70ea26df31548cbf98a8a0c} 
+float {\bfseries s\+\_\+max} = 1.\+066
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a3e608ad51b0b541c85c99090351b23ea}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a3e608ad51b0b541c85c99090351b23ea} 
+float {\bfseries sv\+\_\+min} = -\/0.\+4
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_acdb914d4ac6b59f9f7d874ab36428c0e}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_acdb914d4ac6b59f9f7d874ab36428c0e} 
+float {\bfseries sv\+\_\+max} = 0.\+4
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a220079ec271462325a24c473a66f6169}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a220079ec271462325a24c473a66f6169} 
+float {\bfseries v\+\_\+min} = -\/13.\+6
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ac132bca79eff9bf814c5988a616123a6}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ac132bca79eff9bf814c5988a616123a6} 
+float {\bfseries v\+\_\+max} = 50.\+8
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2201d8c8d71f08c5e1d923a7ed48c381}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_a2201d8c8d71f08c5e1d923a7ed48c381} 
+float {\bfseries v\+\_\+switch} = 7.\+319
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ace3db3a123ac6188bf034bcaecdbe4aa}\label{classf110__gym_1_1unittest_1_1dynamics__test_1_1_dynamics_test_ace3db3a123ac6188bf034bcaecdbe4aa} 
+float {\bfseries a\+\_\+max} = 11.\+5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit tests comparing the KS and ST models against Common\+Road reference values (full-\/size Common\+Road test vehicle, not the F1\+TENTH car). 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+unittest/\doxymbox{\hyperlink{dynamics__test_8py}{dynamics\+\_\+test.\+py}}\end{DoxyCompactItemize}

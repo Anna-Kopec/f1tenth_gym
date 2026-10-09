@@ -1,0 +1,169 @@
+\doxysection{f110\+\_\+gym/\+unittest/\+random\+\_\+trackgen.py File Reference}
+\hypertarget{random__trackgen_8py}{}\label{random__trackgen_8py}\index{f110\_gym/unittest/random\_trackgen.py@{f110\_gym/unittest/random\_trackgen.py}}
+
+
+Generate random closed race tracks as gym maps (image + YAML) plus a centreline CSV.  
+
+
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{random__trackgen_8py_ac1a0df39c10e33ddb477d9020a8a666f}{f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+create\+\_\+track}} ()
+\begin{DoxyCompactList}\small\item\em Generate one random closed track. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{random__trackgen_8py_abf0918ea0a50ea69f494a71d97483c8f}{f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+convert\+\_\+track}} (track, track\+\_\+int, track\+\_\+ext, iter)
+\begin{DoxyCompactList}\small\item\em Render a generated track to a gym map and save its files (see the file overview for the outputs). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{random__trackgen_8py_a9d47282619ade831e74f78ea802fdd0c}\label{random__trackgen_8py_a9d47282619ade831e74f78ea802fdd0c} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+parser} = argparse.\+Argument\+Parser()
+\item 
+\Hypertarget{random__trackgen_8py_a7487bc05dd5dec9378a0cef668123d11}\label{random__trackgen_8py_a7487bc05dd5dec9378a0cef668123d11} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+type}
+\item 
+\Hypertarget{random__trackgen_8py_a0726f3cb3017bc7a0e22ffb30e53eefa}\label{random__trackgen_8py_a0726f3cb3017bc7a0e22ffb30e53eefa} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+int}
+\item 
+\Hypertarget{random__trackgen_8py_aa72b8a2db3b63f9ed42cb896235fb4ac}\label{random__trackgen_8py_aa72b8a2db3b63f9ed42cb896235fb4ac} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+default}
+\item 
+\Hypertarget{random__trackgen_8py_acfe582339d8be9075a6160eae33e10aa}\label{random__trackgen_8py_acfe582339d8be9075a6160eae33e10aa} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+help}
+\item 
+\Hypertarget{random__trackgen_8py_adaa99201e805097500ed2491766a2938}\label{random__trackgen_8py_adaa99201e805097500ed2491766a2938} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+args} = parser.\+parse\+\_\+args()
+\item 
+\doxymbox{\hyperlink{random__trackgen_8py_a3457cee9b138a50f02af8eb4e071173e}{f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+NUM\+\_\+\+MAPS}} = args.\+num\+\_\+maps
+\begin{DoxyCompactList}\small\item\em Number of track generation attempts (from --num\+\_\+maps). \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{random__trackgen_8py_a2fe20a3d4b091cfa0c3eb867adc992ce}{f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+WIDTH}} = 10.\+0
+\begin{DoxyCompactList}\small\item\em Distance from the centreline to each wall, in track units. \end{DoxyCompactList}\item 
+\Hypertarget{random__trackgen_8py_a8f9627599e2526027f715cd162b7155f}\label{random__trackgen_8py_a8f9627599e2526027f715cd162b7155f} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+track}
+\item 
+\Hypertarget{random__trackgen_8py_a55ebef782ee46bdd7cd03aa6a404cd02}\label{random__trackgen_8py_a55ebef782ee46bdd7cd03aa6a404cd02} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+track\+\_\+int}
+\item 
+\Hypertarget{random__trackgen_8py_a492ff0fd0e3e2e4b53c804fe4656e19f}\label{random__trackgen_8py_a492ff0fd0e3e2e4b53c804fe4656e19f} 
+{\bfseries f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+track\+\_\+ext}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generate random closed race tracks as gym maps (image + YAML) plus a centreline CSV. 
+
+Adapted from the track generator in Open\+AI gym\textquotesingle{}s Car\+Racing-\/v0.\hypertarget{random__trackgen_8py_random_trackgen_usage}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{random__trackgen_8py_random_trackgen_usage}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ random\_trackgen.py\ -\/-\/seed\ 123\ -\/-\/num\_maps\ 5}
+
+\end{DoxyCode}
+ Output goes into folders created in the current directory:
+\begin{DoxyItemize}
+\item {\ttfamily maps/\+map\+N.\+png} and {\ttfamily maps/\+map\+N.\+pgm}: the track walls as a black-\/on-\/white image.
+\item {\ttfamily maps/\+map\+N.\+yaml}: map metadata (resolution 0.\+0625 m/\+pixel, origin).
+\item {\ttfamily centerline/\+map\+N.\+csv}: centreline waypoints "{}x, y"{} in metres, starting at (0, 0).
+\end{DoxyItemize}\hypertarget{random__trackgen_8py_random_trackgen_algorithm}{}\doxysubsection{\texorpdfstring{How a track is made (create\+\_\+track())}{How a track is made (create\+\_\+track())}}\label{random__trackgen_8py_random_trackgen_algorithm}
+
+\begin{DoxyEnumerate}
+\item Place 16 checkpoints around a circle, each at a random angle within its 1/\+16 sector and a random radius.
+\item "{}\+Drive"{} a point around them: at each step it turns toward the next checkpoint, with a limited turn rate, then moves forward a fixed distance. Every step is recorded.
+\item Cut out exactly one lap: the section between two consecutive passes through the start angle. If its two ends don\textquotesingle{}t meet up cleanly, give up (the caller retries).
+\item Offset the centreline by +/\+-\/\+WIDTH with shapely to get the two walls.
+\end{DoxyEnumerate}
+
+convert\+\_\+track() then plots the walls with matplotlib and writes the image, YAML and centreline files.
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{random__trackgen_8py_doc-func-members}
+\Hypertarget{random__trackgen_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{random__trackgen_8py_abf0918ea0a50ea69f494a71d97483c8f}\index{random\_trackgen.py@{random\_trackgen.py}!convert\_track@{convert\_track}}
+\index{convert\_track@{convert\_track}!random\_trackgen.py@{random\_trackgen.py}}
+\doxysubsubsection{\texorpdfstring{convert\_track()}{convert\_track()}}
+{\footnotesize\ttfamily \label{random__trackgen_8py_abf0918ea0a50ea69f494a71d97483c8f} 
+convert\+\_\+track (\begin{DoxyParamCaption}\item[{}]{track}{, }\item[{}]{track\+\_\+int}{, }\item[{}]{track\+\_\+ext}{, }\item[{}]{iter}{}\end{DoxyParamCaption})}
+
+
+
+Render a generated track to a gym map and save its files (see the file overview for the outputs). 
+
+The two walls are drawn as thick black lines on a white 20 x 20 inch matplotlib figure, saved at 80 dpi (1600 x 1600 pixels), and converted to grayscale with Open\+CV.
+
+The world frame is chosen so the first centreline point is at (0, 0). Pixel positions are measured with matplotlib\textquotesingle{}s trans\+Data, which works at the figure\textquotesingle{}s own 100 dpi, and scaled by 0.\+05 m per pixel. At the saved 80 dpi that is 0.\+05 \texorpdfstring{$\ast$}{*} 100 / 80 = 0.\+0625 m per pixel, which is the resolution written to the YAML.
+
+
+\begin{DoxyParams}{Parameters}
+{\em track} & np.\+ndarray of shape (n, 2): centreline from create\+\_\+track(). \\
+\hline
+{\em track\+\_\+int} & np.\+ndarray: first wall from create\+\_\+track(). \\
+\hline
+{\em track\+\_\+ext} & np.\+ndarray: second wall from create\+\_\+track(). \\
+\hline
+{\em iter} & Map number, used in the file names (mapN.\texorpdfstring{$\ast$}{*}).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The 0.\+05 / 0.\+0625 relationship relies on matplotlib\textquotesingle{}s default figure dpi of 100. A matplotlibrc that changes it would misalign the centreline and the image. 
+
+The "{}map size"{} printed is the figure size at 100 dpi, not the saved image size. 
+\end{DoxyNote}
+\Hypertarget{random__trackgen_8py_ac1a0df39c10e33ddb477d9020a8a666f}\index{random\_trackgen.py@{random\_trackgen.py}!create\_track@{create\_track}}
+\index{create\_track@{create\_track}!random\_trackgen.py@{random\_trackgen.py}}
+\doxysubsubsection{\texorpdfstring{create\_track()}{create\_track()}}
+{\footnotesize\ttfamily \label{random__trackgen_8py_ac1a0df39c10e33ddb477d9020a8a666f} 
+create\+\_\+track (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Generate one random closed track. 
+
+See the file overview for the algorithm. Track units are arbitrary until convert\+\_\+track() fixes the scale.
+
+\begin{DoxyReturn}{Returns}
+Either a tuple (track\+\_\+xy, wall\+\_\+a, wall\+\_\+b) of np.\+ndarrays of (x, y) points:
+\begin{DoxyItemize}
+\item {\ttfamily track\+\_\+xy:} the centreline, shape (n, 2).
+\item {\ttfamily wall\+\_\+a:} the centreline grown outward by WIDTH (outer wall).
+\item {\ttfamily wall\+\_\+b:} the centreline shrunk inward by WIDTH (inner wall). Or False if this attempt failed to make a clean closed loop.
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The returned walls are named {\ttfamily track\+\_\+xy\+\_\+offset\+\_\+in} / {\ttfamily \+\_\+out} in the code, but buffer(+WIDTH) is actually the {\itshape outer} wall and buffer(-\/WIDTH) the inner one. 
+\end{DoxyNote}
+
+
+\label{random__trackgen_8py_doc-var-members}
+\Hypertarget{random__trackgen_8py_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{random__trackgen_8py_a3457cee9b138a50f02af8eb4e071173e}\index{random\_trackgen.py@{random\_trackgen.py}!NUM\_MAPS@{NUM\_MAPS}}
+\index{NUM\_MAPS@{NUM\_MAPS}!random\_trackgen.py@{random\_trackgen.py}}
+\doxysubsubsection{\texorpdfstring{NUM\_MAPS}{NUM\_MAPS}}
+{\footnotesize\ttfamily \label{random__trackgen_8py_a3457cee9b138a50f02af8eb4e071173e} 
+f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+NUM\+\_\+\+MAPS = args.\+num\+\_\+maps}
+
+
+
+Number of track generation attempts (from --num\+\_\+maps). 
+
+Failed attempts are skipped, not retried. \Hypertarget{random__trackgen_8py_a2fe20a3d4b091cfa0c3eb867adc992ce}\index{random\_trackgen.py@{random\_trackgen.py}!WIDTH@{WIDTH}}
+\index{WIDTH@{WIDTH}!random\_trackgen.py@{random\_trackgen.py}}
+\doxysubsubsection{\texorpdfstring{WIDTH}{WIDTH}}
+{\footnotesize\ttfamily \label{random__trackgen_8py_a2fe20a3d4b091cfa0c3eb867adc992ce} 
+float f110\+\_\+gym.\+unittest.\+random\+\_\+trackgen.\+WIDTH = 10.\+0}
+
+
+
+Distance from the centreline to each wall, in track units. 
+
+The track is 2 \texorpdfstring{$\ast$}{*} WIDTH wide. 

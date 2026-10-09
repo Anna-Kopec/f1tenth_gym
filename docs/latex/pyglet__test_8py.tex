@@ -1,0 +1,178 @@
+\doxysection{f110\+\_\+gym/\+unittest/\+pyglet\+\_\+test.py File Reference}
+\hypertarget{pyglet__test_8py}{}\label{pyglet__test_8py}\index{f110\_gym/unittest/pyglet\_test.py@{f110\_gym/unittest/pyglet\_test.py}}
+
+
+Standalone experiment: draw a map\textquotesingle{}s obstacle pixels as points in a pyglet window.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera}}
+\begin{DoxyCompactList}\small\item\em A simple 2D camera: a scroll offset and a zoom factor, applied to the window\textquotesingle{}s view matrix. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{Camera} variant where (0, 0) is the centre of the window instead of the bottom-\/left corner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{pyglet__test_8py_a5f426db48c67df9c0d82f4050a34f56e}\label{pyglet__test_8py_a5f426db48c67df9c0d82f4050a34f56e} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+on\+\_\+resize} (width, height)
+\begin{DoxyCompactList}\small\item\em Window resize handler: set up a 3D perspective projection (60 degree field of view). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{pyglet__test_8py_a97119cd5dfb56eb71f47c587b798f474}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+loop}} (dt)
+\begin{DoxyCompactList}\small\item\em Scheduled every frame: print the current frame rate. \end{DoxyCompactList}\item 
+\Hypertarget{pyglet__test_8py_a62938d95648ce68f5734723e5e4e6d07}\label{pyglet__test_8py_a62938d95648ce68f5734723e5e4e6d07} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+on\+\_\+draw} ()
+\begin{DoxyCompactList}\small\item\em Draw handler: clear the window and draw the map points in pink, inside the camera. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{pyglet__test_8py_a3d69f486cb21f39a06dad8857f9b7d50}\label{pyglet__test_8py_a3d69f486cb21f39a06dad8857f9b7d50} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+parser} = argparse.\+Argument\+Parser()
+\item 
+\Hypertarget{pyglet__test_8py_a981fb3f820ad2e7741085fe4f5dea096}\label{pyglet__test_8py_a981fb3f820ad2e7741085fe4f5dea096} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+type}
+\item 
+\Hypertarget{pyglet__test_8py_a2005fab57ddd5da6ff3394c03dc13cd5}\label{pyglet__test_8py_a2005fab57ddd5da6ff3394c03dc13cd5} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+str}
+\item 
+\Hypertarget{pyglet__test_8py_acc7e94317a1b95945b9baf3623660350}\label{pyglet__test_8py_acc7e94317a1b95945b9baf3623660350} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+required}
+\item 
+\Hypertarget{pyglet__test_8py_a41b4d9d2099f3bffde0a78849b8f6e9b}\label{pyglet__test_8py_a41b4d9d2099f3bffde0a78849b8f6e9b} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+True}
+\item 
+\Hypertarget{pyglet__test_8py_af457772f551e51c84059b1619cac6f6f}\label{pyglet__test_8py_af457772f551e51c84059b1619cac6f6f} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+help}
+\item 
+\Hypertarget{pyglet__test_8py_a45eb1549d05c60fdad09c712bda5a759}\label{pyglet__test_8py_a45eb1549d05c60fdad09c712bda5a759} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+args} = parser.\+parse\+\_\+args()
+\item 
+\Hypertarget{pyglet__test_8py_a3174957b3d9e1f51302c419ae772a7d7}\label{pyglet__test_8py_a3174957b3d9e1f51302c419ae772a7d7} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+metada} = yaml.\+safe\+\_\+load(yaml\+\_\+stream)
+\item 
+\Hypertarget{pyglet__test_8py_a087834fb591571e3b9590537ab43f2a4}\label{pyglet__test_8py_a087834fb591571e3b9590537ab43f2a4} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+resolution} = map\+\_\+metada\+[\textquotesingle{}resolution\textquotesingle{}]
+\item 
+\Hypertarget{pyglet__test_8py_a7ccec01d1694c9ce188a100eae74a9eb}\label{pyglet__test_8py_a7ccec01d1694c9ce188a100eae74a9eb} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+origin} = map\+\_\+metada\+[\textquotesingle{}origin\textquotesingle{}]
+\item 
+\Hypertarget{pyglet__test_8py_a489a47127c8b26ff6a6c2f32b22b7c4e}\label{pyglet__test_8py_a489a47127c8b26ff6a6c2f32b22b7c4e} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+origin\+\_\+x} = origin\+[0]
+\item 
+\Hypertarget{pyglet__test_8py_a8ba1eb7ca846ae091a7a0208bab2d8e5}\label{pyglet__test_8py_a8ba1eb7ca846ae091a7a0208bab2d8e5} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+origin\+\_\+y} = origin\+[1]
+\item 
+\Hypertarget{pyglet__test_8py_afae1d6e5e857392c773fb99b539676bc}\label{pyglet__test_8py_afae1d6e5e857392c773fb99b539676bc} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+img} = np.\+array(Image.\+open(args.\+map\+\_\+path + args.\+map\+\_\+ext).transpose(Image.\+FLIP\+\_\+\+TOP\+\_\+\+BOTTOM)).astype(np.\+float64)
+\item 
+\Hypertarget{pyglet__test_8py_a481a4c3d659a7730333145e5fe7c4367}\label{pyglet__test_8py_a481a4c3d659a7730333145e5fe7c4367} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+height} = map\+\_\+img.\+shape\+[0]
+\item 
+\Hypertarget{pyglet__test_8py_a2e254b24420bdda87cd30f367b65552d}\label{pyglet__test_8py_a2e254b24420bdda87cd30f367b65552d} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+width} = map\+\_\+img.\+shape\+[1]
+\item 
+\Hypertarget{pyglet__test_8py_a4c371730daa6fa2b932e0d6bdc28e700}\label{pyglet__test_8py_a4c371730daa6fa2b932e0d6bdc28e700} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+range\+\_\+x} = np.\+arange(map\+\_\+width)
+\item 
+\Hypertarget{pyglet__test_8py_a85be62a46ea83891f58f723d84164389}\label{pyglet__test_8py_a85be62a46ea83891f58f723d84164389} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+range\+\_\+y} = np.\+arange(map\+\_\+height)
+\item 
+\Hypertarget{pyglet__test_8py_a454e00b86957ad0ad6d7e8ac86d95040}\label{pyglet__test_8py_a454e00b86957ad0ad6d7e8ac86d95040} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+x} = (map\+\_\+x \texorpdfstring{$\ast$}{*} map\+\_\+resolution + origin\+\_\+x).flatten()
+\item 
+\Hypertarget{pyglet__test_8py_a60c456037437e2b33defa90cac5b2553}\label{pyglet__test_8py_a60c456037437e2b33defa90cac5b2553} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+y} = (map\+\_\+y \texorpdfstring{$\ast$}{*} map\+\_\+resolution + origin\+\_\+y).flatten()
+\item 
+\Hypertarget{pyglet__test_8py_a3186da83d330b11ad5d0f0adfc57dab7}\label{pyglet__test_8py_a3186da83d330b11ad5d0f0adfc57dab7} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+z} = np.\+zeros(map\+\_\+y.\+shape)
+\item 
+\Hypertarget{pyglet__test_8py_aa4a56a9e36d04e7211af58fc468903ba}\label{pyglet__test_8py_aa4a56a9e36d04e7211af58fc468903ba} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+coords} = np.\+vstack((map\+\_\+x, map\+\_\+y, map\+\_\+z))
+\item 
+\Hypertarget{pyglet__test_8py_a83cf143d5d4d4fbe4aa56cf8c6699c78}\label{pyglet__test_8py_a83cf143d5d4d4fbe4aa56cf8c6699c78} 
+float {\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+mask} = 0.\+0
+\item 
+\Hypertarget{pyglet__test_8py_a53860be358d7cdfc130c75ca444c9939}\label{pyglet__test_8py_a53860be358d7cdfc130c75ca444c9939} 
+float {\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+mask\+\_\+flat} = map\+\_\+mask.\+flatten()
+\item 
+\Hypertarget{pyglet__test_8py_a8c5958c53e522bb0dc390ad0421a6057}\label{pyglet__test_8py_a8c5958c53e522bb0dc390ad0421a6057} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+map\+\_\+points} = map\+\_\+coords\+[:\+, map\+\_\+mask\+\_\+flat]\+.T
+\begin{DoxyCompactList}\small\item\em Obstacle points in world metres, shape (n, 3). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{pyglet__test_8py_a61b9b5ee2dc42c296dc48e8ddaf5a173}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+config}}
+\item 
+\Hypertarget{pyglet__test_8py_abbdafa8876f8f50a0f98b0ccf20e58df}\label{pyglet__test_8py_abbdafa8876f8f50a0f98b0ccf20e58df} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+window} = window.\+Window(resizable=True, config=config)
+\item 
+\Hypertarget{pyglet__test_8py_a1546787b3b7976676236a790f8d70c5c}\label{pyglet__test_8py_a1546787b3b7976676236a790f8d70c5c} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+cam} = \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{Camera}}(window)
+\begin{DoxyCompactList}\small\item\em 2D camera wrapped around the draw call. \end{DoxyCompactList}\item 
+\Hypertarget{pyglet__test_8py_a3405d8b8ab8878375ce14241e071c6fd}\label{pyglet__test_8py_a3405d8b8ab8878375ce14241e071c6fd} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+batch} = graphics.\+Batch()
+\begin{DoxyCompactList}\small\item\em pyglet Batch holding one point per obstacle pixel. \end{DoxyCompactList}\item 
+\Hypertarget{pyglet__test_8py_a88390b60af94b8cc39c9c11c7471bea5}\label{pyglet__test_8py_a88390b60af94b8cc39c9c11c7471bea5} 
+list {\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+points} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Vertex lists for each point, kept so they could be updated later. \end{DoxyCompactList}\item 
+\Hypertarget{pyglet__test_8py_a3710a56d6d768172240edd7f43b56d90}\label{pyglet__test_8py_a3710a56d6d768172240edd7f43b56d90} 
+{\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+particle} = batch.\+add(1, GL\+\_\+\+POINTS, None, (\textquotesingle{}v3f/stream\textquotesingle{}, \+[\doxymbox{\hyperlink{pyglet__test_8py_a8c5958c53e522bb0dc390ad0421a6057}{map\+\_\+points}}\+[i, 0]\+, \doxymbox{\hyperlink{pyglet__test_8py_a8c5958c53e522bb0dc390ad0421a6057}{map\+\_\+points}}\+[i, 1]\+, \doxymbox{\hyperlink{pyglet__test_8py_a8c5958c53e522bb0dc390ad0421a6057}{map\+\_\+points}}\+[i, 2]\+]\+))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Standalone experiment: draw a map\textquotesingle{}s obstacle pixels as points in a pyglet window. 
+
+Loads a map (YAML + image) the same way \doxylink{rendering_8py}{rendering.\+py}: Env\+Renderer.\+update\+\_\+map() does, converts every pure-\/black pixel to a world-\/coordinate point, and draws them with a 3D perspective projection. It also contains two small 2D camera classes (Camera, Centered\+Camera).
+
+Usage: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ pyglet\_test.py\ -\/-\/map\_path\ ../envs/maps/vegas\ -\/-\/map\_ext\ .png}
+
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+The Camera classes use {\ttfamily window.\+view}, which only exists in pyglet 2.\+x, while the drawing code uses the pyglet 1.\+x batch.\+add() format. setup.\+py pins pyglet \texorpdfstring{$<$}{<} 1.\+5, so the script is unlikely to run unchanged with either version. 
+\end{DoxyNote}
+
+
+\label{pyglet__test_8py_doc-func-members}
+\Hypertarget{pyglet__test_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pyglet__test_8py_a97119cd5dfb56eb71f47c587b798f474}\index{pyglet\_test.py@{pyglet\_test.py}!loop@{loop}}
+\index{loop@{loop}!pyglet\_test.py@{pyglet\_test.py}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{pyglet__test_8py_a97119cd5dfb56eb71f47c587b798f474} 
+loop (\begin{DoxyParamCaption}\item[{}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Scheduled every frame: print the current frame rate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Time since the last call (s), supplied by pyglet.\+clock. \\
+\hline
+\end{DoxyParams}
+
+
+\label{pyglet__test_8py_doc-var-members}
+\Hypertarget{pyglet__test_8py_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{pyglet__test_8py_a61b9b5ee2dc42c296dc48e8ddaf5a173}\index{pyglet\_test.py@{pyglet\_test.py}!config@{config}}
+\index{config@{config}!pyglet\_test.py@{pyglet\_test.py}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{pyglet__test_8py_a61b9b5ee2dc42c296dc48e8ddaf5a173} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+config}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ Config(sample\_buffers=1,\ samples=4,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ depth\_size=16,\ double\_buffer=\textcolor{keyword}{True},\ )}
+
+\end{DoxyCode}

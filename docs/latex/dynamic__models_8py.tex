@@ -1,0 +1,332 @@
+\doxysection{f110\+\_\+gym/\+envs/\+dynamic\+\_\+models.py File Reference}
+\hypertarget{dynamic__models_8py}{}\label{dynamic__models_8py}\index{f110\_gym/envs/dynamic\_models.py@{f110\_gym/envs/dynamic\_models.py}}
+
+
+Vehicle dynamics for the F1\+TENTH gym: single-\/track (bicycle) models, input constraints, and the low-\/level speed / steering controller.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1dynamic__models_1_1_dynamics_test}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+Dynamics\+Test}}
+\begin{DoxyCompactList}\small\item\em Unit tests comparing the KS and ST models against Common\+Road reference values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{dynamic__models_8py_affb5031583970439b2cd192493eb848d}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+accl\+\_\+constraints}} (vel, accl, v\+\_\+switch, a\+\_\+max, v\+\_\+min, v\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Clamp a requested longitudinal acceleration to what the vehicle can do. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_a97dd29ea6cdf3eec8df97a95991c651e}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+steering\+\_\+constraint}} (steering\+\_\+angle, steering\+\_\+velocity, s\+\_\+min, s\+\_\+max, sv\+\_\+min, sv\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Clamp a requested steering angle velocity to the steering limits. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_add65560e7ce9f0eb27d2bacf12ec95ef}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+vehicle\+\_\+dynamics\+\_\+ks}} (x, u\+\_\+init, mu, C\+\_\+\+Sf, C\+\_\+\+Sr, lf, lr, h, m, I, s\+\_\+min, s\+\_\+max, sv\+\_\+min, sv\+\_\+max, v\+\_\+switch, a\+\_\+max, v\+\_\+min, v\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Kinematic single-\/track (bicycle) model: state derivative f(x, u). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_a8e88ec80a03380998d6056e2207ea7ac}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+vehicle\+\_\+dynamics\+\_\+st}} (x, u\+\_\+init, mu, C\+\_\+\+Sf, C\+\_\+\+Sr, lf, lr, h, m, I, s\+\_\+min, s\+\_\+max, sv\+\_\+min, sv\+\_\+max, v\+\_\+switch, a\+\_\+max, v\+\_\+min, v\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Dynamic single-\/track (bicycle) model with tyre slip: state derivative f(x, u). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_a0be97eae93fd6dc5a242b6e0e4572794}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+pid}} (speed, steer, current\+\_\+speed, current\+\_\+steer, max\+\_\+sv, max\+\_\+a, max\+\_\+v, min\+\_\+v)
+\begin{DoxyCompactList}\small\item\em Low-\/level controller: desired (speed, steering angle) -\/\texorpdfstring{$>$}{>} (acceleration, steering velocity). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_a5b0fbf2816bc0e26d07089aefdd41d9e}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+func\+\_\+\+KS}} (x, t, u, mu, C\+\_\+\+Sf, C\+\_\+\+Sr, lf, lr, h, m, I, s\+\_\+min, s\+\_\+max, sv\+\_\+min, sv\+\_\+max, v\+\_\+switch, a\+\_\+max, v\+\_\+min, v\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Adapter for scipy.\+integrate.\+odeint: wraps \doxylink{dynamic__models_8py_add65560e7ce9f0eb27d2bacf12ec95ef}{vehicle\+\_\+dynamics\+\_\+ks()} with the (x, t, ...) signature odeint expects. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{dynamic__models_8py_a34776404c7ff2e1f7ce7d3bc45153017}{f110\+\_\+gym.\+envs.\+dynamic\+\_\+models.\+func\+\_\+\+ST}} (x, t, u, mu, C\+\_\+\+Sf, C\+\_\+\+Sr, lf, lr, h, m, I, s\+\_\+min, s\+\_\+max, sv\+\_\+min, sv\+\_\+max, v\+\_\+switch, a\+\_\+max, v\+\_\+min, v\+\_\+max)
+\begin{DoxyCompactList}\small\item\em Adapter for scipy.\+integrate.\+odeint: wraps \doxylink{dynamic__models_8py_a8e88ec80a03380998d6056e2207ea7ac}{vehicle\+\_\+dynamics\+\_\+st()} with the (x, t, ...) signature odeint expects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Vehicle dynamics for the F1\+TENTH gym: single-\/track (bicycle) models, input constraints, and the low-\/level speed / steering controller. 
+
+Follows the Common\+Road single-\/track vehicle models. Original implementation: \href{https://gitlab.lrz.de/tum-cps/commonroad-vehicle-models/}{\texttt{https:\+/\+/\+gitlab.\+lrz.\+de/\+tum-\/cps/\+commonroad-\/vehicle-\/models/}}\hypertarget{dynamic__models_8py_dynamic_models_models}{}\doxysubsection{\texorpdfstring{Models in this file}{Models in this file}}\label{dynamic__models_8py_dynamic_models_models}
+
+\begin{DoxyItemize}
+\item {\bfseries{Kinematic single-\/track (KS)}}, vehicle\+\_\+dynamics\+\_\+ks(): a 5-\/state bicycle model with no tyre slip. The wheels go exactly where they point. Accurate at low speed, wrong when cornering hard.
+\item {\bfseries{Dynamic single-\/track (ST)}}, vehicle\+\_\+dynamics\+\_\+st(): a 7-\/state bicycle model with a linear tyre model, slip angle and yaw dynamics, including load transfer from longitudinal acceleration. Below 0.\+5 m/\+s it switches to the KS equations, because the ST equations divide by the speed.
+\end{DoxyItemize}
+
+Both functions return the state {\itshape derivative} f(x, u). They do not step the state themselves; an integrator (Euler or RK4 in base\+\_\+classes.\+Race\+Car.\+update\+\_\+pose) does that.\hypertarget{dynamic__models_8py_dynamic_models_inputs}{}\doxysubsection{\texorpdfstring{Control inputs}{Control inputs}}\label{dynamic__models_8py_dynamic_models_inputs}
+The models take u = \+[steering angle velocity, longitudinal acceleration]. The gym\textquotesingle{}s users command a {\itshape desired steering angle and speed} instead, so pid() converts between the two. Every model call first passes u through steering\+\_\+constraint() and accl\+\_\+constraints() to enforce the physical limits.\hypertarget{dynamic__models_8py_dynamic_models_params}{}\doxysubsection{\texorpdfstring{Vehicle parameters (shared by every function)}{Vehicle parameters (shared by every function)}}\label{dynamic__models_8py_dynamic_models_params}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Name  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Meaning  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Units  \\
+mu  &tyre-\/road friction coefficient  &-\/  \\
+C\+\_\+\+Sf  &front cornering stiffness coefficient (per unit of normal load)  &1/\+rad  \\
+C\+\_\+\+Sr  &rear cornering stiffness coefficient  &1/\+rad  \\
+lf, lr  &distance from centre of gravity to front / rear axle  &m  \\
+h  &height of the centre of gravity  &m  \\
+m  &vehicle mass  &kg  \\
+I  &yaw moment of inertia about the z axis  &kg m\texorpdfstring{$^\wedge$}{\string^}2  \\
+s\+\_\+min/\+max  &steering angle limits  &rad  \\
+sv\+\_\+min/\+max  &steering angle velocity limits  &rad/\+s  \\
+v\+\_\+switch  &speed above which acceleration is limited by motor power  &m/\+s  \\
+a\+\_\+max  &maximum longitudinal acceleration magnitude  &m/\+s\texorpdfstring{$^\wedge$}{\string^}2  \\
+v\+\_\+min/\+max  &speed limits (v\+\_\+min is negative, for reversing)  &m/\+s  \\
+\end{DoxyTable}
+
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{dynamic__models_8py_doc-func-members}
+\Hypertarget{dynamic__models_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{dynamic__models_8py_affb5031583970439b2cd192493eb848d}\index{dynamic\_models.py@{dynamic\_models.py}!accl\_constraints@{accl\_constraints}}
+\index{accl\_constraints@{accl\_constraints}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{accl\_constraints()}{accl\_constraints()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_affb5031583970439b2cd192493eb848d} 
+accl\+\_\+constraints (\begin{DoxyParamCaption}\item[{}]{vel}{, }\item[{}]{accl}{, }\item[{}]{v\+\_\+switch}{, }\item[{}]{a\+\_\+max}{, }\item[{}]{v\+\_\+min}{, }\item[{}]{v\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Clamp a requested longitudinal acceleration to what the vehicle can do. 
+
+Three limits are applied:
+\begin{DoxyItemize}
+\item {\bfseries{Power limit:}} above {\ttfamily v\+\_\+switch}, the maximum forward acceleration falls off as a\+\_\+max \texorpdfstring{$\ast$}{*} v\+\_\+switch / vel. This models a motor with constant power, where force (and so acceleration) is proportional to 1/\+speed.
+\item {\bfseries{Speed limits:}} once the car is at {\ttfamily v\+\_\+min} it cannot accelerate further negative, and once at {\ttfamily v\+\_\+max} it cannot accelerate further positive.
+\item {\bfseries{Braking limit:}} deceleration is capped at -\/a\+\_\+max.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em vel} & Current longitudinal velocity (m/\+s). \\
+\hline
+{\em accl} & Requested (unconstrained) acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2). \\
+\hline
+{\em v\+\_\+switch} & Switching velocity: above it, acceleration is power-\/limited (m/\+s). \\
+\hline
+{\em a\+\_\+max} & Maximum acceleration magnitude (m/\+s\texorpdfstring{$^\wedge$}{\string^}2). \\
+\hline
+{\em v\+\_\+min} & Minimum allowed velocity (m/\+s, negative for reverse). \\
+\hline
+{\em v\+\_\+max} & Maximum allowed velocity (m/\+s). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The constrained acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2). 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_a5b0fbf2816bc0e26d07089aefdd41d9e}\index{dynamic\_models.py@{dynamic\_models.py}!func\_KS@{func\_KS}}
+\index{func\_KS@{func\_KS}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{func\_KS()}{func\_KS()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_a5b0fbf2816bc0e26d07089aefdd41d9e} 
+func\+\_\+\+KS (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{t}{, }\item[{}]{u}{, }\item[{}]{mu}{, }\item[{}]{C\+\_\+\+Sf}{, }\item[{}]{C\+\_\+\+Sr}{, }\item[{}]{lf}{, }\item[{}]{lr}{, }\item[{}]{h}{, }\item[{}]{m}{, }\item[{}]{I}{, }\item[{}]{s\+\_\+min}{, }\item[{}]{s\+\_\+max}{, }\item[{}]{sv\+\_\+min}{, }\item[{}]{sv\+\_\+max}{, }\item[{}]{v\+\_\+switch}{, }\item[{}]{a\+\_\+max}{, }\item[{}]{v\+\_\+min}{, }\item[{}]{v\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Adapter for scipy.\+integrate.\+odeint: wraps vehicle\+\_\+dynamics\+\_\+ks() with the (x, t, ...) signature odeint expects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & State, as in vehicle\+\_\+dynamics\+\_\+ks(). \\
+\hline
+{\em t} & Time (unused; the model does not depend on time). \\
+\hline
+{\em u} & Input, as in vehicle\+\_\+dynamics\+\_\+ks(). \\
+\hline
+{\em mu,C\+\_\+\+Sf,C\+\_\+\+Sr,lf,lr,h,m,I,s\+\_\+min,s\+\_\+max,sv\+\_\+min,sv\+\_\+max,v\+\_\+switch,a\+\_\+max,v\+\_\+min,v\+\_\+max} & Vehicle parameters, passed through unchanged. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state derivative from vehicle\+\_\+dynamics\+\_\+ks(). 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_a34776404c7ff2e1f7ce7d3bc45153017}\index{dynamic\_models.py@{dynamic\_models.py}!func\_ST@{func\_ST}}
+\index{func\_ST@{func\_ST}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{func\_ST()}{func\_ST()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_a34776404c7ff2e1f7ce7d3bc45153017} 
+func\+\_\+\+ST (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{t}{, }\item[{}]{u}{, }\item[{}]{mu}{, }\item[{}]{C\+\_\+\+Sf}{, }\item[{}]{C\+\_\+\+Sr}{, }\item[{}]{lf}{, }\item[{}]{lr}{, }\item[{}]{h}{, }\item[{}]{m}{, }\item[{}]{I}{, }\item[{}]{s\+\_\+min}{, }\item[{}]{s\+\_\+max}{, }\item[{}]{sv\+\_\+min}{, }\item[{}]{sv\+\_\+max}{, }\item[{}]{v\+\_\+switch}{, }\item[{}]{a\+\_\+max}{, }\item[{}]{v\+\_\+min}{, }\item[{}]{v\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Adapter for scipy.\+integrate.\+odeint: wraps vehicle\+\_\+dynamics\+\_\+st() with the (x, t, ...) signature odeint expects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & State, as in vehicle\+\_\+dynamics\+\_\+st(). \\
+\hline
+{\em t} & Time (unused; the model does not depend on time). \\
+\hline
+{\em u} & Input, as in vehicle\+\_\+dynamics\+\_\+st(). \\
+\hline
+{\em mu,C\+\_\+\+Sf,C\+\_\+\+Sr,lf,lr,h,m,I,s\+\_\+min,s\+\_\+max,sv\+\_\+min,sv\+\_\+max,v\+\_\+switch,a\+\_\+max,v\+\_\+min,v\+\_\+max} & Vehicle parameters, passed through unchanged. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state derivative from vehicle\+\_\+dynamics\+\_\+st(). 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_a0be97eae93fd6dc5a242b6e0e4572794}\index{dynamic\_models.py@{dynamic\_models.py}!pid@{pid}}
+\index{pid@{pid}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{pid()}{pid()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_a0be97eae93fd6dc5a242b6e0e4572794} 
+pid (\begin{DoxyParamCaption}\item[{}]{speed}{, }\item[{}]{steer}{, }\item[{}]{current\+\_\+speed}{, }\item[{}]{current\+\_\+steer}{, }\item[{}]{max\+\_\+sv}{, }\item[{}]{max\+\_\+a}{, }\item[{}]{max\+\_\+v}{, }\item[{}]{min\+\_\+v}{}\end{DoxyParamCaption})}
+
+
+
+Low-\/level controller: desired (speed, steering angle) -\/\texorpdfstring{$>$}{>} (acceleration, steering velocity). 
+
+This is what lets the gym take "{}go this fast, steer this much"{} as its action.
+
+{\bfseries{Steering (bang-\/bang):}} if the steering angle is off target by more than 1e-\/4 rad, steer toward the target at full rate (+/\+-\/ {\ttfamily max\+\_\+sv}). Otherwise hold still. The angle can overshoot by up to max\+\_\+sv \texorpdfstring{$\ast$}{*} dt in one step.
+
+{\bfseries{Speed (proportional only, no integral or derivative term):}} acceleration = kp \texorpdfstring{$\ast$}{*} (target speed -\/ current speed). The gain kp depends on the situation:
+
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Current speed  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Speed error  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Situation  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}kp  \\
+forward (v \texorpdfstring{$>$}{>} 0)  &positive  &speeding up  &10 \texorpdfstring{$\ast$}{*} max\+\_\+a / max\+\_\+v  \\
+forward (v \texorpdfstring{$>$}{>} 0)  &zero or negative  &braking  &10 \texorpdfstring{$\ast$}{*} max\+\_\+a / (-\/min\+\_\+v)  \\
+v \texorpdfstring{$<$}{<}= 0  &positive  &braking  &2 \texorpdfstring{$\ast$}{*} max\+\_\+a / max\+\_\+v  \\
+v \texorpdfstring{$<$}{<}= 0  &zero or negative  &speeding up  &2 \texorpdfstring{$\ast$}{*} max\+\_\+a / (-\/min\+\_\+v)  \\
+\end{DoxyTable}
+
+
+A car at a standstill (v == 0) uses the v \texorpdfstring{$<$}{<}= 0 rows, so pulling away from rest uses the gentler gain of 2 rather than 10.
+
+Outputs are not clamped here. accl\+\_\+constraints() and steering\+\_\+constraint() clamp them inside the dynamics model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & Desired longitudinal speed (m/\+s). \\
+\hline
+{\em steer} & Desired steering angle (rad). \\
+\hline
+{\em current\+\_\+speed} & Current longitudinal speed (m/\+s). \\
+\hline
+{\em current\+\_\+steer} & Current steering angle (rad). \\
+\hline
+{\em max\+\_\+sv} & Maximum steering velocity (rad/\+s). \\
+\hline
+{\em max\+\_\+a} & Maximum acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2). \\
+\hline
+{\em max\+\_\+v} & Maximum speed (m/\+s). \\
+\hline
+{\em min\+\_\+v} & Minimum speed (m/\+s, negative). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (accl, sv): acceleration command (m/\+s\texorpdfstring{$^\wedge$}{\string^}2) and steering velocity command (rad/\+s). 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_a97dd29ea6cdf3eec8df97a95991c651e}\index{dynamic\_models.py@{dynamic\_models.py}!steering\_constraint@{steering\_constraint}}
+\index{steering\_constraint@{steering\_constraint}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{steering\_constraint()}{steering\_constraint()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_a97dd29ea6cdf3eec8df97a95991c651e} 
+steering\+\_\+constraint (\begin{DoxyParamCaption}\item[{}]{steering\+\_\+angle}{, }\item[{}]{steering\+\_\+velocity}{, }\item[{}]{s\+\_\+min}{, }\item[{}]{s\+\_\+max}{, }\item[{}]{sv\+\_\+min}{, }\item[{}]{sv\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Clamp a requested steering angle velocity to the steering limits. 
+
+
+\begin{DoxyItemize}
+\item If the wheels are already at a lock ({\ttfamily s\+\_\+min} or {\ttfamily s\+\_\+max}) and the request would turn them further, the steering velocity is set to 0.
+\item Otherwise the rate is clamped to \+[{\ttfamily sv\+\_\+min}, {\ttfamily sv\+\_\+max}], which models the top speed of the steering servo.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em steering\+\_\+angle} & Current front-\/wheel steering angle (rad). \\
+\hline
+{\em steering\+\_\+velocity} & Requested (unconstrained) steering angle velocity (rad/\+s). \\
+\hline
+{\em s\+\_\+min} & Minimum steering angle (rad). \\
+\hline
+{\em s\+\_\+max} & Maximum steering angle (rad). \\
+\hline
+{\em sv\+\_\+min} & Minimum steering velocity (rad/\+s). \\
+\hline
+{\em sv\+\_\+max} & Maximum steering velocity (rad/\+s). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The constrained steering velocity (rad/\+s). 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_add65560e7ce9f0eb27d2bacf12ec95ef}\index{dynamic\_models.py@{dynamic\_models.py}!vehicle\_dynamics\_ks@{vehicle\_dynamics\_ks}}
+\index{vehicle\_dynamics\_ks@{vehicle\_dynamics\_ks}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{vehicle\_dynamics\_ks()}{vehicle\_dynamics\_ks()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_add65560e7ce9f0eb27d2bacf12ec95ef} 
+vehicle\+\_\+dynamics\+\_\+ks (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{u\+\_\+init}{, }\item[{}]{mu}{, }\item[{}]{C\+\_\+\+Sf}{, }\item[{}]{C\+\_\+\+Sr}{, }\item[{}]{lf}{, }\item[{}]{lr}{, }\item[{}]{h}{, }\item[{}]{m}{, }\item[{}]{I}{, }\item[{}]{s\+\_\+min}{, }\item[{}]{s\+\_\+max}{, }\item[{}]{sv\+\_\+min}{, }\item[{}]{sv\+\_\+max}{, }\item[{}]{v\+\_\+switch}{, }\item[{}]{a\+\_\+max}{, }\item[{}]{v\+\_\+min}{, }\item[{}]{v\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Kinematic single-\/track (bicycle) model: state derivative f(x, u). 
+
+It assumes the tyres roll without slipping, so the rear axle always moves along the car\textquotesingle{}s heading and the yaw rate is set purely by geometry: \begin{DoxyVerb}x_dot     = v * cos(psi)
+y_dot     = v * sin(psi)
+delta_dot = u[0]  (steering velocity)
+v_dot     = u[1]  (acceleration)
+psi_dot   = v / (lf + lr) * tan(delta)
+\end{DoxyVerb}
+
+
+Here (x, y) is the rear-\/axle position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & np.\+ndarray of shape (5,): state \+[x, y, delta, v, psi]
+\begin{DoxyItemize}
+\item x\+[0]: x position in global coordinates (m)
+\item x\+[1]: y position in global coordinates (m)
+\item x\+[2]: front-\/wheel steering angle delta (rad)
+\item x\+[3]: longitudinal velocity v (m/\+s)
+\item x\+[4]: yaw angle psi (rad) 
+\end{DoxyItemize}\\
+\hline
+{\em u\+\_\+init} & np.\+ndarray of shape (2,): requested input \+[steering velocity (rad/\+s), longitudinal acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2)]. It is clamped by steering\+\_\+constraint() and accl\+\_\+constraints() before use. \\
+\hline
+{\em mu,C\+\_\+\+Sf,C\+\_\+\+Sr,lf,lr,h,m,I,s\+\_\+min,s\+\_\+max,sv\+\_\+min,sv\+\_\+max,v\+\_\+switch,a\+\_\+max,v\+\_\+min,v\+\_\+max} & Vehicle parameters (see the parameter table in the file documentation). Only lf, lr and the constraint limits are used by this model. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (5,): the state derivative dx/\+dt. 
+\end{DoxyReturn}
+\Hypertarget{dynamic__models_8py_a8e88ec80a03380998d6056e2207ea7ac}\index{dynamic\_models.py@{dynamic\_models.py}!vehicle\_dynamics\_st@{vehicle\_dynamics\_st}}
+\index{vehicle\_dynamics\_st@{vehicle\_dynamics\_st}!dynamic\_models.py@{dynamic\_models.py}}
+\doxysubsubsection{\texorpdfstring{vehicle\_dynamics\_st()}{vehicle\_dynamics\_st()}}
+{\footnotesize\ttfamily \label{dynamic__models_8py_a8e88ec80a03380998d6056e2207ea7ac} 
+vehicle\+\_\+dynamics\+\_\+st (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{u\+\_\+init}{, }\item[{}]{mu}{, }\item[{}]{C\+\_\+\+Sf}{, }\item[{}]{C\+\_\+\+Sr}{, }\item[{}]{lf}{, }\item[{}]{lr}{, }\item[{}]{h}{, }\item[{}]{m}{, }\item[{}]{I}{, }\item[{}]{s\+\_\+min}{, }\item[{}]{s\+\_\+max}{, }\item[{}]{sv\+\_\+min}{, }\item[{}]{sv\+\_\+max}{, }\item[{}]{v\+\_\+switch}{, }\item[{}]{a\+\_\+max}{, }\item[{}]{v\+\_\+min}{, }\item[{}]{v\+\_\+max}{}\end{DoxyParamCaption})}
+
+
+
+Dynamic single-\/track (bicycle) model with tyre slip: state derivative f(x, u). 
+
+{\bfseries{Above 0.\+5 m/\+s}} (the dynamic model):
+\begin{DoxyItemize}
+\item Position moves along the {\itshape velocity} direction, psi + beta, not the heading psi. The car can drift sideways.
+\item Each axle\textquotesingle{}s lateral tyre force is linear in its slip angle. The force is scaled by mu, by that axle\textquotesingle{}s cornering stiffness (C\+\_\+\+Sf or C\+\_\+\+Sr) and by the axle\textquotesingle{}s normal load.
+\item Normal loads include longitudinal load transfer. The front axle carries m\texorpdfstring{$\ast$}{*}(g\texorpdfstring{$\ast$}{*}lr -\/ a\texorpdfstring{$\ast$}{*}h)/(lf + lr) and the rear axle m\texorpdfstring{$\ast$}{*}(g\texorpdfstring{$\ast$}{*}lf + a\texorpdfstring{$\ast$}{*}h)/(lf + lr), so accelerating (a \texorpdfstring{$>$}{>} 0) shifts load to the rear and braking shifts it to the front.
+\item The yaw acceleration (x\+[5] derivative) and slip angle rate (x\+[6] derivative) come from the lateral force and moment balance on these tyre forces.
+\end{DoxyItemize}
+
+{\bfseries{Below 0.\+5 m/\+s}} (kinematic fallback): the dynamic equations divide by v and v\texorpdfstring{$^\wedge$}{\string^}2, so they blow up near standstill. The KS model is used instead for the first five states, and:
+\begin{DoxyItemize}
+\item the yaw rate derivative is the time derivative of the KS yaw rate, d/\+dt \+[ v / lwb \texorpdfstring{$\ast$}{*} tan(delta) ] = a/\+lwb \texorpdfstring{$\ast$}{*} tan(delta) + v/(lwb \texorpdfstring{$\ast$}{*} cos\texorpdfstring{$^\wedge$}{\string^}2(delta)) \texorpdfstring{$\ast$}{*} delta\+\_\+dot.
+\item the slip angle derivative is 0, so the slip angle is held constant.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & np.\+ndarray of shape (7,): state \+[x, y, delta, v, psi, psi\+\_\+dot, beta]
+\begin{DoxyItemize}
+\item x\+[0]: x position in global coordinates (m)
+\item x\+[1]: y position in global coordinates (m)
+\item x\+[2]: front-\/wheel steering angle delta (rad)
+\item x\+[3]: longitudinal velocity v (m/\+s)
+\item x\+[4]: yaw angle psi (rad)
+\item x\+[5]: yaw rate psi\+\_\+dot (rad/\+s)
+\item x\+[6]: slip angle beta at the centre of gravity (rad) 
+\end{DoxyItemize}\\
+\hline
+{\em u\+\_\+init} & np.\+ndarray of shape (2,): requested input \+[steering velocity (rad/\+s), longitudinal acceleration (m/\+s\texorpdfstring{$^\wedge$}{\string^}2)]. It is clamped before use. \\
+\hline
+{\em mu,C\+\_\+\+Sf,C\+\_\+\+Sr,lf,lr,h,m,I,s\+\_\+min,s\+\_\+max,sv\+\_\+min,sv\+\_\+max,v\+\_\+switch,a\+\_\+max,v\+\_\+min,v\+\_\+max} & Vehicle parameters (see the parameter table in the file documentation). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (7,): the state derivative dx/\+dt.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+(x, y) is the centre of gravity in the dynamic branch, but the KS fallback treats it as the rear axle. The difference is ignored when switching between them. 
+\end{DoxyNote}

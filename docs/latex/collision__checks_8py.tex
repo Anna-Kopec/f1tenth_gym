@@ -1,0 +1,241 @@
+\doxysection{f110\+\_\+gym/\+unittest/\+collision\+\_\+checks.py File Reference}
+\hypertarget{collision__checks_8py}{}\label{collision__checks_8py}\index{f110\_gym/unittest/collision\_checks.py@{f110\_gym/unittest/collision\_checks.py}}
+
+
+Older standalone prototype of the GJK collision code.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1collision__checks_1_1_collision_tests}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+Collision\+Tests}}
+\begin{DoxyCompactList}\small\item\em Unit tests for \doxylink{collision__checks_8py_af2945c5ffca81a4e0518ffb89a4c5607}{get\+\_\+vertices()} and \doxylink{collision__checks_8py_af3bd441b36109b97657a02b03b499b55}{collision()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{collision__checks_8py_a2b2e410078df63145bd89175338e2f25}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+perpendicular}} (pt)
+\begin{DoxyCompactList}\small\item\em Rotate a 2D vector by -\/90 degrees: (x, y) -\/\texorpdfstring{$>$}{>} (y, -\/x). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_a7eb2209320a8441ecdb18361d6222702}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+triple\+Product}} (a, b, c)
+\begin{DoxyCompactList}\small\item\em 2D vector triple product (a x b) x c = b(a.\+c) -\/ a(b.\+c). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_ad6dd657facee4125bde58e26a23e3159}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+avg\+Point}} (vertices)
+\begin{DoxyCompactList}\small\item\em Mean of a set of vertices. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+index\+Of\+Furthest\+Point}} (vertices, d)
+\begin{DoxyCompactList}\small\item\em Index of the vertex with the largest dot product with direction {\ttfamily d}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_a7a5f77766edf577c0d831b4b46147afd}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+support}} (vertices1, vertices2, d)
+\begin{DoxyCompactList}\small\item\em Support point of the Minkowski difference (body1 -\/ body2) in direction {\ttfamily d}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_af3bd441b36109b97657a02b03b499b55}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+collision}} (vertices1, vertices2)
+\begin{DoxyCompactList}\small\item\em GJK test: do two convex polygons overlap? \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_aef3edf79f0ffa6c97789cd8f47d7c533}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+get\+\_\+trmtx}} (pose)
+\begin{DoxyCompactList}\small\item\em 4x4 homogeneous transform from the vehicle frame to the world frame. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{collision__checks_8py_af2945c5ffca81a4e0518ffb89a4c5607}{f110\+\_\+gym.\+unittest.\+collision\+\_\+checks.\+get\+\_\+vertices}} (pose, length, width)
+\begin{DoxyCompactList}\small\item\em World-\/frame corners of a rectangle centred on {\ttfamily pose}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Older standalone prototype of the GJK collision code. 
+
+Superseded by \doxylink{collision__models_8py}{collision\+\_\+models.\+py}.
+
+This file is kept for reference only; nothing in the gym imports it. Its functions are identical to the ones in \doxylink{collision__models_8py}{envs/\+collision\+\_\+models.\+py}, except that it has {\bfseries{no collision\+\_\+multiple()}} (the pairwise check across many cars that the Simulator uses) and no test for it.
+
+For how GJK works and detailed per-\/function documentation, see \doxylink{collision__models_8py}{collision\+\_\+models.\+py}.
+
+Run the tests with: {\ttfamily python} \doxylink{collision__checks_8py}{collision\+\_\+checks.\+py} (test\+\_\+get\+\_\+vert opens a matplotlib window and blocks until it is closed).
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{collision__checks_8py_doc-func-members}
+\Hypertarget{collision__checks_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{collision__checks_8py_ad6dd657facee4125bde58e26a23e3159}\index{collision\_checks.py@{collision\_checks.py}!avgPoint@{avgPoint}}
+\index{avgPoint@{avgPoint}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{avgPoint()}{avgPoint()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_ad6dd657facee4125bde58e26a23e3159} 
+avg\+Point (\begin{DoxyParamCaption}\item[{}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+Mean of a set of vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & np.\+ndarray of shape (n, 2). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: avg\+Point() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_af3bd441b36109b97657a02b03b499b55}\index{collision\_checks.py@{collision\_checks.py}!collision@{collision}}
+\index{collision@{collision}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{collision()}{collision()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_af3bd441b36109b97657a02b03b499b55} 
+collision (\begin{DoxyParamCaption}\item[{}]{vertices1}{, }\item[{}]{vertices2}{}\end{DoxyParamCaption})}
+
+
+
+GJK test: do two convex polygons overlap? 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices1} & np.\+ndarray of shape (n, 2): first convex body. \\
+\hline
+{\em vertices2} & np.\+ndarray of shape (m, 2): second convex body. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if they overlap (touching counts), False otherwise. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: collision() for a step-\/by-\/step explanation. 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_aef3edf79f0ffa6c97789cd8f47d7c533}\index{collision\_checks.py@{collision\_checks.py}!get\_trmtx@{get\_trmtx}}
+\index{get\_trmtx@{get\_trmtx}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{get\_trmtx()}{get\_trmtx()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_aef3edf79f0ffa6c97789cd8f47d7c533} 
+get\+\_\+trmtx (\begin{DoxyParamCaption}\item[{}]{pose}{}\end{DoxyParamCaption})}
+
+
+
+4x4 homogeneous transform from the vehicle frame to the world frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw]. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (4, 4). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: get\+\_\+trmtx() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_af2945c5ffca81a4e0518ffb89a4c5607}\index{collision\_checks.py@{collision\_checks.py}!get\_vertices@{get\_vertices}}
+\index{get\_vertices@{get\_vertices}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{get\_vertices()}{get\_vertices()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_af2945c5ffca81a4e0518ffb89a4c5607} 
+get\+\_\+vertices (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{length}{, }\item[{}]{width}{}\end{DoxyParamCaption})}
+
+
+
+World-\/frame corners of a rectangle centred on {\ttfamily pose}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the rectangle centre. \\
+\hline
+{\em length} & Rectangle length along the heading (m). \\
+\hline
+{\em width} & Rectangle width (m). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (4, 2): rear-\/left, rear-\/right, front-\/right, front-\/left. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: get\+\_\+vertices() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64}\index{collision\_checks.py@{collision\_checks.py}!indexOfFurthestPoint@{indexOfFurthestPoint}}
+\index{indexOfFurthestPoint@{indexOfFurthestPoint}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{indexOfFurthestPoint()}{indexOfFurthestPoint()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_a06ba4e2cc7a4f03d67fcfe73641d1b64} 
+index\+Of\+Furthest\+Point (\begin{DoxyParamCaption}\item[{}]{vertices}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Index of the vertex with the largest dot product with direction {\ttfamily d}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & np.\+ndarray of shape (n, 2). \\
+\hline
+{\em d} & np.\+ndarray of shape (2,): search direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int row index into {\ttfamily vertices}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: index\+Of\+Furthest\+Point() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_a2b2e410078df63145bd89175338e2f25}\index{collision\_checks.py@{collision\_checks.py}!perpendicular@{perpendicular}}
+\index{perpendicular@{perpendicular}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{perpendicular()}{perpendicular()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_a2b2e410078df63145bd89175338e2f25} 
+perpendicular (\begin{DoxyParamCaption}\item[{}]{pt}{}\end{DoxyParamCaption})}
+
+
+
+Rotate a 2D vector by -\/90 degrees: (x, y) -\/\texorpdfstring{$>$}{>} (y, -\/x). 
+
+Modifies {\ttfamily pt} in place.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & np.\+ndarray of shape (2,). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The same array, now perpendicular to its original direction. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: perpendicular() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_a7a5f77766edf577c0d831b4b46147afd}\index{collision\_checks.py@{collision\_checks.py}!support@{support}}
+\index{support@{support}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_a7a5f77766edf577c0d831b4b46147afd} 
+support (\begin{DoxyParamCaption}\item[{}]{vertices1}{, }\item[{}]{vertices2}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Support point of the Minkowski difference (body1 -\/ body2) in direction {\ttfamily d}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices1} & np.\+ndarray of shape (n, 2): first body. \\
+\hline
+{\em vertices2} & np.\+ndarray of shape (m, 2): second body. \\
+\hline
+{\em d} & np.\+ndarray of shape (2,): search direction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: support() 
+\end{DoxySeeAlso}
+\Hypertarget{collision__checks_8py_a7eb2209320a8441ecdb18361d6222702}\index{collision\_checks.py@{collision\_checks.py}!tripleProduct@{tripleProduct}}
+\index{tripleProduct@{tripleProduct}!collision\_checks.py@{collision\_checks.py}}
+\doxysubsubsection{\texorpdfstring{tripleProduct()}{tripleProduct()}}
+{\footnotesize\ttfamily \label{collision__checks_8py_a7eb2209320a8441ecdb18361d6222702} 
+triple\+Product (\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{, }\item[{}]{c}{}\end{DoxyParamCaption})}
+
+
+
+2D vector triple product (a x b) x c = b(a.\+c) -\/ a(b.\+c). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a,b,c} & np.\+ndarray of shape (2,). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (2,). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{collision__models_8py}{collision\+\_\+models.\+py}: triple\+Product() 
+\end{DoxySeeAlso}

@@ -1,0 +1,168 @@
+\doxysection{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera Class Reference}
+\hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}{}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}\index{f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}}
+
+
+A simple 2D camera: a scroll offset and a zoom factor, applied to the window\textquotesingle{}s view matrix.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a8478e89fd7599728e5535e20d546000f}{\+\_\+\+\_\+init\+\_\+\_}} (self, pyglet.\+window.\+Window window, scroll\+\_\+speed=1, min\+\_\+zoom=1, max\+\_\+zoom=4)
+\begin{DoxyCompactList}\small\item\em Create a camera for {\ttfamily window}, at offset (0, 0) and zoom 1 (clamped to the zoom limits). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a01fac3db8cdf72d605b1e029ebea88f9}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a01fac3db8cdf72d605b1e029ebea88f9} 
+{\bfseries zoom} (self)
+\begin{DoxyCompactList}\small\item\em Current zoom factor. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a5647f7668ffc737a7e5ecd49c992beb7}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a5647f7668ffc737a7e5ecd49c992beb7} 
+{\bfseries zoom} (self, value)
+\begin{DoxyCompactList}\small\item\em Set the zoom factor, clamped to \+[min\+\_\+zoom, max\+\_\+zoom]. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a95074337cacab9e95f43ab7b27231b0b}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a95074337cacab9e95f43ab7b27231b0b} 
+{\bfseries position} (self)
+\begin{DoxyCompactList}\small\item\em Current scroll offset as a tuple (offset\+\_\+x, offset\+\_\+y). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa7fcd0efb638f11f6f96e614437df30a}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa7fcd0efb638f11f6f96e614437df30a} 
+{\bfseries position} (self, value)
+\begin{DoxyCompactList}\small\item\em Set the scroll offset directly from a tuple (x, y). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}{move}} (self, axis\+\_\+x, axis\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Move the offset by scroll\+\_\+speed in the given direction, e.\+g. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin}} (self)
+\begin{DoxyCompactList}\small\item\em Apply the camera before drawing: translate by -\/offset \texorpdfstring{$\ast$}{*} zoom, then scale by zoom. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}{end}} (self)
+\begin{DoxyCompactList}\small\item\em Undo \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin()} after drawing (reverse scale, then reverse translate). \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a92e3f6c23b7a5eda3fae9596fd4c8dc2}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a92e3f6c23b7a5eda3fae9596fd4c8dc2} 
+{\bfseries \+\_\+\+\_\+enter\+\_\+\_} (self)
+\begin{DoxyCompactList}\small\item\em Context-\/manager entry: calls \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin()}. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_ade6b430495843449d101df234b1c59b0}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_ade6b430495843449d101df234b1c59b0} 
+{\bfseries \+\_\+\+\_\+exit\+\_\+\_} (self, exception\+\_\+type, exception\+\_\+value, traceback)
+\begin{DoxyCompactList}\small\item\em Context-\/manager exit: calls \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}{end()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a81dae02fbeac037bfcba9afeeac9a0ca}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a81dae02fbeac037bfcba9afeeac9a0ca} 
+{\bfseries scroll\+\_\+speed} = scroll\+\_\+speed
+\begin{DoxyCompactList}\small\item\em Distance moved per unit of \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}{move()} input. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa8efeba81038cc57db534857a61b0d4b}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa8efeba81038cc57db534857a61b0d4b} 
+{\bfseries max\+\_\+zoom} = max\+\_\+zoom
+\begin{DoxyCompactList}\small\item\em Largest allowed zoom. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa5e9b9a6cca61ed9f997cd23ed1ea8b6}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aa5e9b9a6cca61ed9f997cd23ed1ea8b6} 
+{\bfseries min\+\_\+zoom} = min\+\_\+zoom
+\begin{DoxyCompactList}\small\item\em Smallest allowed zoom. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a2f36f3e98a13b1cb3513bb28ee49bfa3}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a2f36f3e98a13b1cb3513bb28ee49bfa3} 
+int {\bfseries offset\+\_\+x} = 0
+\begin{DoxyCompactList}\small\item\em Horizontal scroll offset. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a86c1d9993ef44398c258a72eec2d369a}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a86c1d9993ef44398c258a72eec2d369a} 
+int {\bfseries offset\+\_\+y} = 0
+\begin{DoxyCompactList}\small\item\em Vertical scroll offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a2a4b65e4c2c87b3ed27ea4d694f6d9a4}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a2a4b65e4c2c87b3ed27ea4d694f6d9a4} 
+{\bfseries \+\_\+window} = window
+\item 
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aec06bae6c67e84720de17c8a80544b27}\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_aec06bae6c67e84720de17c8a80544b27} 
+{\bfseries \+\_\+zoom} = max(min(1, self.\+max\+\_\+zoom), self.\+min\+\_\+zoom)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple 2D camera: a scroll offset and a zoom factor, applied to the window\textquotesingle{}s view matrix. 
+
+Use it around drawing code, either with \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin()} / \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}{end()} or as a context manager: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{with}\ cam:}
+\DoxyCodeLine{\ \ \ \ batch.draw()}
+
+\end{DoxyCode}
+ 
+
+\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_doc-constructors}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a8478e89fd7599728e5535e20d546000f}\index{f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a8478e89fd7599728e5535e20d546000f} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{pyglet.\+window.\+Window}]{window}{, }\item[{}]{scroll\+\_\+speed}{ = {\ttfamily 1}, }\item[{}]{min\+\_\+zoom}{ = {\ttfamily 1}, }\item[{}]{max\+\_\+zoom}{ = {\ttfamily 4}}\end{DoxyParamCaption})}
+
+
+
+Create a camera for {\ttfamily window}, at offset (0, 0) and zoom 1 (clamped to the zoom limits). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The pyglet window whose view matrix is changed. \\
+\hline
+{\em scroll\+\_\+speed} & Distance moved per unit of \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}{move()} input. \\
+\hline
+{\em min\+\_\+zoom} & Smallest allowed zoom. \\
+\hline
+{\em max\+\_\+zoom} & Largest allowed zoom.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion\+Error} & If {\ttfamily min\+\_\+zoom} \texorpdfstring{$>$}{>} {\ttfamily max\+\_\+zoom}. \\
+\hline
+\end{DoxyExceptions}
+
+
+\label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_doc-func-members}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}\index{f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}!begin@{begin}}
+\index{begin@{begin}!f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera.\+begin (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Apply the camera before drawing: translate by -\/offset \texorpdfstring{$\ast$}{*} zoom, then scale by zoom. 
+
+
+
+Reimplemented in \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1db73772f37c678968a0521aa26106cc}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera}}.
+
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e}\index{f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}!end@{end}}
+\index{end@{end}!f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a3e249087f581f1045b66da162a42cf2e} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera.\+end (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Undo \doxylink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a0525714093df381fe8b50a3808f2cc72}{begin()} after drawing (reverse scale, then reverse translate). 
+
+Without this, the transforms would build up on every frame. 
+
+Reimplemented in \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test_1_1_centered_camera_a1646c6488aa5ff1e06db01b1f1099583}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Centered\+Camera}}.
+
+\Hypertarget{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735}\index{f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}!move@{move}}
+\index{move@{move}!f110\_gym.unittest.pyglet\_test.Camera@{f110\_gym.unittest.pyglet\_test.Camera}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1unittest_1_1pyglet__test_1_1_camera_a6ff07bc8c068798f44dd9ef57bc86735} 
+f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test.\+Camera.\+move (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{axis\+\_\+x}{, }\item[{}]{axis\+\_\+y}{}\end{DoxyParamCaption})}
+
+
+
+Move the offset by scroll\+\_\+speed in the given direction, e.\+g. 
+
+move(-\/1, 0) moves left.
+
+
+\begin{DoxyParams}{Parameters}
+{\em axis\+\_\+x} & Horizontal direction (-\/1, 0 or 1, or any scale factor). \\
+\hline
+{\em axis\+\_\+y} & Vertical direction. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+unittest/\doxymbox{\hyperlink{pyglet__test_8py}{pyglet\+\_\+test.\+py}}\end{DoxyCompactItemize}

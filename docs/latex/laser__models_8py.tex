@@ -1,0 +1,404 @@
+\doxysection{f110\+\_\+gym/\+envs/\+laser\+\_\+models.py File Reference}
+\hypertarget{laser__models_8py}{}\label{laser__models_8py}\index{f110\_gym/envs/laser\_models.py@{f110\_gym/envs/laser\_models.py}}
+
+
+2D Li\+DAR simulation: ray tracing against an occupancy-\/grid map, adding other vehicles to a scan, and time-\/to-\/collision checks.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Simulator2D}}
+\begin{DoxyCompactList}\small\item\em 2D Li\+DAR simulator: holds a map and its distance transform, and produces noisy scans. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Tests}}
+\begin{DoxyCompactList}\small\item\em Unit tests for \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{Scan\+Simulator2D}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{laser__models_8py_a9d67e7237ac37e73931b0fdbd1eaf713}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+get\+\_\+dt}} (bitmap, resolution)
+\begin{DoxyCompactList}\small\item\em Distance transform of the map: distance (m) from each cell to the nearest obstacle. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_a38dba469bc9e65a15dfb137b8aeecbe2}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+xy\+\_\+2\+\_\+rc}} (x, y, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution)
+\begin{DoxyCompactList}\small\item\em Convert a world (x, y) point into a (row, column) cell index of the map grid. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_aaa68fe3dc850dfca6e0767addeeb5679}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+distance\+\_\+transform}} (x, y, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt)
+\begin{DoxyCompactList}\small\item\em Distance from a world point to the nearest obstacle, read from the precomputed distance transform. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_ab698a8a4f7e92436fcd5910a25014e6e}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+trace\+\_\+ray}} (x, y, theta\+\_\+index, sines, cosines, eps, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt, max\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Length of one Li\+DAR beam, found by sphere tracing through the distance transform. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_afcd5af3133654de54268953b5930c985}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+get\+\_\+scan}} (pose, theta\+\_\+dis, fov, num\+\_\+beams, theta\+\_\+index\+\_\+increment, sines, cosines, eps, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt, max\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Simulate a full Li\+DAR scan by tracing every beam from one pose. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_adf66bdfd1681cb547fd63a09da5b1baf}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+check\+\_\+ttc\+\_\+jit}} (scan, vel, scan\+\_\+angles, cosines, side\+\_\+distances, ttc\+\_\+thresh)
+\begin{DoxyCompactList}\small\item\em Decide whether the vehicle has hit the environment, using instantaneous time-\/to-\/collision (i\+TTC). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_ad30dab2c4deb6085da8d21e922547dce}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+cross}} (v1, v2)
+\begin{DoxyCompactList}\small\item\em 2D cross product (the z component of the 3D cross product): v1.\+x \texorpdfstring{$\ast$}{*} v2.\+y -\/ v1.\+y \texorpdfstring{$\ast$}{*} v2.\+x. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_ab9b6f5eaab1d35637a9ffa227cac4479}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+are\+\_\+collinear}} (pt\+\_\+a, pt\+\_\+b, pt\+\_\+c)
+\begin{DoxyCompactList}\small\item\em Test whether three 2D points lie on one line (within a tolerance of 1e-\/8). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_a3114d3c49734bf6ea5ca0980bc23e4aa}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+get\+\_\+range}} (pose, beam\+\_\+theta, va, vb)
+\begin{DoxyCompactList}\small\item\em Distance along one beam to a line segment (one edge of another vehicle). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_a02f1376c07dab5b46e8f4e93e972338c}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+get\+\_\+blocked\+\_\+view\+\_\+indices}} (pose, vertices, scan\+\_\+angles)
+\begin{DoxyCompactList}\small\item\em Range of beam indices that could hit another vehicle. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_af44b17aa5c825995b0d6ca2c8df0c064}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+ray\+\_\+cast}} (pose, scan, scan\+\_\+angles, vertices)
+\begin{DoxyCompactList}\small\item\em Add one other vehicle to a scan by intersecting beams with its four edges. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{laser__models_8py_a51af30a60f9f02777c6396b8247e356f}{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Manual demo: time 10000 scans on the example map, then animate a scan rotating in place on a polar plot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+2D Li\+DAR simulation: ray tracing against an occupancy-\/grid map, adding other vehicles to a scan, and time-\/to-\/collision checks. 
+
+\hypertarget{laser__models_8py_laser_models_map_raytrace}{}\doxysubsection{\texorpdfstring{How map scans are simulated}{How map scans are simulated}}\label{laser__models_8py_laser_models_map_raytrace}
+The map is a black-\/and-\/white image (black = obstacle) plus a YAML file giving its resolution (metres per pixel) and the world pose of its bottom-\/left corner.
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Distance transform (once, when the map loads):}} get\+\_\+dt() computes, for every free cell, the distance in metres to the nearest obstacle cell.
+\item {\bfseries{Sphere tracing (every beam, every scan):}} trace\+\_\+ray() starts at the sensor and looks up the distance to the nearest obstacle, d. No obstacle is closer than d in {\itshape any} direction, so the ray can safely jump d metres forward. It repeats until d is below a small tolerance {\ttfamily eps} (the ray has hit something) or the total length passes {\ttfamily max\+\_\+range}. Rays in open space take a few big steps; rays close to walls take many small steps.
+\end{DoxyEnumerate}
+
+To avoid computing sin/\+cos for every beam, beam directions come from a lookup table that splits the full circle into {\ttfamily theta\+\_\+dis} (2000 by default) discrete angles.\hypertarget{laser__models_8py_laser_models_agent_raycast}{}\doxysubsection{\texorpdfstring{How other vehicles are added}{How other vehicles are added}}\label{laser__models_8py_laser_models_agent_raycast}
+The map scan only contains static walls. ray\+\_\+cast() then models each opponent as a 4-\/sided polygon and intersects every beam that could hit it with its four edges (get\+\_\+range()). Any beam that hits an opponent before its current range is shortened.\hypertarget{laser__models_8py_laser_models_ttc}{}\doxysubsection{\texorpdfstring{Time-\/to-\/collision}{Time-\/to-\/collision}}\label{laser__models_8py_laser_models_ttc}
+check\+\_\+ttc\+\_\+jit() decides whether the car has hit a wall by computing an instantaneous time-\/to-\/collision (i\+TTC) along every beam.
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{laser__models_8py_doc-func-members}
+\Hypertarget{laser__models_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{laser__models_8py_ab9b6f5eaab1d35637a9ffa227cac4479}\index{laser\_models.py@{laser\_models.py}!are\_collinear@{are\_collinear}}
+\index{are\_collinear@{are\_collinear}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{are\_collinear()}{are\_collinear()}}
+{\footnotesize\ttfamily \label{laser__models_8py_ab9b6f5eaab1d35637a9ffa227cac4479} 
+are\+\_\+collinear (\begin{DoxyParamCaption}\item[{}]{pt\+\_\+a}{, }\item[{}]{pt\+\_\+b}{, }\item[{}]{pt\+\_\+c}{}\end{DoxyParamCaption})}
+
+
+
+Test whether three 2D points lie on one line (within a tolerance of 1e-\/8). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt\+\_\+a,pt\+\_\+b,pt\+\_\+c} & np.\+ndarray of shape (2,): the points to test. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the points are collinear. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_adf66bdfd1681cb547fd63a09da5b1baf}\index{laser\_models.py@{laser\_models.py}!check\_ttc\_jit@{check\_ttc\_jit}}
+\index{check\_ttc\_jit@{check\_ttc\_jit}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{check\_ttc\_jit()}{check\_ttc\_jit()}}
+{\footnotesize\ttfamily \label{laser__models_8py_adf66bdfd1681cb547fd63a09da5b1baf} 
+check\+\_\+ttc\+\_\+jit (\begin{DoxyParamCaption}\item[{}]{scan}{, }\item[{}]{vel}{, }\item[{}]{scan\+\_\+angles}{, }\item[{}]{cosines}{, }\item[{}]{side\+\_\+distances}{, }\item[{}]{ttc\+\_\+thresh}{}\end{DoxyParamCaption})}
+
+
+
+Decide whether the vehicle has hit the environment, using instantaneous time-\/to-\/collision (i\+TTC). 
+
+For each beam i: \begin{DoxyVerb}closing speed  = vel * cos(angle_i)                (the car's speed along that beam)
+iTTC_i         = (scan_i - side_distance_i) / closing speed
+\end{DoxyVerb}
+
+
+The numerator is the gap between the car body and the obstacle, not the sensor-\/to-\/obstacle distance. A beam with 0 \texorpdfstring{$<$}{<}= i\+TTC \texorpdfstring{$<$}{<} {\ttfamily ttc\+\_\+thresh} means contact is imminent, so the car counts as crashed. Beams pointing away from the direction of travel have a negative closing speed and so a negative i\+TTC, which is ignored. A stationary car (vel == 0) never collides.
+
+{\ttfamily error\+\_\+model=\textquotesingle{}numpy\textquotesingle{}} makes division by zero return inf or nan instead of raising. This happens for beams at exactly +/\+-\/90 degrees, where cos = 0, and those beams are then ignored.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scan} & np.\+ndarray of shape (num\+\_\+beams,): current scan ranges (m). \\
+\hline
+{\em vel} & Current longitudinal velocity (m/\+s). \\
+\hline
+{\em scan\+\_\+angles} & np.\+ndarray of shape (num\+\_\+beams,): beam angles relative to the heading (unused). \\
+\hline
+{\em cosines} & np.\+ndarray of shape (num\+\_\+beams,): precomputed cos(scan\+\_\+angles). \\
+\hline
+{\em side\+\_\+distances} & np.\+ndarray of shape (num\+\_\+beams,): distance from the sensor to the car\textquotesingle{}s own body edge along each beam (m). \\
+\hline
+{\em ttc\+\_\+thresh} & i\+TTC threshold below which a collision is declared (s). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vehicle is in collision with the environment. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_ad30dab2c4deb6085da8d21e922547dce}\index{laser\_models.py@{laser\_models.py}!cross@{cross}}
+\index{cross@{cross}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{cross()}{cross()}}
+{\footnotesize\ttfamily \label{laser__models_8py_ad30dab2c4deb6085da8d21e922547dce} 
+cross (\begin{DoxyParamCaption}\item[{}]{v1}{, }\item[{}]{v2}{}\end{DoxyParamCaption})}
+
+
+
+2D cross product (the z component of the 3D cross product): v1.\+x \texorpdfstring{$\ast$}{*} v2.\+y -\/ v1.\+y \texorpdfstring{$\ast$}{*} v2.\+x. 
+
+Positive if {\ttfamily v2} is counter-\/clockwise from {\ttfamily v1}, negative if clockwise, and 0 if they are parallel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & np.\+ndarray of shape (2,). \\
+\hline
+{\em v2} & np.\+ndarray of shape (2,). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Scalar cross product. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_aaa68fe3dc850dfca6e0767addeeb5679}\index{laser\_models.py@{laser\_models.py}!distance\_transform@{distance\_transform}}
+\index{distance\_transform@{distance\_transform}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{distance\_transform()}{distance\_transform()}}
+{\footnotesize\ttfamily \label{laser__models_8py_aaa68fe3dc850dfca6e0767addeeb5679} 
+distance\+\_\+transform (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Distance from a world point to the nearest obstacle, read from the precomputed distance transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & World coordinates of the query point (m). \\
+\hline
+{\em orig\+\_\+x,orig\+\_\+y} & World position of the map origin (m). \\
+\hline
+{\em orig\+\_\+c,orig\+\_\+s} & cos / sin of the map origin yaw. \\
+\hline
+{\em height,width} & Map size in cells. \\
+\hline
+{\em resolution} & Map resolution (metres per cell). \\
+\hline
+{\em dt} & Distance transform from get\+\_\+dt(). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance to the nearest obstacle (m).
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+xy\+\_\+2\+\_\+rc() for what happens to points outside the map. 
+\end{DoxySeeAlso}
+\Hypertarget{laser__models_8py_a02f1376c07dab5b46e8f4e93e972338c}\index{laser\_models.py@{laser\_models.py}!get\_blocked\_view\_indices@{get\_blocked\_view\_indices}}
+\index{get\_blocked\_view\_indices@{get\_blocked\_view\_indices}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_blocked\_view\_indices()}{get\_blocked\_view\_indices()}}
+{\footnotesize\ttfamily \label{laser__models_8py_a02f1376c07dab5b46e8f4e93e972338c} 
+get\+\_\+blocked\+\_\+view\+\_\+indices (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{vertices}{, }\item[{}]{scan\+\_\+angles}{}\end{DoxyParamCaption})}
+
+
+
+Range of beam indices that could hit another vehicle. 
+
+Computes the bearing of each of the opponent\textquotesingle{}s four corners relative to the scanner\textquotesingle{}s heading, finds the beam nearest each bearing, and returns the smallest and largest of those beam indices. Only beams in this range need to be tested against the opponent, which saves a lot of work.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the scanning vehicle. \\
+\hline
+{\em vertices} & np.\+ndarray of shape (4, 2): the opponent\textquotesingle{}s corners in the world frame. \\
+\hline
+{\em scan\+\_\+angles} & np.\+ndarray of shape (num\+\_\+beams,): beam angles relative to the heading. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (min\+\_\+ind, max\+\_\+ind): first and last beam index (inclusive) to test.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Corners outside the field of view snap to the nearest end beam. If an opponent sits directly behind the scanner, where bearings wrap around +/\+-\/pi, the min/\+max range may cover the wrong span. That region is outside a 270-\/degree field of view anyway. 
+\end{DoxyNote}
+\Hypertarget{laser__models_8py_a9d67e7237ac37e73931b0fdbd1eaf713}\index{laser\_models.py@{laser\_models.py}!get\_dt@{get\_dt}}
+\index{get\_dt@{get\_dt}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_dt()}{get\_dt()}}
+{\footnotesize\ttfamily \label{laser__models_8py_a9d67e7237ac37e73931b0fdbd1eaf713} 
+get\+\_\+dt (\begin{DoxyParamCaption}\item[{}]{bitmap}{, }\item[{}]{resolution}{}\end{DoxyParamCaption})}
+
+
+
+Distance transform of the map: distance (m) from each cell to the nearest obstacle. 
+
+scipy\textquotesingle{}s Euclidean distance transform gives, for every non-\/zero (free) cell, the distance in cells to the nearest zero (obstacle) cell. Multiplying by the resolution converts that to metres. Obstacle cells get 0.
+
+Uses scipy.\+ndimage, so it cannot be compiled with numba. It runs only once per map.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & np.\+ndarray of shape (rows, cols): binary map, 0 = obstacle and anything \texorpdfstring{$>$}{>} 0 (normally 255) = free space. \\
+\hline
+{\em resolution} & Map resolution (metres per cell). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (rows, cols): distance to the nearest obstacle in metres. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_a3114d3c49734bf6ea5ca0980bc23e4aa}\index{laser\_models.py@{laser\_models.py}!get\_range@{get\_range}}
+\index{get\_range@{get\_range}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_range()}{get\_range()}}
+{\footnotesize\ttfamily \label{laser__models_8py_a3114d3c49734bf6ea5ca0980bc23e4aa} 
+get\+\_\+range (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{beam\+\_\+theta}{, }\item[{}]{va}{, }\item[{}]{vb}{}\end{DoxyParamCaption})}
+
+
+
+Distance along one beam to a line segment (one edge of another vehicle). 
+
+Finds where the ray o + d1 \texorpdfstring{$\ast$}{*} dir meets the segment va + d2 \texorpdfstring{$\ast$}{*} (vb -\/ va):
+\begin{DoxyItemize}
+\item {\ttfamily d1} is the distance along the beam. It must be \texorpdfstring{$>$}{>}= 0, so the hit is in front of the sensor.
+\item {\ttfamily d2} is the position along the edge. It must be in \+[0, 1], so the hit is between the two corners.
+\end{DoxyItemize}
+
+If the beam is parallel to the edge, it only counts as a hit when the beam lies exactly along the edge\textquotesingle{}s line, in which case the nearer corner is returned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the scanning sensor. Only x and y are used. \\
+\hline
+{\em beam\+\_\+theta} & World-\/frame angle of the beam (rad). \\
+\hline
+{\em va,vb} & np.\+ndarray of shape (2,): the two corners of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance from the sensor to the edge along the beam (m), or inf if the beam misses. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_afcd5af3133654de54268953b5930c985}\index{laser\_models.py@{laser\_models.py}!get\_scan@{get\_scan}}
+\index{get\_scan@{get\_scan}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{get\_scan()}{get\_scan()}}
+{\footnotesize\ttfamily \label{laser__models_8py_afcd5af3133654de54268953b5930c985} 
+get\+\_\+scan (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{theta\+\_\+dis}{, }\item[{}]{fov}{, }\item[{}]{num\+\_\+beams}{, }\item[{}]{theta\+\_\+index\+\_\+increment}{, }\item[{}]{sines}{, }\item[{}]{cosines}{, }\item[{}]{eps}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{, }\item[{}]{max\+\_\+range}{}\end{DoxyParamCaption})}
+
+
+
+Simulate a full Li\+DAR scan by tracing every beam from one pose. 
+
+Beams sweep counter-\/clockwise from (heading -\/ fov/\+2) to (heading + fov/\+2). Each beam\textquotesingle{}s direction is tracked as an index into the angle lookup table, wrapped into \+[0, theta\+\_\+dis).
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the sensor in the world. \\
+\hline
+{\em theta\+\_\+dis} & Number of discrete angles in the lookup table (covering 0 to 2\texorpdfstring{$\ast$}{*}pi). \\
+\hline
+{\em fov} & Field of view (rad). \\
+\hline
+{\em num\+\_\+beams} & Number of beams in the scan. \\
+\hline
+{\em theta\+\_\+index\+\_\+increment} & Lookup-\/table index step between neighbouring beams (beam spacing in radians \texorpdfstring{$\ast$}{*} theta\+\_\+dis / 2pi). \\
+\hline
+{\em sines,cosines} & Angle lookup tables of shape (theta\+\_\+dis,). \\
+\hline
+{\em eps,orig\+\_\+x,orig\+\_\+y,orig\+\_\+c,orig\+\_\+s,height,width,resolution,dt,max\+\_\+range} & Passed through to trace\+\_\+ray(). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): range of each beam (m), from the rightmost beam to the leftmost. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_a51af30a60f9f02777c6396b8247e356f}\index{laser\_models.py@{laser\_models.py}!main@{main}}
+\index{main@{main}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{laser__models_8py_a51af30a60f9f02777c6396b8247e356f} 
+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Manual demo: time 10000 scans on the example map, then animate a scan rotating in place on a polar plot. 
+
+Not run by default; uncomment {\ttfamily main()} in the {\ttfamily \+\_\+\+\_\+main\+\_\+\_} block to use it. \Hypertarget{laser__models_8py_af44b17aa5c825995b0d6ca2c8df0c064}\index{laser\_models.py@{laser\_models.py}!ray\_cast@{ray\_cast}}
+\index{ray\_cast@{ray\_cast}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{ray\_cast()}{ray\_cast()}}
+{\footnotesize\ttfamily \label{laser__models_8py_af44b17aa5c825995b0d6ca2c8df0c064} 
+ray\+\_\+cast (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{scan}{, }\item[{}]{scan\+\_\+angles}{, }\item[{}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+Add one other vehicle to a scan by intersecting beams with its four edges. 
+
+For every beam that could hit the opponent (see get\+\_\+blocked\+\_\+view\+\_\+indices()), the beam is tested against all four edges. If any edge is closer than the beam\textquotesingle{}s current range, the range is shortened to that distance.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the scanning vehicle. \\
+\hline
+{\em scan} & np.\+ndarray of shape (num\+\_\+beams,): scan to modify. Modified in place. \\
+\hline
+{\em scan\+\_\+angles} & np.\+ndarray of shape (num\+\_\+beams,): beam angles relative to the heading. \\
+\hline
+{\em vertices} & np.\+ndarray of shape (4, 2): the opponent\textquotesingle{}s corners, in order around the rectangle (as returned by collision\+\_\+models.\+get\+\_\+vertices()). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): the modified scan (the same object as {\ttfamily scan}). 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_ab698a8a4f7e92436fcd5910a25014e6e}\index{laser\_models.py@{laser\_models.py}!trace\_ray@{trace\_ray}}
+\index{trace\_ray@{trace\_ray}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{trace\_ray()}{trace\_ray()}}
+{\footnotesize\ttfamily \label{laser__models_8py_ab698a8a4f7e92436fcd5910a25014e6e} 
+trace\+\_\+ray (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{theta\+\_\+index}{, }\item[{}]{sines}{, }\item[{}]{cosines}{, }\item[{}]{eps}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{, }\item[{}]{max\+\_\+range}{}\end{DoxyParamCaption})}
+
+
+
+Length of one Li\+DAR beam, found by sphere tracing through the distance transform. 
+
+The loop is pure arithmetic, so it is compiled with numba. See the file overview for how sphere tracing works.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & World position of the sensor (m). \\
+\hline
+{\em theta\+\_\+index} & Index of this beam\textquotesingle{}s direction in the {\ttfamily sines} / {\ttfamily cosines} lookup table. It is rounded down to an integer, so beam directions are snapped to the table\textquotesingle{}s discrete angles. \\
+\hline
+{\em sines} & np.\+ndarray of shape (theta\+\_\+dis,): lookup table of sin(angle). \\
+\hline
+{\em cosines} & np.\+ndarray of shape (theta\+\_\+dis,): lookup table of cos(angle). \\
+\hline
+{\em eps} & Stop when the distance to the nearest obstacle drops below this (m). \\
+\hline
+{\em orig\+\_\+x,orig\+\_\+y,orig\+\_\+c,orig\+\_\+s,height,width,resolution} & Map geometry (see xy\+\_\+2\+\_\+rc()). \\
+\hline
+{\em dt} & Distance transform from get\+\_\+dt(). \\
+\hline
+{\em max\+\_\+range} & Maximum Li\+DAR range (m). Longer rays are clipped to this. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Distance along the beam to the first obstacle (m), at most {\ttfamily max\+\_\+range}. 
+\end{DoxyReturn}
+\Hypertarget{laser__models_8py_a38dba469bc9e65a15dfb137b8aeecbe2}\index{laser\_models.py@{laser\_models.py}!xy\_2\_rc@{xy\_2\_rc}}
+\index{xy\_2\_rc@{xy\_2\_rc}!laser\_models.py@{laser\_models.py}}
+\doxysubsubsection{\texorpdfstring{xy\_2\_rc()}{xy\_2\_rc()}}
+{\footnotesize\ttfamily \label{laser__models_8py_a38dba469bc9e65a15dfb137b8aeecbe2} 
+xy\+\_\+2\+\_\+rc (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{}\end{DoxyParamCaption})}
+
+
+
+Convert a world (x, y) point into a (row, column) cell index of the map grid. 
+
+The point is shifted by the map origin, rotated into the map frame (which can have a yaw), and then divided by the resolution.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & World x coordinate (m). \\
+\hline
+{\em y} & World y coordinate (m). \\
+\hline
+{\em orig\+\_\+x} & World x of the map origin (bottom-\/left cell) (m). \\
+\hline
+{\em orig\+\_\+y} & World y of the map origin (m). \\
+\hline
+{\em orig\+\_\+c} & cos(map origin yaw). \\
+\hline
+{\em orig\+\_\+s} & sin(map origin yaw). \\
+\hline
+{\em height} & Map height in cells (rows). \\
+\hline
+{\em width} & Map width in cells (columns). \\
+\hline
+{\em resolution} & Map resolution (metres per cell). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (r, c): row and column of the cell, or (-\/1, -\/1) if the point is outside the map.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+A (-\/1, -\/1) result is used directly as an array index by distance\+\_\+transform(). In numpy, index -\/1 means the last row/\+column, so points outside the map read the distance value of the map\textquotesingle{}s top-\/right cell instead of raising an error. 
+\end{DoxyWarning}

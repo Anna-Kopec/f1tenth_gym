@@ -1,0 +1,180 @@
+\doxysection{waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner Class Reference}
+\hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner}{}\label{classwaypoint__follow_1_1_pure_pursuit_planner}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+
+
+Example raceline follower using pure pursuit (see the file overview).  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_ac08bda5885415b9ede3ec7ae1ae9e278}{\+\_\+\+\_\+init\+\_\+\_}} (self, conf, wb)
+\begin{DoxyCompactList}\small\item\em Load the raceline from the config and set up the planner. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_a4f6877f3202fdf67cf1990e1cda08e12}{load\+\_\+waypoints}} (self, conf)
+\begin{DoxyCompactList}\small\item\em Read the raceline CSV into {\ttfamily self.\+waypoints} (one row per waypoint, all columns kept). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_a78a17e42e2dd9d93c91307d1c310ef9b}{render\+\_\+waypoints}} (self, e)
+\begin{DoxyCompactList}\small\item\em Draw the raceline points on the renderer (call from a render callback). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_a5e108053998e97e4a5597cc6a73fb44a}{plan}} (self, pose\+\_\+x, pose\+\_\+y, pose\+\_\+theta, lookahead\+\_\+distance, vgain)
+\begin{DoxyCompactList}\small\item\em Compute the control command for the car\textquotesingle{}s current pose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_aef8fe731350cb98332eb2077f24570df}\label{classwaypoint__follow_1_1_pure_pursuit_planner_aef8fe731350cb98332eb2077f24570df} 
+{\bfseries wheelbase} = wb
+\begin{DoxyCompactList}\small\item\em Wheelbase (m), used in the steering law. \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_aa9d6fa014dc3ec55dae27453cfaa5714}\label{classwaypoint__follow_1_1_pure_pursuit_planner_aa9d6fa014dc3ec55dae27453cfaa5714} 
+{\bfseries conf} = conf
+\begin{DoxyCompactList}\small\item\em Config namespace (waypoint file and column indices). \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_ab198ebb1461f1d0c96842567b8d39cae}\label{classwaypoint__follow_1_1_pure_pursuit_planner_ab198ebb1461f1d0c96842567b8d39cae} 
+int {\bfseries max\+\_\+reacquire} = 20.
+\begin{DoxyCompactList}\small\item\em If the car is further than this from the raceline (m), give up and use the fallback command. \end{DoxyCompactList}\item 
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a7d9b92f76f965de082c671653511e101}\label{classwaypoint__follow_1_1_pure_pursuit_planner_a7d9b92f76f965de082c671653511e101} 
+list {\bfseries drawn\+\_\+waypoints} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em pyglet vertex lists for the drawn waypoints (created on the first render). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_a298b938e47a2d9f1ef02fca0911110da}{waypoints}} = np.\+loadtxt(conf.\+wpt\+\_\+path, delimiter=conf.\+wpt\+\_\+delim, skiprows=conf.\+wpt\+\_\+rowskip)
+\begin{DoxyCompactList}\small\item\em Raceline array, shape (N, num\+\_\+columns). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner_a3b56e9f725fc2b228accd1001ad806a6}{\+\_\+get\+\_\+current\+\_\+waypoint}} (self, waypoints, lookahead\+\_\+distance, position, theta)
+\begin{DoxyCompactList}\small\item\em Choose the point to aim for. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Example raceline follower using pure pursuit (see the file overview). 
+
+\label{classwaypoint__follow_1_1_pure_pursuit_planner_doc-constructors}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_ac08bda5885415b9ede3ec7ae1ae9e278}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_ac08bda5885415b9ede3ec7ae1ae9e278} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{conf}{, }\item[{}]{wb}{}\end{DoxyParamCaption})}
+
+
+
+Load the raceline from the config and set up the planner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em conf} & Config namespace (see the "{}\+Config file fields used"{} table). \\
+\hline
+{\em wb} & Wheelbase of the car (m). \\
+\hline
+\end{DoxyParams}
+
+
+\label{classwaypoint__follow_1_1_pure_pursuit_planner_doc-func-members}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a3b56e9f725fc2b228accd1001ad806a6}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!\_get\_current\_waypoint@{\_get\_current\_waypoint}}
+\index{\_get\_current\_waypoint@{\_get\_current\_waypoint}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{\_get\_current\_waypoint()}{\_get\_current\_waypoint()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_a3b56e9f725fc2b228accd1001ad806a6} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+\_\+get\+\_\+current\+\_\+waypoint (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{waypoints}{, }\item[{}]{lookahead\+\_\+distance}{, }\item[{}]{position}{, }\item[{}]{theta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Choose the point to aim for. 
+
+
+\begin{DoxyItemize}
+\item If the car is within {\ttfamily lookahead\+\_\+distance} of the raceline: the raceline point one lookahead distance ahead (see the note).
+\item If it is further away but within {\ttfamily max\+\_\+reacquire} (20 m): the nearest raceline segment\textquotesingle{}s start point, to steer back onto the line.
+\item Otherwise: None.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em waypoints} & Full raceline array (all columns), used for the speed column. \\
+\hline
+{\em lookahead\+\_\+distance} & Lookahead distance (m). \\
+\hline
+{\em position} & np.\+ndarray of shape (2,): car position. \\
+\hline
+{\em theta} & Car yaw (unused). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (3,): \+[x, y, target speed], or None.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The point returned is the {\itshape start} waypoint of the segment where the lookahead circle crosses, not the exact crossing point. The speed is taken from the waypoint nearest the car. 
+\end{DoxyNote}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a4f6877f3202fdf67cf1990e1cda08e12}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!load\_waypoints@{load\_waypoints}}
+\index{load\_waypoints@{load\_waypoints}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{load\_waypoints()}{load\_waypoints()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_a4f6877f3202fdf67cf1990e1cda08e12} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+load\+\_\+waypoints (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{conf}{}\end{DoxyParamCaption})}
+
+
+
+Read the raceline CSV into {\ttfamily self.\+waypoints} (one row per waypoint, all columns kept). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em conf} & Config namespace with {\ttfamily wpt\+\_\+path}, {\ttfamily wpt\+\_\+delim} and {\ttfamily wpt\+\_\+rowskip}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a5e108053998e97e4a5597cc6a73fb44a}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!plan@{plan}}
+\index{plan@{plan}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{plan()}{plan()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_a5e108053998e97e4a5597cc6a73fb44a} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+plan (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{pose\+\_\+x}{, }\item[{}]{pose\+\_\+y}{, }\item[{}]{pose\+\_\+theta}{, }\item[{}]{lookahead\+\_\+distance}{, }\item[{}]{vgain}{}\end{DoxyParamCaption})}
+
+
+
+Compute the control command for the car\textquotesingle{}s current pose. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose\+\_\+x,pose\+\_\+y} & Car position (m). \\
+\hline
+{\em pose\+\_\+theta} & Car yaw (rad). \\
+\hline
+{\em lookahead\+\_\+distance} & Lookahead distance (m). \\
+\hline
+{\em vgain} & Multiplier applied to the raceline\textquotesingle{}s speed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (speed, steering\+\_\+angle). Note the order is the reverse of the env\textquotesingle{}s action \+[steer, speed]. If no target point is found, returns (4.\+0, 0.\+0): 4 m/\+s straight ahead. 
+\end{DoxyReturn}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a78a17e42e2dd9d93c91307d1c310ef9b}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!render\_waypoints@{render\_waypoints}}
+\index{render\_waypoints@{render\_waypoints}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{render\_waypoints()}{render\_waypoints()}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_a78a17e42e2dd9d93c91307d1c310ef9b} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+render\+\_\+waypoints (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{e}{}\end{DoxyParamCaption})}
+
+
+
+Draw the raceline points on the renderer (call from a render callback). 
+
+The points are created on the first call and moved on later calls. Coordinates are scaled by 50 to match Env\+Renderer\textquotesingle{}s drawing units.
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & The Env\+Renderer. \\
+\hline
+\end{DoxyParams}
+
+
+\label{classwaypoint__follow_1_1_pure_pursuit_planner_doc-variable-members}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classwaypoint__follow_1_1_pure_pursuit_planner_a298b938e47a2d9f1ef02fca0911110da}\index{waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}!waypoints@{waypoints}}
+\index{waypoints@{waypoints}!waypoint\_follow.PurePursuitPlanner@{waypoint\_follow.PurePursuitPlanner}}
+\doxysubsubsection{\texorpdfstring{waypoints}{waypoints}}
+{\footnotesize\ttfamily \label{classwaypoint__follow_1_1_pure_pursuit_planner_a298b938e47a2d9f1ef02fca0911110da} 
+waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner.\+waypoints = np.\+loadtxt(conf.\+wpt\+\_\+path, delimiter=conf.\+wpt\+\_\+delim, skiprows=conf.\+wpt\+\_\+rowskip)}
+
+
+
+Raceline array, shape (N, num\+\_\+columns). 
+
+Columns are picked with conf.\+wpt\+\_\+xind etc. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+annac/\+\+Documents/\+\+FSAE/\+\+F1\+Tenth/\+f1tenth\+\_\+gym/\+examples/\doxymbox{\hyperlink{waypoint__follow_8py}{waypoint\+\_\+follow.\+py}}\end{DoxyCompactItemize}

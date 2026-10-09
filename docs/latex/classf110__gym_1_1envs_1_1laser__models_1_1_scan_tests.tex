@@ -1,0 +1,53 @@
+\doxysection{f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Tests Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests}{}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests}\index{f110\_gym.envs.laser\_models.ScanTests@{f110\_gym.envs.laser\_models.ScanTests}}
+
+
+Unit tests for \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{Scan\+Simulator2D}.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+laser\+\_\+models.\+Scan\+Tests:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a98f3861eb3303fcaffc33e1bc8011d7b}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a98f3861eb3303fcaffc33e1bc8011d7b} 
+{\bfseries set\+Up} (self)
+\begin{DoxyCompactList}\small\item\em Set Li\+DAR settings and a set of test poses rotating in place at the origin. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a143e151b17e4ac71e368d691a138ad25}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a143e151b17e4ac71e368d691a138ad25} 
+{\bfseries test\+\_\+fps} (self)
+\begin{DoxyCompactList}\small\item\em Scanning the berlin map runs faster than 500 scans per second. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a08c75a1d6d2240a2ed44b3b80030e47c}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a08c75a1d6d2240a2ed44b3b80030e47c} 
+{\bfseries test\+\_\+rng} (self)
+\begin{DoxyCompactList}\small\item\em Noise is reproducible: re-\/seeding the generator reproduces the same scans, and successive scans from one generator differ. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a73fd44ad04462f5154bf26be3d777a98}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a73fd44ad04462f5154bf26be3d777a98} 
+int {\bfseries num\+\_\+beams} = 1080
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a394982c2f5cf5e2ca4140ab22aeb6299}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a394982c2f5cf5e2ca4140ab22aeb6299} 
+float {\bfseries fov} = 4.\+7
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a9ee273a46746a96fd531f84e792201cb}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a9ee273a46746a96fd531f84e792201cb} 
+int {\bfseries num\+\_\+test} = 10
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a31eb3b8ba28e16af8b39bd39c2254090}\label{classf110__gym_1_1envs_1_1laser__models_1_1_scan_tests_a31eb3b8ba28e16af8b39bd39c2254090} 
+{\bfseries test\+\_\+poses} = np.\+zeros((self.\+num\+\_\+test, 3))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit tests for \doxylink{classf110__gym_1_1envs_1_1laser__models_1_1_scan_simulator2_d}{Scan\+Simulator2D}. 
+
+\begin{DoxyNote}{Note}
+Map paths are relative (\textquotesingle{}../\+envs/\+maps/\+berlin.yaml\textquotesingle{}), so run these from a directory where that path resolves, e.\+g. f110\+\_\+gym/\+envs or a sibling folder. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{laser__models_8py}{laser\+\_\+models.\+py}}\end{DoxyCompactItemize}

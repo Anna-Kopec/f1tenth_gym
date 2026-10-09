@@ -1,0 +1,50 @@
+\doxysection{f110\+\_\+gym/\+unittest/\+pyglet\+\_\+test\+\_\+camera.py File Reference}
+\hypertarget{pyglet__test__camera_8py}{}\label{pyglet__test__camera_8py}\index{f110\_gym/unittest/pyglet\_test\_camera.py@{f110\_gym/unittest/pyglet\_test\_camera.py}}
+
+
+Standalone experiment for the pan / zoom camera later used by \doxylink{rendering_8py}{rendering.\+py}: Env\+Renderer.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1pyglet__test__camera_1_1_app}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+App}}
+\begin{DoxyCompactList}\small\item\em Test window with a draggable, zoomable orthographic camera over one coloured square. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{pyglet__test__camera_8py_ad60c292ad7eac4ed7de1777dcd5435b2}{f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+ZOOM\+\_\+\+IN\+\_\+\+FACTOR}} = 1.\+2
+\begin{DoxyCompactList}\small\item\em Zoom multiplier per scroll step up. \end{DoxyCompactList}\item 
+\Hypertarget{pyglet__test__camera_8py_a4ec694cd82738b571eaaa90eea919fe8}\label{pyglet__test__camera_8py_a4ec694cd82738b571eaaa90eea919fe8} 
+int {\bfseries f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+ZOOM\+\_\+\+OUT\+\_\+\+FACTOR} = 1/\doxymbox{\hyperlink{pyglet__test__camera_8py_ad60c292ad7eac4ed7de1777dcd5435b2}{ZOOM\+\_\+\+IN\+\_\+\+FACTOR}}
+\begin{DoxyCompactList}\small\item\em Zoom multiplier per scroll step down. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Standalone experiment for the pan / zoom camera later used by \doxylink{rendering_8py}{rendering.\+py}: Env\+Renderer. 
+
+Opens an 800x800 window with one coloured square. Drag with the mouse to pan and scroll to zoom about the cursor. The camera logic (left/\+right/\+bottom/\+top bounds plus a gl\+Ortho projection) is the same approach Env\+Renderer uses.
+
+Run with: {\ttfamily python} \doxylink{pyglet__test__camera_8py}{pyglet\+\_\+test\+\_\+camera.\+py} (the window opens as soon as the module is run or imported). 
+
+\label{pyglet__test__camera_8py_doc-var-members}
+\Hypertarget{pyglet__test__camera_8py_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{pyglet__test__camera_8py_ad60c292ad7eac4ed7de1777dcd5435b2}\index{pyglet\_test\_camera.py@{pyglet\_test\_camera.py}!ZOOM\_IN\_FACTOR@{ZOOM\_IN\_FACTOR}}
+\index{ZOOM\_IN\_FACTOR@{ZOOM\_IN\_FACTOR}!pyglet\_test\_camera.py@{pyglet\_test\_camera.py}}
+\doxysubsubsection{\texorpdfstring{ZOOM\_IN\_FACTOR}{ZOOM\_IN\_FACTOR}}
+{\footnotesize\ttfamily \label{pyglet__test__camera_8py_ad60c292ad7eac4ed7de1777dcd5435b2} 
+float f110\+\_\+gym.\+unittest.\+pyglet\+\_\+test\+\_\+camera.\+ZOOM\+\_\+\+IN\+\_\+\+FACTOR = 1.\+2}
+
+
+
+Zoom multiplier per scroll step up. 
+
+Scrolling up multiplies zoom\+\_\+level by this, which shows more of the scene (zooms out). 

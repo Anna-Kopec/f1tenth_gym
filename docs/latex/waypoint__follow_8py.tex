@@ -1,0 +1,177 @@
+\doxysection{C:/\+\+Users/\+annac/\+\+Documents/\+\+FSAE/\+\+F1\+Tenth/\+f1tenth\+\_\+gym/\+examples/\+waypoint\+\_\+follow.py File Reference}
+\hypertarget{waypoint__follow_8py}{}\label{waypoint__follow_8py}\index{C:/Users/annac/Documents/FSAE/F1Tenth/f1tenth\_gym/examples/waypoint\_follow.py@{C:/Users/annac/Documents/FSAE/F1Tenth/f1tenth\_gym/examples/waypoint\_follow.py}}
+
+
+Example: a pure pursuit controller following a raceline in the F1\+TENTH gym.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classwaypoint__follow_1_1_pure_pursuit_planner}{waypoint\+\_\+follow.\+Pure\+Pursuit\+Planner}}
+\begin{DoxyCompactList}\small\item\em Example raceline follower using pure pursuit (see the file overview). \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classwaypoint__follow_1_1_flippy_planner}{waypoint\+\_\+follow.\+Flippy\+Planner}}
+\begin{DoxyCompactList}\small\item\em Test planner that flips its steering left and right to stress the integrator and dynamics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{waypoint__follow_8py_a4f0e75e0be333faa12911a7c7b8a24a3}{waypoint\+\_\+follow.\+nearest\+\_\+point\+\_\+on\+\_\+trajectory}} (point, trajectory)
+\begin{DoxyCompactList}\small\item\em Nearest point to {\ttfamily point} on a piecewise-\/linear trajectory. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{waypoint__follow_8py_a749f473573e12128d681993cc788699e}{waypoint\+\_\+follow.\+first\+\_\+point\+\_\+on\+\_\+trajectory\+\_\+intersecting\+\_\+circle}} (point, radius, trajectory, t=0.\+0, wrap=False)
+\begin{DoxyCompactList}\small\item\em First point along the trajectory, searching forward from {\ttfamily t}, that is exactly {\ttfamily radius} from {\ttfamily point}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{waypoint__follow_8py_a8a637ff9a8ff99343fb9d1eed4cc96c1}{waypoint\+\_\+follow.\+get\+\_\+actuation}} (pose\+\_\+theta, lookahead\+\_\+point, position, lookahead\+\_\+distance, wheelbase)
+\begin{DoxyCompactList}\small\item\em Pure pursuit control law: speed and steering angle toward a lookahead point. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{waypoint__follow_8py_a51af30a60f9f02777c6396b8247e356f}{waypoint\+\_\+follow.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Run one episode of pure pursuit on the example map, rendering in real time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Example: a pure pursuit controller following a raceline in the F1\+TENTH gym. 
+
+Loads config\+\_\+example\+\_\+map.\+yaml, creates a single-\/car environment on the example map, and drives one episode with Pure\+Pursuit\+Planner, rendering as it goes. The camera follows the car and the waypoints are drawn on the map.
+
+Run it from the {\ttfamily examples} folder, because the config and waypoint paths are relative: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ examples}
+\DoxyCodeLine{python\ waypoint\_follow.py}
+
+\end{DoxyCode}
+\hypertarget{waypoint__follow_8py_waypoint_follow_pure_pursuit}{}\doxysubsection{\texorpdfstring{How pure pursuit works}{How pure pursuit works}}\label{waypoint__follow_8py_waypoint_follow_pure_pursuit}
+Each step, the controller:
+\begin{DoxyEnumerate}
+\item finds the point on the raceline nearest the car;
+\item walks forward along the raceline to the first point that is the {\itshape lookahead distance} L away from the car, and aims for it;
+\item fits the circular arc that leaves the car along its heading and passes through that point. If the point is a lateral (sideways) distance y from the car\textquotesingle{}s heading line, the arc has radius R = L\texorpdfstring{$^\wedge$}{\string^}2 / (2y);
+\item steers with the bicycle-\/model angle for that arc: delta = atan(wheelbase / R). The speed command is the raceline\textquotesingle{}s speed at the nearest point, times a gain.
+\end{DoxyEnumerate}
+
+A longer lookahead gives smoother but wider lines; a shorter one tracks more tightly but can oscillate.\hypertarget{waypoint__follow_8py_waypoint_follow_config}{}\doxysubsection{\texorpdfstring{Config file fields used}{Config file fields used}}\label{waypoint__follow_8py_waypoint_follow_config}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Field  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Meaning  \\
+map\+\_\+path  &Map path without extension (passed as the env\textquotesingle{}s {\ttfamily map} kwarg).  \\
+map\+\_\+ext  &Map image extension, including the dot.  \\
+sx, sy, stheta  &Starting pose \+[x, y, yaw].  \\
+wpt\+\_\+path  &Raceline CSV file.  \\
+wpt\+\_\+delim  &CSV delimiter.  \\
+wpt\+\_\+rowskip  &Number of header rows to skip.  \\
+wpt\+\_\+xind, wpt\+\_\+yind  &Columns holding x and y (m).  \\
+wpt\+\_\+vind  &Column holding the target speed (m/\+s).  \\
+\end{DoxyTable}
+
+
+The other fields in config\+\_\+example\+\_\+map.\+yaml (parameter bounds, popsize, optim\+\_\+method, ...) belong to a parameter-\/tuning setup and are not used here. 
+
+\label{waypoint__follow_8py_doc-func-members}
+\Hypertarget{waypoint__follow_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{waypoint__follow_8py_a749f473573e12128d681993cc788699e}\index{waypoint\_follow.py@{waypoint\_follow.py}!first\_point\_on\_trajectory\_intersecting\_circle@{first\_point\_on\_trajectory\_intersecting\_circle}}
+\index{first\_point\_on\_trajectory\_intersecting\_circle@{first\_point\_on\_trajectory\_intersecting\_circle}!waypoint\_follow.py@{waypoint\_follow.py}}
+\doxysubsubsection{\texorpdfstring{first\_point\_on\_trajectory\_intersecting\_circle()}{first\_point\_on\_trajectory\_intersecting\_circle()}}
+{\footnotesize\ttfamily \label{waypoint__follow_8py_a749f473573e12128d681993cc788699e} 
+first\+\_\+point\+\_\+on\+\_\+trajectory\+\_\+intersecting\+\_\+circle (\begin{DoxyParamCaption}\item[{}]{point}{, }\item[{}]{radius}{, }\item[{}]{trajectory}{, }\item[{}]{t}{ = {\ttfamily 0.0}, }\item[{}]{wrap}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+First point along the trajectory, searching forward from {\ttfamily t}, that is exactly {\ttfamily radius} from {\ttfamily point}. 
+
+Each segment start + s \texorpdfstring{$\ast$}{*} V is tested against the circle \texorpdfstring{$\vert$}{|}start + s \texorpdfstring{$\ast$}{*} V -\/ point\texorpdfstring{$\vert$}{|} = radius. That is a quadratic in s, and a root with s in \+[0, 1] is a crossing on the segment. On the starting segment, only crossings at or after the starting fraction count.
+
+Algorithm: \href{http://codereview.stackexchange.com/questions/86421/line-segment-to-circle-collision-algorithm}{\texttt{http:\+/\+/\+codereview.\+stackexchange.\+com/\+questions/\+86421/\+line-\/segment-\/to-\/circle-\/collision-\/algorithm}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & np.\+ndarray of shape (2,): circle centre (the car\textquotesingle{}s position). \\
+\hline
+{\em radius} & Circle radius (the lookahead distance) (m). \\
+\hline
+{\em trajectory} & np.\+ndarray of shape (N, 2): waypoints \+[x, y]. \\
+\hline
+{\em t} & Where to start searching: segment index plus fraction along it (e.\+g. 12.\+3 = 30\% along segment 12), as given by nearest\+\_\+point\+\_\+on\+\_\+trajectory(). \\
+\hline
+{\em wrap} & If True and nothing is found before the end, continue from the start of the trajectory, treating it as a closed loop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (point, segment\+\_\+index, fraction), or (None, None, None) if there is no crossing.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The search assumes the starting segment passes within {\ttfamily radius} of {\ttfamily point}. 
+
+A tiny 1e-\/6 is added to each segment\textquotesingle{}s end point to avoid zero-\/length segments. 
+\end{DoxyNote}
+\Hypertarget{waypoint__follow_8py_a8a637ff9a8ff99343fb9d1eed4cc96c1}\index{waypoint\_follow.py@{waypoint\_follow.py}!get\_actuation@{get\_actuation}}
+\index{get\_actuation@{get\_actuation}!waypoint\_follow.py@{waypoint\_follow.py}}
+\doxysubsubsection{\texorpdfstring{get\_actuation()}{get\_actuation()}}
+{\footnotesize\ttfamily \label{waypoint__follow_8py_a8a637ff9a8ff99343fb9d1eed4cc96c1} 
+get\+\_\+actuation (\begin{DoxyParamCaption}\item[{}]{pose\+\_\+theta}{, }\item[{}]{lookahead\+\_\+point}{, }\item[{}]{position}{, }\item[{}]{lookahead\+\_\+distance}{, }\item[{}]{wheelbase}{}\end{DoxyParamCaption})}
+
+
+
+Pure pursuit control law: speed and steering angle toward a lookahead point. 
+
+Computes the lookahead point\textquotesingle{}s lateral offset y in the car\textquotesingle{}s frame, the arc radius R = L\texorpdfstring{$^\wedge$}{\string^}2 / (2y), and the steering angle atan(wheelbase / R).
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose\+\_\+theta} & Car yaw (rad). \\
+\hline
+{\em lookahead\+\_\+point} & np.\+ndarray of shape (3,): \+[x, y, target speed] of the point to aim for. \\
+\hline
+{\em position} & np.\+ndarray of shape (2,): car position \+[x, y]. \\
+\hline
+{\em lookahead\+\_\+distance} & Lookahead distance L (m), used as the distance to the point in the formula. \\
+\hline
+{\em wheelbase} & Distance between the axles (m). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (speed, steering\+\_\+angle): target speed (m/\+s) and steering angle (rad, positive = left). If the point is straight ahead (\texorpdfstring{$\vert$}{|}y\texorpdfstring{$\vert$}{|} \texorpdfstring{$<$}{<} 1e-\/6), the steering angle is 0. 
+\end{DoxyReturn}
+\Hypertarget{waypoint__follow_8py_a51af30a60f9f02777c6396b8247e356f}\index{waypoint\_follow.py@{waypoint\_follow.py}!main@{main}}
+\index{main@{main}!waypoint\_follow.py@{waypoint\_follow.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{waypoint__follow_8py_a51af30a60f9f02777c6396b8247e356f} 
+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run one episode of pure pursuit on the example map, rendering in real time. 
+
+Steps:
+\begin{DoxyEnumerate}
+\item Load config\+\_\+example\+\_\+map.\+yaml.
+\item Build the planner with the default F1\+TENTH wheelbase (lf + lr = 0.\+15875 + 0.\+17145 m).
+\item Create a 1-\/car env with the RK4 integrator and register a render callback. The callback makes the camera follow the car and draws the raceline.
+\item Reset at the configured start pose, then step until done: the car crashes or completes 2 laps.
+\item Print simulated time against real time.
+\end{DoxyEnumerate}
+
+The {\ttfamily work} dict holds tuned controller values: {\ttfamily tlad} is the lookahead distance (m) and {\ttfamily vgain} the speed gain. {\ttfamily mass} and {\ttfamily lf} are left over from the tuning run and are not used. \Hypertarget{waypoint__follow_8py_a4f0e75e0be333faa12911a7c7b8a24a3}\index{waypoint\_follow.py@{waypoint\_follow.py}!nearest\_point\_on\_trajectory@{nearest\_point\_on\_trajectory}}
+\index{nearest\_point\_on\_trajectory@{nearest\_point\_on\_trajectory}!waypoint\_follow.py@{waypoint\_follow.py}}
+\doxysubsubsection{\texorpdfstring{nearest\_point\_on\_trajectory()}{nearest\_point\_on\_trajectory()}}
+{\footnotesize\ttfamily \label{waypoint__follow_8py_a4f0e75e0be333faa12911a7c7b8a24a3} 
+nearest\+\_\+point\+\_\+on\+\_\+trajectory (\begin{DoxyParamCaption}\item[{}]{point}{, }\item[{}]{trajectory}{}\end{DoxyParamCaption})}
+
+
+
+Nearest point to {\ttfamily point} on a piecewise-\/linear trajectory. 
+
+Projects the point onto every segment (clamped to the segment\textquotesingle{}s ends) and returns the closest projection. It is fast: about 0.\+2 ms for 1000 waypoints.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & np.\+ndarray of shape (2,): query point \+[x, y]. \\
+\hline
+{\em trajectory} & np.\+ndarray of shape (N, 2): waypoints \+[x, y]. Consecutive waypoints must differ, or a zero-\/length segment causes a division by zero. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (projection, distance, t, segment\+\_\+index):
+\begin{DoxyItemize}
+\item {\ttfamily projection:} np.\+ndarray of shape (2,), the nearest point on the trajectory.
+\item {\ttfamily distance:} distance from {\ttfamily point} to it.
+\item {\ttfamily t:} position along that segment, from 0 (start) to 1 (end).
+\item {\ttfamily segment\+\_\+index:} index i of the segment, which runs from waypoint i to waypoint i+1. 
+\end{DoxyItemize}
+\end{DoxyReturn}

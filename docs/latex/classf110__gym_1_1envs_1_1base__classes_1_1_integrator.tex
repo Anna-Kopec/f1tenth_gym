@@ -1,0 +1,55 @@
+\doxysection{f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Integrator Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}{}\label{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}\index{f110\_gym.envs.base\_classes.Integrator@{f110\_gym.envs.base\_classes.Integrator}}
+
+
+Numerical integration scheme used to advance the vehicle dynamics.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Integrator:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1base__classes_1_1_integrator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}{RK4}} = 1
+\begin{DoxyCompactList}\small\item\em Classic 4th-\/order Runge-\/\+Kutta: four derivative evaluations per step. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}{Euler}} = 2
+\begin{DoxyCompactList}\small\item\em Forward (explicit) Euler: state += dt \texorpdfstring{$\ast$}{*} f(state). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Numerical integration scheme used to advance the vehicle dynamics. 
+
+The dynamics model returns the time derivative of the state, and the integrator turns that into the next state over one physics time step. 
+
+\label{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395}\index{f110\_gym.envs.base\_classes.Integrator@{f110\_gym.envs.base\_classes.Integrator}!Euler@{Euler}}
+\index{Euler@{Euler}!f110\_gym.envs.base\_classes.Integrator@{f110\_gym.envs.base\_classes.Integrator}}
+\doxysubsubsection{\texorpdfstring{Euler}{Euler}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_a2bd1464c50cdf5b55b908812dd2fb395} 
+int f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Integrator.\+Euler = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Forward (explicit) Euler: state += dt \texorpdfstring{$\ast$}{*} f(state). 
+
+Cheapest, but less accurate and can drift or go unstable with large time steps. \Hypertarget{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae}\index{f110\_gym.envs.base\_classes.Integrator@{f110\_gym.envs.base\_classes.Integrator}!RK4@{RK4}}
+\index{RK4@{RK4}!f110\_gym.envs.base\_classes.Integrator@{f110\_gym.envs.base\_classes.Integrator}}
+\doxysubsubsection{\texorpdfstring{RK4}{RK4}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1base__classes_1_1_integrator_ad8611fabc50848e9a304ee0c9b8b8cae} 
+int f110\+\_\+gym.\+envs.\+base\+\_\+classes.\+Integrator.\+RK4 = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Classic 4th-\/order Runge-\/\+Kutta: four derivative evaluations per step. 
+
+More accurate, especially at high speed or with large time steps, at roughly 4x the cost of Euler. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{base__classes_8py}{base\+\_\+classes.\+py}}\end{DoxyCompactItemize}

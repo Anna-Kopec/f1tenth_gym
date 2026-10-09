@@ -1,0 +1,62 @@
+\doxysection{f110\+\_\+gym/\+envs/\+f110\+\_\+env.py File Reference}
+\hypertarget{f110__env_8py}{}\label{f110__env_8py}\index{f110\_gym/envs/f110\_env.py@{f110\_gym/envs/f110\_env.py}}
+
+
+Open\+AI gym environment for F1\+TENTH racing (F110\+Env).  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env}{f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+F110\+Env}}
+\begin{DoxyCompactList}\small\item\em Open\+AI gym environment for F1\+TENTH. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{f110__env_8py_a118efb91786ec1caaf67464c1d4d4962}\label{f110__env_8py_a118efb91786ec1caaf67464c1d4d4962} 
+int {\bfseries f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+VIDEO\+\_\+W} = 600
+\begin{DoxyCompactList}\small\item\em Video width in pixels (currently unused). \end{DoxyCompactList}\item 
+\Hypertarget{f110__env_8py_ac753c679a3d5a173c8ad99d14c5fc47b}\label{f110__env_8py_ac753c679a3d5a173c8ad99d14c5fc47b} 
+int {\bfseries f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+VIDEO\+\_\+H} = 400
+\begin{DoxyCompactList}\small\item\em Video height in pixels (currently unused). \end{DoxyCompactList}\item 
+\Hypertarget{f110__env_8py_a72a6be22a508a795985d604b0add267d}\label{f110__env_8py_a72a6be22a508a795985d604b0add267d} 
+int {\bfseries f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+WINDOW\+\_\+W} = 1000
+\begin{DoxyCompactList}\small\item\em Initial render window width in pixels. \end{DoxyCompactList}\item 
+\Hypertarget{f110__env_8py_a9a35e98c8a439e76515bdcd473fd9e2d}\label{f110__env_8py_a9a35e98c8a439e76515bdcd473fd9e2d} 
+int {\bfseries f110\+\_\+gym.\+envs.\+f110\+\_\+env.\+WINDOW\+\_\+H} = 800
+\begin{DoxyCompactList}\small\item\em Initial render window height in pixels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Open\+AI gym environment for F1\+TENTH racing (F110\+Env). 
+
+F110\+Env is the public entry point of the package. It wraps base\+\_\+classes.\+Simulator (which does the physics, Li\+DAR and collisions) and adds:
+\begin{DoxyItemize}
+\item the gym interface: reset() / step() / render();
+\item lap counting and lap timing, using a "{}finish zone"{} around the start pose;
+\item the episode-\/end (done) condition;
+\item rendering through rendering.\+Env\+Renderer.
+\end{DoxyItemize}\hypertarget{f110__env_8py_f110_env_usage}{}\doxysubsection{\texorpdfstring{Typical usage}{Typical usage}}\label{f110__env_8py_f110_env_usage}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{import}\ gym,\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{env\ =\ gym.make(\textcolor{stringliteral}{'f110\_gym:f110-\/v0'},\ map=\textcolor{stringliteral}{'vegas'},\ num\_agents=1)}
+\DoxyCodeLine{obs,\ reward,\ done,\ info\ =\ env.reset(np.array([[0.,\ 0.,\ 0.]]))}
+\DoxyCodeLine{\textcolor{keywordflow}{while}\ \textcolor{keywordflow}{not}\ done:}
+\DoxyCodeLine{\ \ \ \ action\ =\ np.array([[steer,\ speed]])\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ one\ row\ per\ agent}}
+\DoxyCodeLine{\ \ \ \ obs,\ reward,\ done,\ info\ =\ env.step(action)}
+\DoxyCodeLine{\ \ \ \ env.render(mode=\textcolor{stringliteral}{'human'})}
+
+\end{DoxyCode}
+
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}

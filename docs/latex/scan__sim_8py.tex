@@ -1,0 +1,187 @@
+\doxysection{f110\+\_\+gym/\+unittest/\+scan\+\_\+sim.py File Reference}
+\hypertarget{scan__sim_8py}{}\label{scan__sim_8py}\index{f110\_gym/unittest/scan\_sim.py@{f110\_gym/unittest/scan\_sim.py}}
+
+
+Older standalone prototype of the Li\+DAR simulator.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_simulator2_d}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+Scan\+Simulator2D}}
+\begin{DoxyCompactList}\small\item\em Prototype 2D Li\+DAR simulator holding a map, its distance transform, and its own noise generator. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1unittest_1_1scan__sim_1_1_scan_tests}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+Scan\+Tests}}
+\begin{DoxyCompactList}\small\item\em Tests comparing this simulator against scans from the legacy C++ simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1unittest}{f110\+\_\+gym.\+unittest}}
+\begin{DoxyCompactList}\small\item\em Development scripts: early standalone prototypes, legacy test-\/data generation, rendering experiments and a random track generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{scan__sim_8py_a9d67e7237ac37e73931b0fdbd1eaf713}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+get\+\_\+dt}} (bitmap, resolution)
+\begin{DoxyCompactList}\small\item\em Distance transform of the map: distance (m) from each cell to the nearest obstacle (0-\/valued) cell. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{scan__sim_8py_a38dba469bc9e65a15dfb137b8aeecbe2}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+xy\+\_\+2\+\_\+rc}} (x, y, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution)
+\begin{DoxyCompactList}\small\item\em World (x, y) to (row, column) in the map grid; (-\/1, -\/1) if outside the map. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{scan__sim_8py_aaa68fe3dc850dfca6e0767addeeb5679}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+distance\+\_\+transform}} (x, y, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt)
+\begin{DoxyCompactList}\small\item\em Distance from a world point to the nearest obstacle, read from the distance transform {\ttfamily dt}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{scan__sim_8py_ab698a8a4f7e92436fcd5910a25014e6e}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+trace\+\_\+ray}} (x, y, theta\+\_\+index, sines, cosines, eps, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt, max\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Length of one beam, by sphere tracing through the distance transform. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{scan__sim_8py_afcd5af3133654de54268953b5930c985}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+get\+\_\+scan}} (pose, theta\+\_\+dis, fov, num\+\_\+beams, theta\+\_\+index\+\_\+increment, sines, cosines, eps, orig\+\_\+x, orig\+\_\+y, orig\+\_\+c, orig\+\_\+s, height, width, resolution, dt, max\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Trace every beam of a scan from one pose (rightmost beam to leftmost). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{scan__sim_8py_a51af30a60f9f02777c6396b8247e356f}{f110\+\_\+gym.\+unittest.\+scan\+\_\+sim.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Manual demo: time 10000 scans, then animate a scan rotating in place on a polar plot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Older standalone prototype of the Li\+DAR simulator. 
+
+Superseded by \doxylink{laser__models_8py}{laser\+\_\+models.\+py}.
+
+This file is kept for reference only; nothing in the gym imports it. It differs from \doxylink{laser__models_8py}{envs/\+laser\+\_\+models.\+py} in these ways:
+\begin{DoxyItemize}
+\item {\bfseries{Noise:}} Scan\+Simulator2D owns its noise generator and standard deviation ({\ttfamily seed} and {\ttfamily std\+\_\+dev} constructor arguments), and scan(pose) always adds noise. In \doxylink{laser__models_8py}{laser\+\_\+models.\+py} the caller passes a generator, or None for no noise.
+\item {\bfseries{No range clipping:}} trace\+\_\+ray() does not clip the result to {\ttfamily max\+\_\+range}, so a beam can come back slightly longer than max\+\_\+range.
+\item {\bfseries{Missing functions:}} none of the time-\/to-\/collision or other-\/car ray-\/casting functions (check\+\_\+ttc\+\_\+jit, ray\+\_\+cast, get\+\_\+range, ...) exist here.
+\item {\bfseries{Tests:}} they compare scans against legacy\+\_\+scan.\+npz (made by \doxylink{legacy__scan__gen_8py}{legacy\+\_\+scan\+\_\+gen.\+py} from the old C++ simulator), using map paths (\textquotesingle{}../../../\+maps/...\textquotesingle{}) that do not exist in this repository.
+\item {\bfseries{Entry point:}} running the file calls main(), not the tests, and main() loads a map from a hard-\/coded path on the original author\textquotesingle{}s machine.
+\end{DoxyItemize}
+
+For how the ray tracing works and detailed per-\/function documentation, see \doxylink{laser__models_8py}{laser\+\_\+models.\+py}.
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{scan__sim_8py_doc-func-members}
+\Hypertarget{scan__sim_8py_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{scan__sim_8py_aaa68fe3dc850dfca6e0767addeeb5679}\index{scan\_sim.py@{scan\_sim.py}!distance\_transform@{distance\_transform}}
+\index{distance\_transform@{distance\_transform}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{distance\_transform()}{distance\_transform()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_aaa68fe3dc850dfca6e0767addeeb5679} 
+distance\+\_\+transform (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Distance from a world point to the nearest obstacle, read from the distance transform {\ttfamily dt}. 
+
+\begin{DoxyReturn}{Returns}
+Distance (m). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{laser__models_8py}{laser\+\_\+models.\+py}: distance\+\_\+transform() 
+\end{DoxySeeAlso}
+\Hypertarget{scan__sim_8py_a9d67e7237ac37e73931b0fdbd1eaf713}\index{scan\_sim.py@{scan\_sim.py}!get\_dt@{get\_dt}}
+\index{get\_dt@{get\_dt}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{get\_dt()}{get\_dt()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_a9d67e7237ac37e73931b0fdbd1eaf713} 
+get\+\_\+dt (\begin{DoxyParamCaption}\item[{}]{bitmap}{, }\item[{}]{resolution}{}\end{DoxyParamCaption})}
+
+
+
+Distance transform of the map: distance (m) from each cell to the nearest obstacle (0-\/valued) cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bitmap} & np.\+ndarray of shape (rows, cols): 0 = obstacle, \texorpdfstring{$>$}{>} 0 = free. \\
+\hline
+{\em resolution} & Map resolution (m per cell). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (rows, cols). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{laser__models_8py}{laser\+\_\+models.\+py}: get\+\_\+dt() 
+\end{DoxySeeAlso}
+\Hypertarget{scan__sim_8py_afcd5af3133654de54268953b5930c985}\index{scan\_sim.py@{scan\_sim.py}!get\_scan@{get\_scan}}
+\index{get\_scan@{get\_scan}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{get\_scan()}{get\_scan()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_afcd5af3133654de54268953b5930c985} 
+get\+\_\+scan (\begin{DoxyParamCaption}\item[{}]{pose}{, }\item[{}]{theta\+\_\+dis}{, }\item[{}]{fov}{, }\item[{}]{num\+\_\+beams}{, }\item[{}]{theta\+\_\+index\+\_\+increment}{, }\item[{}]{sines}{, }\item[{}]{cosines}{, }\item[{}]{eps}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{, }\item[{}]{max\+\_\+range}{}\end{DoxyParamCaption})}
+
+
+
+Trace every beam of a scan from one pose (rightmost beam to leftmost). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & np.\+ndarray of shape (3,): \+[x, y, yaw] of the sensor. \\
+\hline
+{\em theta\+\_\+dis,fov,num\+\_\+beams,theta\+\_\+index\+\_\+increment,sines,cosines} & Scan geometry and angle lookup tables (see Scan\+Simulator2D). \\
+\hline
+{\em eps,orig\+\_\+x,orig\+\_\+y,orig\+\_\+c,orig\+\_\+s,height,width,resolution,dt,max\+\_\+range} & Passed through to trace\+\_\+ray(). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+np.\+ndarray of shape (num\+\_\+beams,): ranges (m). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{laser__models_8py}{laser\+\_\+models.\+py}: get\+\_\+scan() 
+\end{DoxySeeAlso}
+\Hypertarget{scan__sim_8py_a51af30a60f9f02777c6396b8247e356f}\index{scan\_sim.py@{scan\_sim.py}!main@{main}}
+\index{main@{main}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_a51af30a60f9f02777c6396b8247e356f} 
+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Manual demo: time 10000 scans, then animate a scan rotating in place on a polar plot. 
+
+\begin{DoxyNote}{Note}
+The map path is hard-\/coded to the original author\textquotesingle{}s machine; edit it before running. 
+\end{DoxyNote}
+\Hypertarget{scan__sim_8py_ab698a8a4f7e92436fcd5910a25014e6e}\index{scan\_sim.py@{scan\_sim.py}!trace\_ray@{trace\_ray}}
+\index{trace\_ray@{trace\_ray}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{trace\_ray()}{trace\_ray()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_ab698a8a4f7e92436fcd5910a25014e6e} 
+trace\+\_\+ray (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{theta\+\_\+index}{, }\item[{}]{sines}{, }\item[{}]{cosines}{, }\item[{}]{eps}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{, }\item[{}]{dt}{, }\item[{}]{max\+\_\+range}{}\end{DoxyParamCaption})}
+
+
+
+Length of one beam, by sphere tracing through the distance transform. 
+
+\begin{DoxyNote}{Note}
+Unlike \doxylink{laser__models_8py}{laser\+\_\+models.\+py}, the result is not clipped to {\ttfamily max\+\_\+range}. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Distance to the first obstacle (m). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{laser__models_8py}{laser\+\_\+models.\+py}: trace\+\_\+ray() 
+\end{DoxySeeAlso}
+\Hypertarget{scan__sim_8py_a38dba469bc9e65a15dfb137b8aeecbe2}\index{scan\_sim.py@{scan\_sim.py}!xy\_2\_rc@{xy\_2\_rc}}
+\index{xy\_2\_rc@{xy\_2\_rc}!scan\_sim.py@{scan\_sim.py}}
+\doxysubsubsection{\texorpdfstring{xy\_2\_rc()}{xy\_2\_rc()}}
+{\footnotesize\ttfamily \label{scan__sim_8py_a38dba469bc9e65a15dfb137b8aeecbe2} 
+xy\+\_\+2\+\_\+rc (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{orig\+\_\+x}{, }\item[{}]{orig\+\_\+y}{, }\item[{}]{orig\+\_\+c}{, }\item[{}]{orig\+\_\+s}{, }\item[{}]{height}{, }\item[{}]{width}{, }\item[{}]{resolution}{}\end{DoxyParamCaption})}
+
+
+
+World (x, y) to (row, column) in the map grid; (-\/1, -\/1) if outside the map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & World coordinates (m). \\
+\hline
+{\em orig\+\_\+x,orig\+\_\+y} & World position of the map origin (m). \\
+\hline
+{\em orig\+\_\+c,orig\+\_\+s} & cos / sin of the map origin yaw. \\
+\hline
+{\em height,width} & Map size in cells. \\
+\hline
+{\em resolution} & Map resolution (m per cell). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple (r, c). 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{laser__models_8py}{laser\+\_\+models.\+py}: xy\+\_\+2\+\_\+rc() (including a warning about how (-\/1, -\/1) is used) 
+\end{DoxySeeAlso}

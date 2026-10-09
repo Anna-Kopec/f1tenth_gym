@@ -1,0 +1,87 @@
+\doxysection{f110\+\_\+gym/\+envs/\+rendering.py File Reference}
+\hypertarget{rendering_8py}{}\label{rendering_8py}\index{f110\_gym/envs/rendering.py@{f110\_gym/envs/rendering.py}}
+
+
+pyglet / Open\+GL renderer for the F1\+TENTH gym (Env\+Renderer).  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer}{f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer}}
+\begin{DoxyCompactList}\small\item\em pyglet window that draws the environment and handles panning, zooming and resizing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym}{f110\+\_\+gym}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym: a lightweight 2D racing simulator with the Open\+AI gym interface. \end{DoxyCompactList}\item 
+namespace \doxymbox{\hyperlink{namespacef110__gym_1_1envs}{f110\+\_\+gym.\+envs}}
+\begin{DoxyCompactList}\small\item\em F1\+TENTH gym environment package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \doxymbox{\hyperlink{rendering_8py_adcb93d33a17b4cc05e3a17a79389ca9f}{f110\+\_\+gym.\+envs.\+rendering.\+ZOOM\+\_\+\+IN\+\_\+\+FACTOR}} = 1.\+2
+\begin{DoxyCompactList}\small\item\em Scale applied per scroll step when zooming. \end{DoxyCompactList}\item 
+\Hypertarget{rendering_8py_aacc77603b42e49b0cfad2a0d5156d033}\label{rendering_8py_aacc77603b42e49b0cfad2a0d5156d033} 
+int {\bfseries f110\+\_\+gym.\+envs.\+rendering.\+ZOOM\+\_\+\+OUT\+\_\+\+FACTOR} = 1/\doxymbox{\hyperlink{rendering_8py_adcb93d33a17b4cc05e3a17a79389ca9f}{ZOOM\+\_\+\+IN\+\_\+\+FACTOR}}
+\begin{DoxyCompactList}\small\item\em Scale applied per scroll step in the other direction. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{rendering_8py_a15030f21ebdcc600d4cdcba2cb4efdbb}{f110\+\_\+gym.\+envs.\+rendering.\+CAR\+\_\+\+LENGTH}} = 0.\+58
+\begin{DoxyCompactList}\small\item\em Length of the drawn car rectangle (m). \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{rendering_8py_abad083fa3d5353b3326b71aedf095e69}{f110\+\_\+gym.\+envs.\+rendering.\+CAR\+\_\+\+WIDTH}} = 0.\+31
+\begin{DoxyCompactList}\small\item\em Width of the drawn car rectangle (m). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+pyglet / Open\+GL renderer for the F1\+TENTH gym (Env\+Renderer). 
+
+\hypertarget{rendering_8py_rendering_coords}{}\doxysubsection{\texorpdfstring{Drawing coordinates}{Drawing coordinates}}\label{rendering_8py_rendering_coords}
+Everything is drawn in a "{}pixel world"{} frame, which is world metres multiplied by 50. The camera is an orthographic projection whose bounds (left, right, bottom, top) change as you pan and zoom. Zooming changes how many of these units fit in the window. The text label sits at a fixed position in this frame, so it moves with the map rather than staying fixed on screen.\hypertarget{rendering_8py_rendering_drawn}{}\doxysubsection{\texorpdfstring{What is drawn}{What is drawn}}\label{rendering_8py_rendering_drawn}
+
+\begin{DoxyItemize}
+\item {\bfseries{Map:}} one grey point for every obstacle pixel in the map image.
+\item {\bfseries{Cars:}} a filled rectangle per car. The ego car is drawn in a brighter purple.
+\item {\bfseries{Label:}} lap time and ego lap count.
+\item {\bfseries{FPS counter:}} in the bottom-\/left corner.
+\end{DoxyItemize}
+
+Everything except the FPS counter is held in one pyglet Batch, so it is drawn in a single call. Extra shapes can be added to {\ttfamily batch} from F110\+Env render callbacks.
+
+\begin{DoxyAuthor}{Author}
+Hongrui Zheng 
+\end{DoxyAuthor}
+
+
+\label{rendering_8py_doc-var-members}
+\Hypertarget{rendering_8py_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{rendering_8py_a15030f21ebdcc600d4cdcba2cb4efdbb}\index{rendering.py@{rendering.py}!CAR\_LENGTH@{CAR\_LENGTH}}
+\index{CAR\_LENGTH@{CAR\_LENGTH}!rendering.py@{rendering.py}}
+\doxysubsubsection{\texorpdfstring{CAR\_LENGTH}{CAR\_LENGTH}}
+{\footnotesize\ttfamily \label{rendering_8py_a15030f21ebdcc600d4cdcba2cb4efdbb} 
+float f110\+\_\+gym.\+envs.\+rendering.\+CAR\+\_\+\+LENGTH = 0.\+58}
+
+
+
+Length of the drawn car rectangle (m). 
+
+Fixed here; does not follow the env\textquotesingle{}s params. \Hypertarget{rendering_8py_abad083fa3d5353b3326b71aedf095e69}\index{rendering.py@{rendering.py}!CAR\_WIDTH@{CAR\_WIDTH}}
+\index{CAR\_WIDTH@{CAR\_WIDTH}!rendering.py@{rendering.py}}
+\doxysubsubsection{\texorpdfstring{CAR\_WIDTH}{CAR\_WIDTH}}
+{\footnotesize\ttfamily \label{rendering_8py_abad083fa3d5353b3326b71aedf095e69} 
+float f110\+\_\+gym.\+envs.\+rendering.\+CAR\+\_\+\+WIDTH = 0.\+31}
+
+
+
+Width of the drawn car rectangle (m). 
+
+Fixed here; does not follow the env\textquotesingle{}s params. \Hypertarget{rendering_8py_adcb93d33a17b4cc05e3a17a79389ca9f}\index{rendering.py@{rendering.py}!ZOOM\_IN\_FACTOR@{ZOOM\_IN\_FACTOR}}
+\index{ZOOM\_IN\_FACTOR@{ZOOM\_IN\_FACTOR}!rendering.py@{rendering.py}}
+\doxysubsubsection{\texorpdfstring{ZOOM\_IN\_FACTOR}{ZOOM\_IN\_FACTOR}}
+{\footnotesize\ttfamily \label{rendering_8py_adcb93d33a17b4cc05e3a17a79389ca9f} 
+float f110\+\_\+gym.\+envs.\+rendering.\+ZOOM\+\_\+\+IN\+\_\+\+FACTOR = 1.\+2}
+
+
+
+Scale applied per scroll step when zooming. 
+
+Despite the name, scrolling up (dy \texorpdfstring{$>$}{>} 0) multiplies the zoom level by this, which shows more of the map (zooms out). 

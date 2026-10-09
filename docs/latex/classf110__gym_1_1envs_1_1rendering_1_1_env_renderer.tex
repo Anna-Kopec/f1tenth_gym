@@ -1,0 +1,337 @@
+\doxysection{f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer Class Reference}
+\hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer}{}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+
+
+pyglet window that draws the environment and handles panning, zooming and resizing.  
+
+
+Inheritance diagram for f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a740a29034563868ac5cf95414c57909a}{\+\_\+\+\_\+init\+\_\+\_}} (self, width, height, \texorpdfstring{$\ast$}{*}args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}kwargs)
+\begin{DoxyCompactList}\small\item\em Open the window (4x anti-\/aliasing, double-\/buffered, resizable) and set up the camera, batch and labels. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2288038d01e29724da84f0a616aea448}{update\+\_\+map}} (self, map\+\_\+path, map\+\_\+ext)
+\begin{DoxyCompactList}\small\item\em Load a map and add one point per obstacle pixel to the batch. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a4ef1228bbf10cd634efe0a4b1ad8f9c8}{on\+\_\+resize}} (self, width, height)
+\begin{DoxyCompactList}\small\item\em pyglet callback when the window is resized: recentre the camera at the current zoom level. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aeeb4ee324a8aabc3c17fba61beb84113}{on\+\_\+mouse\+\_\+drag}} (self, x, y, dx, dy, buttons, modifiers)
+\begin{DoxyCompactList}\small\item\em pyglet callback for mouse drag: pan the camera so the map follows the cursor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a1e27d6aef8f71181bcf52fe384445a68}{on\+\_\+mouse\+\_\+scroll}} (self, x, y, dx, dy)
+\begin{DoxyCompactList}\small\item\em pyglet callback for the scroll wheel: zoom about the cursor position. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad0100c00d7dc029ff099017dbfb97cfd}{on\+\_\+close}} (self)
+\begin{DoxyCompactList}\small\item\em pyglet callback when the window\textquotesingle{}s close button is clicked: close the window, then raise. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aa8dab08d621e974d8cbe760d66705c89}{on\+\_\+draw}} (self)
+\begin{DoxyCompactList}\small\item\em Draw one frame: set the orthographic camera to the current view, then draw the batch and FPS counter. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e}{update\+\_\+obs}} (self, obs)
+\begin{DoxyCompactList}\small\item\em Move the car shapes to the latest poses and refresh the label text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a10e0980201fca6f3392fc5c333a6ad99}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a10e0980201fca6f3392fc5c333a6ad99} 
+int {\bfseries left} = -\/width/\+2
+\begin{DoxyCompactList}\small\item\em Left edge of the visible area, in drawing units. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_acb665a6f4d150da3b2159b1cd86f4117}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_acb665a6f4d150da3b2159b1cd86f4117} 
+int {\bfseries right} = width/\+2
+\begin{DoxyCompactList}\small\item\em Right edge of the visible area. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab6f1d3bbdf185a2489a9c444413e72b6}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab6f1d3bbdf185a2489a9c444413e72b6} 
+int {\bfseries bottom} = -\/height/\+2
+\begin{DoxyCompactList}\small\item\em Bottom edge of the visible area. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a6e8e1a6e3f6c1f681f0fcbe6c04ffc27}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a6e8e1a6e3f6c1f681f0fcbe6c04ffc27} 
+int {\bfseries top} = height/\+2
+\begin{DoxyCompactList}\small\item\em Top edge of the visible area. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a29a7c53793641b68754baf1a671b67ff}{zoom\+\_\+level}} = 1.\+2
+\begin{DoxyCompactList}\small\item\em Drawing units per screen pixel. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab7e977bc0f7464767f725c878970e1bd}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab7e977bc0f7464767f725c878970e1bd} 
+float {\bfseries zoomed\+\_\+width} = width
+\begin{DoxyCompactList}\small\item\em Visible width in drawing units. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad90128770ed695470e47c0659e3dd4de}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad90128770ed695470e47c0659e3dd4de} 
+float {\bfseries zoomed\+\_\+height} = height
+\begin{DoxyCompactList}\small\item\em Visible height in drawing units. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a0f6f622b6ffe98f7ee038c2ce72af276}{batch}} = pyglet.\+graphics.\+Batch()
+\begin{DoxyCompactList}\small\item\em pyglet Batch holding the map points, car shapes and label. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ae423459dd9ee2da53cf7929e4591e366}{map\+\_\+points}} = None
+\begin{DoxyCompactList}\small\item\em Obstacle points in drawing units, shape (n, 3). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a227e60c781a0e50f827ea2f4f11a3f85}{poses}} = None
+\begin{DoxyCompactList}\small\item\em Latest car poses, shape (num\+\_\+agents, 3): \+[x, y, yaw] in metres. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a8a458f2ce6a733888d1a6bfaab243f31}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a8a458f2ce6a733888d1a6bfaab243f31} 
+{\bfseries vertices} = None
+\begin{DoxyCompactList}\small\item\em Reserved for car corners; currently unused. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad3328a46ae8641dc60b24d53219ffcb3}{score\+\_\+label}}
+\begin{DoxyCompactList}\small\item\em Text label showing lap time and ego lap count. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2ecadd7a3ea2a4525bd7b0b4d362db81}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2ecadd7a3ea2a4525bd7b0b4d362db81} 
+{\bfseries fps\+\_\+display} = pyglet.\+window.\+FPSDisplay(self)
+\begin{DoxyCompactList}\small\item\em Frame-\/rate counter, drawn in the bottom-\/left corner. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad2c50c6e7d890771c7173768b6eef5c2}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad2c50c6e7d890771c7173768b6eef5c2} 
+{\bfseries ego\+\_\+idx} = obs\+[\textquotesingle{}ego\+\_\+idx\textquotesingle{}]
+\begin{DoxyCompactList}\small\item\em Index of the ego car, from the latest observation. \end{DoxyCompactList}\item 
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab5bf54db22c97aa938d5f8d01a6162a3}\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ab5bf54db22c97aa938d5f8d01a6162a3} 
+list {\bfseries cars} = \+[$\,$]
+\begin{DoxyCompactList}\small\item\em Pyglet vertex lists for each car\textquotesingle{}s rectangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+pyglet window that draws the environment and handles panning, zooming and resizing. 
+
+\doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_a6e92921323c7221b767e680d663a49f3}{F110\+Env.\+render()} creates and drives it: \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e}{update\+\_\+obs()}, then any render callbacks, then dispatch\+\_\+events(), \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aa8dab08d621e974d8cbe760d66705c89}{on\+\_\+draw()} and flip(). 
+
+\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-constructors}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a740a29034563868ac5cf95414c57909a}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a740a29034563868ac5cf95414c57909a} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{width}{, }\item[{}]{height}{, }\item[{\texorpdfstring{$\ast$}{*}}]{args}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{kwargs}{}\end{DoxyParamCaption})}
+
+
+
+Open the window (4x anti-\/aliasing, double-\/buffered, resizable) and set up the camera, batch and labels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Initial window width in pixels. \\
+\hline
+{\em height} & Initial window height in pixels. \\
+\hline
+{\em args,kwargs} & Passed on to pyglet.\+window.\+Window. \\
+\hline
+\end{DoxyParams}
+
+
+\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-func-members}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad0100c00d7dc029ff099017dbfb97cfd}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!on\_close@{on\_close}}
+\index{on\_close@{on\_close}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{on\_close()}{on\_close()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad0100c00d7dc029ff099017dbfb97cfd} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+on\+\_\+close (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback when the window\textquotesingle{}s close button is clicked: close the window, then raise. 
+
+Raising stops a simulation loop that would otherwise keep running with no window. Overrides pyglet.\+window.\+Window.\+on\+\_\+close.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Always raised, with the message \textquotesingle{}Rendering window was closed.\textquotesingle{} \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aa8dab08d621e974d8cbe760d66705c89}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!on\_draw@{on\_draw}}
+\index{on\_draw@{on\_draw}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{on\_draw()}{on\_draw()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aa8dab08d621e974d8cbe760d66705c89} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+on\+\_\+draw (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Draw one frame: set the orthographic camera to the current view, then draw the batch and FPS counter. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & If \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2288038d01e29724da84f0a616aea448}{update\+\_\+map()} or \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e}{update\+\_\+obs()} has not been called yet. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aeeb4ee324a8aabc3c17fba61beb84113}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!on\_mouse\_drag@{on\_mouse\_drag}}
+\index{on\_mouse\_drag@{on\_mouse\_drag}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{on\_mouse\_drag()}{on\_mouse\_drag()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_aeeb4ee324a8aabc3c17fba61beb84113} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+on\+\_\+mouse\+\_\+drag (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{dx}{, }\item[{}]{dy}{, }\item[{}]{buttons}{, }\item[{}]{modifiers}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback for mouse drag: pan the camera so the map follows the cursor. 
+
+Overrides pyglet.\+window.\+Window.\+on\+\_\+mouse\+\_\+drag.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Cursor distance in pixels from the left edge of the window. \\
+\hline
+{\em y} & Cursor distance in pixels from the bottom edge of the window. \\
+\hline
+{\em dx} & Horizontal movement since the last event (pixels). \\
+\hline
+{\em dy} & Vertical movement since the last event (pixels). \\
+\hline
+{\em buttons} & Bitwise combination of the mouse buttons currently pressed. \\
+\hline
+{\em modifiers} & Bitwise combination of the keyboard modifiers currently active. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a1e27d6aef8f71181bcf52fe384445a68}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!on\_mouse\_scroll@{on\_mouse\_scroll}}
+\index{on\_mouse\_scroll@{on\_mouse\_scroll}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{on\_mouse\_scroll()}{on\_mouse\_scroll()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a1e27d6aef8f71181bcf52fe384445a68} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+on\+\_\+mouse\+\_\+scroll (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{dx}{, }\item[{}]{dy}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback for the scroll wheel: zoom about the cursor position. 
+
+The point under the cursor stays fixed while the visible area grows or shrinks. The zoom level is kept between 0.\+01 and 10.
+
+Overrides pyglet.\+window.\+Window.\+on\+\_\+mouse\+\_\+scroll.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Cursor distance in pixels from the left edge of the window. \\
+\hline
+{\em y} & Cursor distance in pixels from the bottom edge of the window. \\
+\hline
+{\em dx} & Horizontal scroll amount. \\
+\hline
+{\em dy} & Vertical scroll amount (positive = scroll up). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a4ef1228bbf10cd634efe0a4b1ad8f9c8}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!on\_resize@{on\_resize}}
+\index{on\_resize@{on\_resize}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{on\_resize()}{on\_resize()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a4ef1228bbf10cd634efe0a4b1ad8f9c8} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+on\+\_\+resize (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{width}{, }\item[{}]{height}{}\end{DoxyParamCaption})}
+
+
+
+pyglet callback when the window is resized: recentre the camera at the current zoom level. 
+
+Overrides pyglet.\+window.\+Window.\+on\+\_\+resize.
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & New window width in pixels. \\
+\hline
+{\em height} & New window height in pixels.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Any panning is lost on resize; the view recentres on the origin. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2288038d01e29724da84f0a616aea448}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!update\_map@{update\_map}}
+\index{update\_map@{update\_map}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{update\_map()}{update\_map()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2288038d01e29724da84f0a616aea448} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+update\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{map\+\_\+path}{, }\item[{}]{map\+\_\+ext}{}\end{DoxyParamCaption})}
+
+
+
+Load a map and add one point per obstacle pixel to the batch. 
+
+Each obstacle pixel (value exactly 0) is converted to world metres using the YAML\textquotesingle{}s resolution and origin, then scaled by 50 into drawing units.
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+path} & Path to the map {\itshape without} an extension; \textquotesingle{}.yaml\textquotesingle{} and {\ttfamily map\+\_\+ext} are appended to it. \\
+\hline
+{\em map\+\_\+ext} & Image extension, including the dot.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The origin yaw in the YAML is ignored here (the scan simulator does use it). 
+
+Only pixels that are exactly 0 are drawn. The scan simulator treats everything \texorpdfstring{$<$}{<}= 128 as an obstacle, so grey pixels count as walls but are not drawn. 
+
+Calling this again adds the new points without removing the old ones. 
+\end{DoxyNote}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!update\_obs@{update\_obs}}
+\index{update\_obs@{update\_obs}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{update\_obs()}{update\_obs()}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+update\+\_\+obs (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{obs}{}\end{DoxyParamCaption})}
+
+
+
+Move the car shapes to the latest poses and refresh the label text. 
+
+The car shapes are created on the first call, which fixes the number of cars and which one is the ego. Later calls only move them.
+
+
+\begin{DoxyParams}{Parameters}
+{\em obs} & Dict with keys {\ttfamily ego\+\_\+idx}, {\ttfamily poses\+\_\+x}, {\ttfamily poses\+\_\+y}, {\ttfamily poses\+\_\+theta}, {\ttfamily lap\+\_\+times} and {\ttfamily lap\+\_\+counts} (\doxylink{classf110__gym_1_1envs_1_1f110__env_1_1_f110_env_ad72637a095c5eaa10747062ffe62180e}{F110\+Env.\+render\+\_\+obs}).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The lap time shown is car 0\textquotesingle{}s, not necessarily the ego car\textquotesingle{}s. 
+\end{DoxyNote}
+
+
+\label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-variable-members}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a0f6f622b6ffe98f7ee038c2ce72af276}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!batch@{batch}}
+\index{batch@{batch}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{batch}{batch}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a0f6f622b6ffe98f7ee038c2ce72af276} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+batch = pyglet.\+graphics.\+Batch()}
+
+
+
+pyglet Batch holding the map points, car shapes and label. 
+
+Render callbacks can add to it. \Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ae423459dd9ee2da53cf7929e4591e366}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!map\_points@{map\_points}}
+\index{map\_points@{map\_points}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{map\_points}{map\_points}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ae423459dd9ee2da53cf7929e4591e366} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+map\+\_\+points = None}
+
+
+
+Obstacle points in drawing units, shape (n, 3). 
+
+None until \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a2288038d01e29724da84f0a616aea448}{update\+\_\+map()} is called. \Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a227e60c781a0e50f827ea2f4f11a3f85}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!poses@{poses}}
+\index{poses@{poses}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{poses}{poses}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a227e60c781a0e50f827ea2f4f11a3f85} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+poses = None}
+
+
+
+Latest car poses, shape (num\+\_\+agents, 3): \+[x, y, yaw] in metres. 
+
+None until \doxylink{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a818a455670f86db94e060c4ab9c31a0e}{update\+\_\+obs()} is called. \Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad3328a46ae8641dc60b24d53219ffcb3}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!score\_label@{score\_label}}
+\index{score\_label@{score\_label}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{score\_label}{score\_label}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_ad3328a46ae8641dc60b24d53219ffcb3} 
+f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+score\+\_\+label}
+
+{\bfseries Initial value:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ pyglet.text.Label(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Lap\ Time:\ \{laptime:.2f\},\ Ego\ Lap\ Count:\ \{count:.0f\}'}.format(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ laptime=0.0,\ count=0.0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ font\_size=36,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x=0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y=-\/800,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ anchor\_x=\textcolor{stringliteral}{'center'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ anchor\_y=\textcolor{stringliteral}{'center'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ width=0.01,}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ height=0.01,}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color=(255,\ 255,\ 255,\ 255),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ batch=self.batch)}
+
+\end{DoxyCode}
+
+
+Text label showing lap time and ego lap count. 
+
+Placed at (0, -\/800) in drawing units. \Hypertarget{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a29a7c53793641b68754baf1a671b67ff}\index{f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}!zoom\_level@{zoom\_level}}
+\index{zoom\_level@{zoom\_level}!f110\_gym.envs.rendering.EnvRenderer@{f110\_gym.envs.rendering.EnvRenderer}}
+\doxysubsubsection{\texorpdfstring{zoom\_level}{zoom\_level}}
+{\footnotesize\ttfamily \label{classf110__gym_1_1envs_1_1rendering_1_1_env_renderer_a29a7c53793641b68754baf1a671b67ff} 
+float f110\+\_\+gym.\+envs.\+rendering.\+Env\+Renderer.\+zoom\+\_\+level = 1.\+2}
+
+
+
+Drawing units per screen pixel. 
+
+Larger values show more of the map. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+f110\+\_\+gym/\+envs/\doxymbox{\hyperlink{rendering_8py}{rendering.\+py}}\end{DoxyCompactItemize}
