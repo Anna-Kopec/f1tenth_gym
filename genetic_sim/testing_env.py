@@ -245,6 +245,5 @@ def main():
             if not is_window_closed(ex):
                 raise
 
-
 if __name__ == '__main__':
     main()
