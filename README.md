@@ -1,63 +1,84 @@
-![Python 3.8 3.9](https://github.com/f1tenth/f1tenth_gym/actions/workflows/ci.yml/badge.svg)
-![Docker](https://github.com/f1tenth/f1tenth_gym/actions/workflows/docker.yml/badge.svg)
-# The F1TENTH Gym environment
+# FSAE Autonomous Car Sim
 
-This is the repository of the F1TENTH Gym environment.
+A Python simulation environment for prototyping autonomous-vehicle control algorithms for an FSAE (Formula SAE) car, built on a fork of the [F1TENTH Gym](https://github.com/Anna-Kopec/f1tenth_gym).
 
-This project is still under heavy developement.
+## Why F1TENTH?
 
-You can find the [documentation](https://f1tenth-gym.readthedocs.io/en/latest/) of the environment here.
+F1TENTH is a lightweight simulator that handles the vehicle physics, so you can focus on implementing the control algorithms themselves.
 
-## Quickstart
-We recommend installing the simulation inside a virtualenv. You can install the environment by running:
+- **Python only.** No heavy rendering engines (Unreal, Unity) are required, unlike many other simulators.
+- **Easy to set up.** A virtualenv and a single `pip install` are enough to get running.
+- **Well suited to prototyping.** Fast iteration on planning and control before moving to higher-fidelity tools.
+
+## Prerequisites
+
+| Requirement | Notes |
+|---|---|
+| Python 3 | Python 3.8 is required on Windows (upstream library-support limitation). |
+| `git` | To clone the simulator. |
+| `virtualenv` | Install with `pip install virtualenv` (macOS: `pip3 install virtualenv`). |
+
+## Quick Start
+
+Commands below run in macOS Terminal or Windows PowerShell. Where a step has one command, it is identical on both systems.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Anna-Kopec/f1tenth_gym
+cd f1tenth_gym
+```
+
+### 2. Create the virtual environment
+
+From inside `f1tenth_gym`:
 
 ```bash
 virtualenv gym_env
-source gym_env/bin/activate
-git clone https://github.com/f1tenth/f1tenth_gym.git
-cd f1tenth_gym
+```
+
+### 3. Activate the virtual environment and install the simulator
+
+| macOS | Windows (PowerShell) |
+|---|---|
+| `source gym_env/bin/activate` | `gym_env\Scripts\Activate.ps1` |
+
+Then, on both systems:
+
+```bash
 pip install -e .
 ```
 
-Then you can run a quick waypoint follow example by:
-```bash
-cd examples
-python3 waypoint_follow.py
-```
+Use `deactivate` to exit the environment. On Windows Command Prompt (cmd), activate with `gym_env\Scripts\activate.bat`.
 
-A Dockerfile is also provided with support for the GUI with nvidia-docker (nvidia GPU required):
-```bash
-docker build -t f1tenth_gym_container -f Dockerfile .
-docker run --gpus all -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix f1tenth_gym_container
-````
-Then the same example can be ran.
+### 4. Run the genetic simulation
 
-## Known issues
-- Library support issues on Windows. You must use Python 3.8 as of 10-2021
-- On MacOS Big Sur and above, when rendering is turned on, you might encounter the error:
-```
-ImportError: Can't find framework /System/Library/Frameworks/OpenGL.framework.
-```
-You can fix the error by installing a newer version of pyglet:
-```bash
-$ pip3 install pyglet==1.5.20
-```
-And you might see an error similar to
-```
-f110-gym 0.2.1 requires pyglet<1.5, but you have pyglet 1.5.20 which is incompatible.
-```
-which could be ignored. The environment should still work without error.
+| macOS | Windows (PowerShell) |
+|---|---|
+| `python3 genetic_sim/testing_env.py` | `python genetic_sim\testing_env.py` |
 
-## Citing
-If you find this Gym environment useful, please consider citing:
+Run from the repository root. If the script cannot find its map or data files, `cd genetic_sim` first and run `testing_env.py` from there.
 
-```
-@inproceedings{okelly2020f1tenth,
-  title={F1TENTH: An Open-source Evaluation Environment for Continuous Control and Reinforcement Learning},
-  author={O’Kelly, Matthew and Zheng, Hongrui and Karthik, Dhruv and Mangharam, Rahul},
-  booktitle={NeurIPS 2019 Competition and Demonstration Track},
-  pages={77--89},
-  year={2020},
-  organization={PMLR}
-}
-```
+## Viewing the Code Documentation (Doxygen)
+
+Open `docs/doxygen/html/index.html` in a browser.
+
+| macOS | Windows (PowerShell) |
+|---|---|
+| `open docs/doxygen/html/index.html` | `start docs\doxygen\html\index.html` |
+
+You can also double-click `index.html` in Finder or File Explorer. If search or navigation breaks when opened as a local file, serve the folder and visit `http://localhost:8000`:
+
+| macOS | Windows (PowerShell) |
+|---|---|
+| `python3 -m http.server 8000 --directory docs/doxygen/html` | `python -m http.server 8000 --directory docs\doxygen\html` |
+
+## Troubleshooting
+
+| Issue | Fix |
+|---|---|
+| `command not found` / "not recognized" (e.g., `virtualenv`, `git`) | Install the missing prerequisite and make sure it is on your `PATH`. |
+| PowerShell: "running scripts is disabled" when activating | Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then activate again. |
+| Library errors on Windows | Use Python 3.8 (e.g., `py -3.8 -m virtualenv gym_env`). |
+| macOS (Big Sur+) with rendering on: `ImportError: Can't find framework /System/Library/Frameworks/OpenGL.framework` | Run `pip3 install pyglet==1.5.20`. |
+| `f110-gym requires pyglet<1.5, but you have pyglet 1.5.20` | Safe to ignore; the environment should still work. |

@@ -41,6 +41,9 @@ import numpy as np
 from f110_gym.envs.base_classes import Integrator
 from nn_controller import HERE, NNController, load_tracks
 
+
+MAP = "Budapest"
+NUM_AGENTS = 10
 TIMESTEP = 0.01  # s, env physics step
 
 # Car colours in the render window (RGB).
@@ -187,8 +190,8 @@ def race(env, controllers, start_pose, max_steps, render):
 def main():
     ###################
     # CONFIGURE
-    map = 'Budapest'
-    n = 10
+    map = MAP
+    n = NUM_AGENTS
     render = True
     ###################
     parser = argparse.ArgumentParser()
