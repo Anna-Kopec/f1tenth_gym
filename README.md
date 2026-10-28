@@ -59,7 +59,14 @@ Use `deactivate` to exit the environment. On Windows Command Prompt (cmd), activ
 
 Run from the repository root. If the script cannot find its map or data files, `cd genetic_sim` first and run `testing_env.py` from there.
 
-## Viewing the Code Documentation (Doxygen)
+## Documentation
+
+### Read Write-ups
+Formal written documentation for this project can be found in docs/writeups. 
+* [text](<docs/writeups/Autonomous Car Guidelines.pdf>): UConn FSAE's autonomous vehicle initiative overview
+* [text](docs/writeups/CSE_4820_Course_Project_Proposal.pdf): Our team's project proposal (this is also doubling as a class project) 
+
+### Viewing Doxygen Code Documentation
 
 Open `docs/doxygen/html/index.html` in a browser.
 
