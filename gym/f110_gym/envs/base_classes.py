@@ -164,6 +164,7 @@ class RaceCar(object):
         # initialization
         ## Vehicle parameter dictionary (see the constructor for its keys).
         self.params = params
+        self._dyn_consts = self._dynamics_constants(params)
         ## Seed for this car's LiDAR noise generator; reused on every reset().
         self.seed = seed
         ## True if this is the ego vehicle.
@@ -200,7 +201,7 @@ class RaceCar(object):
 
         ## FIFO buffer that delays steering commands to model servo lag.
         #  The newest command is at index 0 and the oldest at index -1.
-        self.steer_buffer = np.empty((0, ))
+        self.steer_buffer = []
         ## Number of steps of steering delay.
         self.steer_buffer_size = 2
 
@@ -283,6 +284,13 @@ class RaceCar(object):
         @param params New vehicle parameter dictionary (same keys as the constructor).
         """
         self.params = params
+        self._dyn_consts = self._dynamics_constants(params)
+
+    @staticmethod
+    def _dynamics_constants(p):
+        """Model constants in the argument order of vehicle_dynamics_st (after state and input)."""
+        return tuple(p[k] for k in ('mu', 'C_Sf', 'C_Sr', 'lf', 'lr', 'h', 'm', 'I', 's_min', 's_max',
+                                    'sv_min', 'sv_max', 'v_switch', 'a_max', 'v_min', 'v_max'))
 
     def set_map(self, map_path, map_ext):
         """!
@@ -316,7 +324,7 @@ class RaceCar(object):
         self.state[0:2] = pose[0:2]
         self.state[4] = pose[2]
         # empty the steering delay buffer so old commands don't carry over
-        self.steer_buffer = np.empty((0, ))
+        self.steer_buffer = []
         # reset scan random generator
         self.scan_rng = np.random.default_rng(seed=self.seed)
 
@@ -421,21 +429,19 @@ class RaceCar(object):
         # Push the new command onto the front of the buffer. Once the buffer is
         # full, pop the oldest command from the back and apply it. This delays
         # steering by steer_buffer_size steps.
-        steer = 0.
-        if self.steer_buffer.shape[0] < self.steer_buffer_size:
+        buf = self.steer_buffer
+        if len(buf) < self.steer_buffer_size:
             # buffer still filling: apply no steering yet
             steer = 0.
-            self.steer_buffer = np.append(raw_steer, self.steer_buffer)
         else:
-            steer = self.steer_buffer[-1]
-            self.steer_buffer = self.steer_buffer[:-1]
-            self.steer_buffer = np.append(raw_steer, self.steer_buffer)
-
+            steer = buf.pop()
+        buf.insert(0, raw_steer)
 
         # ---- 2. low-level control ----
         # Convert desired (speed, steering angle) into the model's actual inputs:
         # acceleration (accl) and steering angle velocity (sv).
-        accl, sv = pid(vel, steer, self.state[3], self.state[2], self.params['sv_max'], self.params['a_max'], self.params['v_max'], self.params['v_min'])
+        p = self.params
+        accl, sv = pid(vel, steer, self.state[3], self.state[2], p['sv_max'], p['a_max'], p['v_max'], p['v_min'])
 
         # ---- 3. integrate the dynamics ----
         if self.integrator is Integrator.RK4:
@@ -443,119 +449,21 @@ class RaceCar(object):
             # Sample the derivative at the start (k1), twice at the midpoint
             # (k2, k3) and at the end (k4) of the step, then take a weighted
             # average. The control input is held constant over the step.
-            k1 = vehicle_dynamics_st(
-                self.state,
-                np.array([sv, accl]),
-                self.params['mu'],
-                self.params['C_Sf'],
-                self.params['C_Sr'],
-                self.params['lf'],
-                self.params['lr'],
-                self.params['h'],
-                self.params['m'],
-                self.params['I'],
-                self.params['s_min'],
-                self.params['s_max'],
-                self.params['sv_min'],
-                self.params['sv_max'],
-                self.params['v_switch'],
-                self.params['a_max'],
-                self.params['v_min'],
-                self.params['v_max'])
-
-            # midpoint estimate using the slope at the start
-            k2_state = self.state + self.time_step*(k1/2)
-
-            k2 = vehicle_dynamics_st(
-                k2_state,
-                np.array([sv, accl]),
-                self.params['mu'],
-                self.params['C_Sf'],
-                self.params['C_Sr'],
-                self.params['lf'],
-                self.params['lr'],
-                self.params['h'],
-                self.params['m'],
-                self.params['I'],
-                self.params['s_min'],
-                self.params['s_max'],
-                self.params['sv_min'],
-                self.params['sv_max'],
-                self.params['v_switch'],
-                self.params['a_max'],
-                self.params['v_min'],
-                self.params['v_max'])
-
-            # second midpoint estimate using the slope at the first midpoint
-            k3_state = self.state + self.time_step*(k2/2)
-
-            k3 = vehicle_dynamics_st(
-                k3_state,
-                np.array([sv, accl]),
-                self.params['mu'],
-                self.params['C_Sf'],
-                self.params['C_Sr'],
-                self.params['lf'],
-                self.params['lr'],
-                self.params['h'],
-                self.params['m'],
-                self.params['I'],
-                self.params['s_min'],
-                self.params['s_max'],
-                self.params['sv_min'],
-                self.params['sv_max'],
-                self.params['v_switch'],
-                self.params['a_max'],
-                self.params['v_min'],
-                self.params['v_max'])
-
-            # end-of-step estimate using the slope at the second midpoint
-            k4_state = self.state + self.time_step*k3
-
-            k4 = vehicle_dynamics_st(
-                k4_state,
-                np.array([sv, accl]),
-                self.params['mu'],
-                self.params['C_Sf'],
-                self.params['C_Sr'],
-                self.params['lf'],
-                self.params['lr'],
-                self.params['h'],
-                self.params['m'],
-                self.params['I'],
-                self.params['s_min'],
-                self.params['s_max'],
-                self.params['sv_min'],
-                self.params['sv_max'],
-                self.params['v_switch'],
-                self.params['a_max'],
-                self.params['v_min'],
-                self.params['v_max'])
+            # The model constants are read once per step (self._dyn_consts).
+            u = np.array([sv, accl])
+            dyn = self._dyn_consts
+            h = self.time_step
+            k1 = vehicle_dynamics_st(self.state, u, *dyn)
+            k2 = vehicle_dynamics_st(self.state + h*(k1/2), u, *dyn)
+            k3 = vehicle_dynamics_st(self.state + h*(k2/2), u, *dyn)
+            k4 = vehicle_dynamics_st(self.state + h*k3, u, *dyn)
 
             # dynamics integration: weighted average of the four slopes
-            self.state = self.state + self.time_step*(1/6)*(k1 + 2*k2 + 2*k3 + k4)
+            self.state = self.state + h*(1/6)*(k1 + 2*k2 + 2*k3 + k4)
 
         elif self.integrator is Integrator.Euler:
             # Forward Euler: one derivative evaluation at the start of the step
-            f = vehicle_dynamics_st(
-                self.state,
-                np.array([sv, accl]),
-                self.params['mu'],
-                self.params['C_Sf'],
-                self.params['C_Sr'],
-                self.params['lf'],
-                self.params['lr'],
-                self.params['h'],
-                self.params['m'],
-                self.params['I'],
-                self.params['s_min'],
-                self.params['s_max'],
-                self.params['sv_min'],
-                self.params['sv_max'],
-                self.params['v_switch'],
-                self.params['a_max'],
-                self.params['v_min'],
-                self.params['v_max'])
+            f = vehicle_dynamics_st(self.state, np.array([sv, accl]), *self._dyn_consts)
             self.state = self.state + self.time_step * f
 
         else:
@@ -661,6 +569,11 @@ class Simulator(object):
         ## Index of the car each car collided with, shape (num_agents,); -1 if none.
         #  Only car-to-car collisions are recorded here, not wall collisions.
         self.collision_idx = -1 * np.ones((self.num_agents, ))
+        ## Cars to leave out of step(): a True entry means the car is not moved or
+        #  scanned any more and keeps its state and last scan. Set by the caller
+        #  (e.g. a trainer) for cars that have crashed and sit still; cleared by reset().
+        self.frozen = np.zeros(self.num_agents, dtype=bool)
+        self._last_scans = [None] * self.num_agents
 
         # initializing agents
         for i in range(self.num_agents):
@@ -675,14 +588,15 @@ class Simulator(object):
         """!
         @brief Load the map for the environment.
 
-        Every car's set_map() is called, although they all share one scan
-        simulator, so the map is effectively loaded once.
+        All cars share one scan simulator (RaceCar.scan_simulator), so the map
+        is loaded through the first car only. Calling set_map() on every car
+        would reload the image and recompute its distance transform once per
+        car (~0.3 s each on a 2000x2000 map) for the same result.
 
         @param map_path Path to the map's YAML metadata file.
         @param map_ext  File extension of the map image (e.g. ".png").
         """
-        for agent in self.agents:
-            agent.set_map(map_path, map_ext)
+        self.agents[0].set_map(map_path, map_ext)
 
 
     def update_params(self, params, agent_idx=-1):
@@ -733,7 +647,8 @@ class Simulator(object):
 
         The steps are:
         1. Move every car (RaceCar.update_pose) and record its new pose.
-           Each car also takes a scan against the static map.
+           Each car also takes a scan against the static map. Cars marked in
+           @ref frozen are skipped and keep their state and last scan.
         2. Check car-to-car collisions on the new poses (check_collision).
         3. For each car: give it the other cars' poses, check for a wall
            collision, and add the other cars to its scan (RaceCar.update_scan).
@@ -758,7 +673,12 @@ class Simulator(object):
         agent_scans = []
 
         # ---- 1. move every car ----
+        frozen = self.frozen
         for i, agent in enumerate(self.agents):
+            if frozen[i]:
+                # parked car: state, pose and scan stay as they were
+                agent_scans.append(self._last_scans[i])
+                continue
             # update each agent's pose
             current_scan = agent.update_pose(control_inputs[i, 0], control_inputs[i, 1])
             agent_scans.append(current_scan)
@@ -771,6 +691,8 @@ class Simulator(object):
 
         # ---- 3. finish each car's scan ----
         for i, agent in enumerate(self.agents):
+            if frozen[i]:
+                continue
             # every pose except this car's own
             opp_poses = np.concatenate((self.agent_poses[0:i, :], self.agent_poses[i+1:, :]), axis=0)
             agent.update_opp_poses(opp_poses)
@@ -781,6 +703,7 @@ class Simulator(object):
             # update agent collision with environment
             if agent.in_collision:
                 self.collisions[i] = 1.
+            self._last_scans[i] = agent_scans[i]
 
         # ---- 4. fill in observations ----
         # state is [x, y, steer_angle, vel, yaw_angle, yaw_rate, slip_angle]
@@ -820,6 +743,7 @@ class Simulator(object):
         if poses.shape[0] != self.num_agents:
             raise ValueError('Number of poses for reset does not match number of agents.')
 
+        self.frozen[:] = False
         # loop over poses to reset
         for i in range(self.num_agents):
             self.agents[i].reset(poses[i, :])

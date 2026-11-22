@@ -1,10 +1,9 @@
 """
-Neural-network controller for the F1TENTH gym (draft).
+Neural-network controller for the F1TENTH gym.
 
 A small fully connected network, written in plain NumPy, maps the car's
-observation straight to an action. The weights are randomly initialised, so
-the car will not drive well until they are trained (for example with an
-evolutionary method such as CMA-ES, or with RL).
+observation straight to an action. The weights start random, so the car will
+not drive well until they are trained (run.py evolves them).
 
 Network:
     inputs  (58) : 54 LiDAR bins (min over each bin, scaled to [0, 1]),
@@ -47,7 +46,7 @@ def load_tracks():
 
 # Vehicle limits, taken from the env's default params.
 S_MIN, S_MAX = -0.4189, 0.4189  # steering angle (rad)
-SPEED_MIN, SPEED_MAX = 0.5, 8.0  # commanded speed (m/s); capped below v_max for a sane draft
+SPEED_MIN, SPEED_MAX = 0.5, 8.0  # commanded speed (m/s); capped below the env's v_max
 LIDAR_MAX_RANGE = 30.0  # m, scanner max range
 NUM_BEAMS = 1080
 LIDAR_BINS = 54  # 1080 / 54 = 20 beams per bin
@@ -70,7 +69,7 @@ class MLP:
             x = np.tanh(x @ W + b)
         return x @ self.weights[-1] + self.biases[-1]
 
-    # Flat parameter vector access, so an optimiser (e.g. CMA-ES) can tune the net.
+    # Flat parameter vector access, so an optimiser (run.py's mutation) can tune the net.
     def get_params(self):
         return np.concatenate([p.ravel() for p in self.weights + self.biases])
 
@@ -119,6 +118,63 @@ class NNController:
 
         self.prev_steer, self.prev_speed = steer, speed
         return steer, speed
+
+
+class BatchedPolicy:
+    """Runs many nets (same layer sizes) together, one batched forward pass per step.
+
+    Built straight from flat weight vectors, in the order of MLP.get_params(). Same
+    maths as NNController.plan, but the weights are stacked into (n, in, out) tensors
+    and only the cars in `idx` are evaluated. Results match the per-car path up to
+    floating-point summation order.
+    """
+
+    def __init__(self, params, hidden):
+        """params: (n, P) array, one flat weight vector per car; hidden: hidden layer sizes."""
+        params = np.asarray(params, dtype=np.float64)
+        sizes = [LIDAR_BINS + 4, *hidden, 2]
+        shapes = list(zip(sizes[:-1], sizes[1:]))
+        n = len(params)
+        i = 0
+        self.W = []
+        for n_in, n_out in shapes:
+            self.W.append(params[:, i:i + n_in * n_out].reshape(n, n_in, n_out))
+            i += n_in * n_out
+        self.b = []
+        for _, n_out in shapes:
+            self.b.append(params[:, i:i + n_out])
+            i += n_out
+        if i != params.shape[1]:
+            raise ValueError(f'params have {params.shape[1]} values per car; layer sizes {sizes} need {i}')
+        self.prev_steer = np.zeros(n)
+        self.prev_speed = np.zeros(n)
+
+    def reset(self):
+        self.prev_steer[:] = 0.0
+        self.prev_speed[:] = 0.0
+
+    def plan(self, obs, idx):
+        """[steer, speed] for each car in idx (int array), shape (len(idx), 2)."""
+        scans = np.asarray([obs['scans'][i] for i in idx], dtype=np.float64)
+        lidar = np.clip(scans.reshape(len(idx), LIDAR_BINS, -1).min(axis=2) / LIDAR_MAX_RANGE, 0.0, 1.0)
+        state = np.column_stack([
+            np.asarray(obs['linear_vels_x'])[idx] / SPEED_MAX,
+            np.asarray(obs['ang_vels_z'])[idx] / 5.0,
+            self.prev_steer[idx] / S_MAX,
+            self.prev_speed[idx] / SPEED_MAX,
+        ])
+        x = np.concatenate([lidar, state], axis=1)[:, None, :]  # (m, 1, in)
+        last = len(self.W) - 1
+        for k, (W, b) in enumerate(zip(self.W, self.b)):
+            x = np.matmul(x, W[idx]) + b[idx][:, None, :]
+            if k < last:
+                x = np.tanh(x)
+        raw = x[:, 0, :]
+        steer = S_MIN + (np.tanh(raw[:, 0]) + 1.0) * 0.5 * (S_MAX - S_MIN)
+        speed = SPEED_MIN + (1.0 / (1.0 + np.exp(-raw[:, 1]))) * (SPEED_MAX - SPEED_MIN)
+        self.prev_steer[idx] = steer
+        self.prev_speed[idx] = speed
+        return np.column_stack([steer, speed])
 
 
 def main():
