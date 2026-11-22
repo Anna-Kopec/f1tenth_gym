@@ -63,8 +63,8 @@ Run from the repository root. If the script cannot find its map or data files, `
 
 ### Read Write-ups
 Formal written documentation for this project can be found in docs/writeups. 
-* [text](<docs/writeups/Autonomous Car Guidelines.pdf>): UConn FSAE's autonomous vehicle initiative overview
-* [text](docs/writeups/CSE_4820_Course_Project_Proposal.pdf): Our team's project proposal (this is also doubling as a class project) 
+* [Autonomous Car Guidelines](<docs/writeups/Autonomous Car Guidelines.pdf>): UConn FSAE's autonomous vehicle initiative overview
+* [CSE 4820 Project Proposal](docs/writeups/CSE_4820_Course_Project_Proposal.pdf): Our team's project proposal (this is also doubling as a class project) 
 
 ### Viewing Doxygen Code Documentation
 
